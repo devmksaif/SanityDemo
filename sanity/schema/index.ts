@@ -1,4 +1,3 @@
-import caseStudy from './caseStudy'
-import homePage from './homePage'
+import post from './post'
 
-export const schemaTypes = [homePage, caseStudy]
+export const schemaTypes = [post]
