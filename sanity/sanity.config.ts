@@ -2,8 +2,9 @@ import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { schemaTypes } from './schema'
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!
+// Fallback to hardcoded values for local development
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "dfvr7i1k"
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production"
 
 export default defineConfig({
   basePath: '/studio',
