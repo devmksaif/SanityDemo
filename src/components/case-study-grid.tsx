@@ -1,6 +1,6 @@
 "use client";
 
-import { useMobile } from "@/hooks/use-mobile";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { CaseStudy, CaseStudyCard } from "./case-study-card";
 import {
   Carousel,
@@ -15,7 +15,7 @@ type CaseStudyGridProps = {
 };
 
 export function CaseStudyGrid({ studies }: CaseStudyGridProps) {
-  const isMobile = useMobile();
+  const isMobile = useIsMobile();
 
   if (isMobile) {
     return (
