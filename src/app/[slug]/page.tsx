@@ -27,9 +27,18 @@ const ptComponents = {
   },
 };
 
-export default async function PostPage({ params }: { params: { slug: string } }) {
+// Fix: Define proper types for Next.js 15
+type PageProps = {
+  params: Promise<{
+    slug: string;
+  }>;
+};
+
+export default async function PostPage({ params }: PageProps) {
+  const { slug } = await params;
+  
   const post = await client.fetch<SanityDocument>(POST_QUERY, {
-    slug: params.slug,
+    slug,
   });
 
   if (!post) {
