@@ -321,9 +321,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Built with ❤️ using Next.js, Sanity, and Tailwind CSS**
-
-For support, please open an issue on GitHub or contact the maintainers.
-
----
-
-*This README was generated with the help of Dyad - Your AI development assistant.*
+ 
