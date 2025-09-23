@@ -12,6 +12,13 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: { source: 'title', maxLength: 96 },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'category',
       title: 'Category',
       type: 'string',
@@ -35,6 +42,12 @@ export default defineType({
       name: 'releaseDate',
       title: 'Release Date',
       type: 'date',
+    }),
+    defineField({
+      name: 'body',
+      title: 'Project Details',
+      type: 'array',
+      of: [{ type: 'block' }],
     }),
   ],
   preview: {

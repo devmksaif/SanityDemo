@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Sparkles } from "lucide-react";
 
 async function getPortfolioProjects() {
-  const query = `*[_type == "portfolioProject"] | order(releaseDate desc)`;
+  const query = `*[_type == "portfolioProject"] | order(releaseDate desc){..., "slug": slug.current}`;
   const data: PortfolioProjectData[] = await client.fetch(query);
   return data;
 }

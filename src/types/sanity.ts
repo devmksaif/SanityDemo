@@ -9,6 +9,7 @@ export type HomePageData = {
 export type DivisionData = {
   _id: string;
   title: string;
+  slug: { current: string };
   description: string;
   logo?: Image;
   coverImage: Image;
@@ -17,12 +18,14 @@ export type DivisionData = {
 export type PortfolioProjectData = {
   _id: string;
   title: string;
+  slug: { current: string };
   category: string;
   division?: {
     title: string;
   };
   thumbnailImage: Image;
   releaseDate?: string;
+  body?: any[]; // Portable Text
 };
 
 export type NewsArticleData = {

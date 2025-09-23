@@ -12,8 +12,8 @@ import { AnimatedContainer } from "@/components/ui/animated-container";
 
 async function getPageData() {
   const homePageQuery = `*[_type == "homePage"][0]`;
-  const divisionsQuery = `*[_type == "division"] | order(_createdAt asc)[0...3]`;
-  const portfolioQuery = `*[_type == "portfolioProject"] | order(releaseDate desc)[0...3]`;
+  const divisionsQuery = `*[_type == "division"] | order(_createdAt asc)[0...3]{..., "slug": slug.current}`;
+  const portfolioQuery = `*[_type == "portfolioProject"] | order(releaseDate desc)[0...3]{..., "slug": slug.current}`;
   const newsQuery = `*[_type == "newsArticle"] | order(publishedAt desc)[0...3]`;
 
   const homePageData: HomePageData = await client.fetch(homePageQuery);

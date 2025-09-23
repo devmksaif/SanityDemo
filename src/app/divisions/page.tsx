@@ -7,7 +7,7 @@ import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 async function getDivisions() {
-  const query = `*[_type == "division"] | order(_createdAt asc)`;
+  const query = `*[_type == "division"] | order(_createdAt asc){..., "slug": slug.current}`;
   const data: DivisionData[] = await client.fetch(query);
   return data;
 }
