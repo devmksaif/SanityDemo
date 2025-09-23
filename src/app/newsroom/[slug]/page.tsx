@@ -12,8 +12,9 @@ async function getArticle(slug: string) {
   return data;
 }
 
-export default async function NewsArticlePage({ params }: { params: { slug: string } }) {
-  const article = await getArticle(params.slug);
+export default async function NewsArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const article = await getArticle(slug);
 
   if (!article) {
     notFound();

@@ -18,8 +18,9 @@ async function getDivision(slug: string) {
   return division;
 }
 
-export default async function DivisionPage({ params }: { params: { slug: string } }) {
-  const division = await getDivision(params.slug);
+export default async function DivisionPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const division = await getDivision(slug);
 
   if (!division) {
     notFound();
