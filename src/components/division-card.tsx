@@ -10,9 +10,10 @@ type DivisionCardProps = {
 
 export function DivisionCard({ division }: DivisionCardProps) {
   const imageUrl = urlFor(division.coverImage).width(500).height(600).url();
+  const slug = division.slug?.current || division._id; // Fallback to ID if no slug
 
   return (
-    <Link href={`/divisions/${division.slug.current}`}>
+    <Link href={`/divisions/${slug}`}>
       <div className="group h-[60vh] min-h-[500px] w-full [perspective:1000px]">
         <Card className="relative h-full w-full rounded-lg shadow-xl transition-all duration-300 hover:shadow-2xl">
           <div className="absolute h-full w-full rounded-lg">
