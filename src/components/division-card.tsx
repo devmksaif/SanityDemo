@@ -17,11 +17,23 @@ export function DivisionCard({ division }: DivisionCardProps) {
   const slug = hasSlug ? division.slug.current : division._id;
   const href = `/divisions/${slug}`;
 
+  // Add detailed debug logging
+  console.log('🎯 DivisionCard Debug:', {
+    title: division.title,
+    _id: division._id,
+    hasSlug,
+    slug: division.slug?.current,
+    href,
+    imageUrl: imageUrl.substring(0, 100) + '...'
+  });
+
   const handleClick = (e: React.MouseEvent) => {
     if (!hasSlug) {
       e.preventDefault();
       console.warn(`🚨 Division "${division.title}" has no slug! ID: ${division._id}`);
       alert(`This division has no slug generated. Please go to Sanity Studio and click "Generate" next to the Slug field.`);
+    } else {
+      console.log(`✅ Division "${division.title}" clicked with slug: ${slug}`);
     }
   };
 
