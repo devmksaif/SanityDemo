@@ -36,3 +36,10 @@ export type NewsArticleData = {
   excerpt: string;
   body?: any[]; // Portable Text
 };
+
+export type TeamMemberData = {
+  _id: string;
+  name: string;
+  role: string;
+  image: Image;
+};

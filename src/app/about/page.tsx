@@ -1,17 +1,19 @@
 import { Container } from "@/components/ui/container";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Sparkles, Users, Target, Eye } from "lucide-react";
-import Image from "next/image";
+import { client, urlFor } from "@/lib/sanity";
+import type { TeamMemberData } from "@/types/sanity";
 
-const teamMembers = [
-  { name: "Jane Doe", role: "Founder & CEO", image: "https://i.pravatar.cc/150?u=a042581f4e29026704d" },
-  { name: "John Smith", role: "Head of Media", image: "https://i.pravatar.cc/150?u=a042581f4e29026705d" },
-  { name: "Emily White", role: "Lead Music Producer", image: "https://i.pravatar.cc/150?u=a042581f4e29026706d" },
-  { name: "Michael Brown", role: "Director of Talent", image: "https://i.pravatar.cc/150?u=a042581f4e29026707d" },
-];
+async function getTeamMembers() {
+  const query = `*[_type == "teamMember"] | order(order asc)`;
+  const data: TeamMemberData[] = await client.fetch(query);
+  return data;
+}
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const teamMembers = await getTeamMembers();
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-background to-secondary/20">
       {/* Page Header */}
@@ -70,20 +72,24 @@ export default function AboutPage() {
               The Minds Behind the Magic
             </h2>
           </div>
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {teamMembers.map((member) => (
-              <Card key={member.name} className="text-center">
-                <CardContent className="pt-6">
-                  <Avatar className="h-24 w-24 mx-auto mb-4">
-                    <AvatarImage src={member.image} alt={member.name} />
-                    <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
-                  </Avatar>
-                  <h3 className="text-lg font-semibold">{member.name}</h3>
-                  <p className="text-sm text-primary">{member.role}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          {teamMembers.length > 0 ? (
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+              {teamMembers.map((member) => (
+                <Card key={member._id} className="text-center">
+                  <CardContent className="pt-6">
+                    <Avatar className="h-24 w-24 mx-auto mb-4">
+                      <AvatarImage src={urlFor(member.image).width(200).url()} alt={member.name} />
+                      <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
+                    </Avatar>
+                    <h3 className="text-lg font-semibold">{member.name}</h3>
+                    <p className="text-sm text-primary">{member.role}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-muted-foreground">Team member information will be updated soon.</p>
+          )}
         </Container>
       </section>
     </div>
