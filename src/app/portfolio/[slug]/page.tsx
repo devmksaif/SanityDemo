@@ -8,7 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar } from "lucide-react";
 
 async function getProject(slug: string) {
-  const query = `*[_type == "portfolioProject" && slug.current == $slug][0]{..., "division": division->{title}}`;
+  // Try to find by slug first, then fallback to ID
+  const query = `*[_type == "portfolioProject" && (slug.current == $slug || _id == $slug)][0]{..., "division": division->{title}}`;
   const data: PortfolioProjectData = await client.fetch(query, { slug });
   return data;
 }

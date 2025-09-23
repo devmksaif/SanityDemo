@@ -7,7 +7,14 @@ import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 async function getDivisions() {
-  const query = `*[_type == "division"] | order(_createdAt asc){..., "slug": slug.current}`;
+  const query = `*[_type == "division"] | order(_createdAt asc){
+    _id, 
+    title, 
+    description, 
+    logo, 
+    coverImage, 
+    "slug": slug.current
+  }`;
   const data: DivisionData[] = await client.fetch(query);
   return data;
 }
@@ -17,7 +24,6 @@ export default async function DivisionsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-background to-secondary/20">
-      {/* Page Header */}
       <section className="py-20 sm:py-32">
         <Container>
           <div className="mx-auto max-w-4xl text-center">
@@ -35,7 +41,6 @@ export default async function DivisionsPage() {
         </Container>
       </section>
 
-      {/* Divisions Grid */}
       <section className="pb-20 sm:pb-32">
         <Container>
           {divisions.length > 0 ? (
@@ -45,7 +50,7 @@ export default async function DivisionsPage() {
               ))}
             </div>
           ) : (
-            <div className="text-center py-12">
+            <div className="text-center">
               <p className="text-lg text-muted-foreground">Divisions content coming soon.</p>
               <Button asChild className="mt-4">
                 <Link href="/studio">Add Divisions in Studio</Link>

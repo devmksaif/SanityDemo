@@ -5,7 +5,8 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 
 async function getDivision(slug: string) {
-  const query = `*[_type == "division" && slug.current == $slug][0]`;
+  // Try to find by slug first, then fallback to ID
+  const query = `*[_type == "division" && (slug.current == $slug || _id == $slug)][0]`;
   const data: DivisionData = await client.fetch(query, { slug });
   return data;
 }
