@@ -9,7 +9,7 @@ import { Github, Twitter, Instagram, Youtube, Mail, ArrowRight, MapPin, Phone } 
 export function EnterpriseFooter() {
   return (
     <footer className="w-full border-t bg-gradient-to-b from-background to-secondary/30">
-      <div className="container mx-auto max-w-screen-2xl px-4 py-16">
+      <div className="mx-auto w-full max-w-screen-2xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 py-16">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand Section */}
