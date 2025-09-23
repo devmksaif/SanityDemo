@@ -8,6 +8,7 @@ import { ArrowRight, Sparkles, TrendingUp, Users, BookOpen, Briefcase } from "lu
 import { Container } from "@/components/ui/container";
 import { PortfolioCard } from "@/components/portfolio-card";
 import { NewsCard } from "@/components/news-card";
+import { AnimatedContainer } from "@/components/ui/animated-container";
 
 async function getPageData() {
   const homePageQuery = `*[_type == "homePage"][0]`;
@@ -35,33 +36,37 @@ export default async function IndexPage() {
       {divisions.length > 0 && (
         <section className="py-20 sm:py-32">
           <Container>
-            <div className="mb-12 text-center">
-              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-4">
-                <Sparkles className="h-4 w-4" />
-                Our Creative Divisions
+            <AnimatedContainer>
+              <div className="mb-12 text-center">
+                <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-4">
+                  <Sparkles className="h-4 w-4" />
+                  Our Creative Divisions
+                </div>
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+                  Powering Creative Excellence
+                </h2>
+                <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
+                  From music to media, our divisions are the heart of our creative enterprise.
+                </p>
               </div>
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-                Powering Creative Excellence
-              </h2>
-              <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-                From music to media, our divisions are the heart of our creative enterprise.
-              </p>
-            </div>
+            </AnimatedContainer>
             
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {divisions.map((division) => (
-                <DivisionCard key={division._id} division={division} />
+              {divisions.map((division, i) => (
+                <AnimatedContainer key={division._id} delay={i * 0.1}>
+                  <DivisionCard division={division} />
+                </AnimatedContainer>
               ))}
             </div>
             
-            <div className="mt-12 text-center">
+            <AnimatedContainer className="mt-12 text-center">
               <Button asChild size="lg" className="group">
                 <Link href="/divisions">
                   Explore All Divisions
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
-            </div>
+            </AnimatedContainer>
           </Container>
         </section>
       )}
@@ -70,31 +75,35 @@ export default async function IndexPage() {
       {portfolio.length > 0 && (
         <section className="py-20 sm:py-32 bg-background">
           <Container>
-            <div className="mb-12 text-center">
-              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-4">
-                <Briefcase className="h-4 w-4" />
-                Featured Work
+            <AnimatedContainer>
+              <div className="mb-12 text-center">
+                <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-4">
+                  <Briefcase className="h-4 w-4" />
+                  Featured Work
+                </div>
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+                  Our Creative Portfolio
+                </h2>
+                <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
+                  A glimpse into the impactful projects we've brought to life.
+                </p>
               </div>
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-                Our Creative Portfolio
-              </h2>
-              <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-                A glimpse into the impactful projects we've brought to life.
-              </p>
-            </div>
+            </AnimatedContainer>
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {portfolio.map((project) => (
-                <PortfolioCard key={project._id} project={project} />
+              {portfolio.map((project, i) => (
+                <AnimatedContainer key={project._id} delay={i * 0.1}>
+                  <PortfolioCard project={project} />
+                </AnimatedContainer>
               ))}
             </div>
-            <div className="mt-12 text-center">
+            <AnimatedContainer className="mt-12 text-center">
               <Button asChild size="lg" variant="outline" className="group">
                 <Link href="/portfolio">
                   View Full Portfolio
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
-            </div>
+            </AnimatedContainer>
           </Container>
         </section>
       )}
@@ -103,31 +112,35 @@ export default async function IndexPage() {
       {news.length > 0 && (
         <section className="py-20 sm:py-32">
           <Container>
-            <div className="mb-12 text-center">
-              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-4">
-                <BookOpen className="h-4 w-4" />
-                Latest News
+            <AnimatedContainer>
+              <div className="mb-12 text-center">
+                <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-4">
+                  <BookOpen className="h-4 w-4" />
+                  Latest News
+                </div>
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+                  From the Newsroom
+                </h2>
+                <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
+                  Stay updated with the latest stories and announcements from Shubz Entertainment.
+                </p>
               </div>
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-                From the Newsroom
-              </h2>
-              <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-                Stay updated with the latest stories and announcements from Shubz Entertainment.
-              </p>
-            </div>
+            </AnimatedContainer>
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {news.map((article) => (
-                <NewsCard key={article._id} article={article} />
+              {news.map((article, i) => (
+                <AnimatedContainer key={article._id} delay={i * 0.1}>
+                  <NewsCard article={article} />
+                </AnimatedContainer>
               ))}
             </div>
-            <div className="mt-12 text-center">
+            <AnimatedContainer className="mt-12 text-center">
               <Button asChild size="lg" className="group">
                 <Link href="/newsroom">
                   Visit Newsroom
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </Button>
-            </div>
+            </AnimatedContainer>
           </Container>
         </section>
       )}
@@ -135,27 +148,29 @@ export default async function IndexPage() {
       {/* CTA Section */}
       <section className="py-20 sm:py-32 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5">
         <Container>
-          <div className="mx-auto max-w-4xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-6">
-              <TrendingUp className="h-4 w-4" />
-              Ready to Collaborate?
+          <AnimatedContainer>
+            <div className="mx-auto max-w-4xl text-center">
+              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-6">
+                <TrendingUp className="h-4 w-4" />
+                Ready to Collaborate?
+              </div>
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-6">
+                Let's Create Something Extraordinary Together
+              </h2>
+              <p className="mb-8 text-lg text-muted-foreground">
+                Whether you're an artist, brand, or creative professional, we have the expertise and resources to bring your vision to life.
+              </p>
+              <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
+                <Button size="lg" className="group">
+                  Start a Project
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+                <Button variant="outline" size="lg">
+                  Schedule a Call
+                </Button>
+              </div>
             </div>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-6">
-              Let's Create Something Extraordinary Together
-            </h2>
-            <p className="mb-8 text-lg text-muted-foreground">
-              Whether you're an artist, brand, or creative professional, we have the expertise and resources to bring your vision to life.
-            </p>
-            <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-              <Button size="lg" className="group">
-                Start a Project
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-              <Button variant="outline" size="lg">
-                Schedule a Call
-              </Button>
-            </div>
-          </div>
+          </AnimatedContainer>
         </Container>
       </section>
     </div>

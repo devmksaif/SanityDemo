@@ -5,6 +5,7 @@ import { ArrowRight, Sparkles, TrendingUp, Users } from "lucide-react";
 import Image from "next/image";
 import { urlFor } from "@/lib/sanity";
 import type { HomePageData } from "@/types/sanity";
+import Tilt from "react-parallax-tilt";
 
 type EnterpriseHeroProps = {
   data?: HomePageData | null;
@@ -68,33 +69,41 @@ export function EnterpriseHero({ data }: EnterpriseHeroProps) {
 
           {/* Visual Element */}
           <div className="relative hidden lg:block">
-            <div className="relative aspect-square w-full max-w-md mx-auto">
-              {/* Base card */}
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/10" />
-              
-              {/* Floating card 1 */}
-              <div className="absolute -top-8 -left-8 w-48 h-64 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 animate-float" style={{ animationDelay: '0s' }}>
-                <div className="p-4">
-                  <TrendingUp className="h-8 w-8 text-white/50" />
-                  <p className="mt-2 text-xs text-white/50">Growth</p>
+            <Tilt
+              glareEnable={true}
+              glareMaxOpacity={0.1}
+              glarePosition="all"
+              scale={1.05}
+              perspective={1000}
+            >
+              <div className="relative aspect-square w-full max-w-md mx-auto">
+                {/* Base card */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/10" />
+                
+                {/* Floating card 1 */}
+                <div className="absolute -top-8 -left-8 w-48 h-64 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 animate-float" style={{ animationDelay: '0s' }}>
+                  <div className="p-4">
+                    <TrendingUp className="h-8 w-8 text-white/50" />
+                    <p className="mt-2 text-xs text-white/50">Growth</p>
+                  </div>
                 </div>
-              </div>
 
-              {/* Floating card 2 */}
-              <div className="absolute -bottom-8 -right-8 w-56 h-40 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 animate-float" style={{ animationDelay: '2s' }}>
-                 <div className="p-4 text-right">
-                  <Users className="h-8 w-8 text-white/50 ml-auto" />
-                  <p className="mt-2 text-xs text-white/50">Talent</p>
+                {/* Floating card 2 */}
+                <div className="absolute -bottom-8 -right-8 w-56 h-40 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 animate-float" style={{ animationDelay: '2s' }}>
+                   <div className="p-4 text-right">
+                    <Users className="h-8 w-8 text-white/50 ml-auto" />
+                    <p className="mt-2 text-xs text-white/50">Talent</p>
+                  </div>
                 </div>
-              </div>
 
-               {/* Center element */}
-              <div className="absolute inset-12 flex items-center justify-center">
-                <div className="flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/60 shadow-2xl shadow-primary/30">
-                  <Sparkles className="h-12 w-12 text-primary-foreground" />
+                 {/* Center element */}
+                <div className="absolute inset-12 flex items-center justify-center">
+                  <div className="flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/60 shadow-2xl shadow-primary/30">
+                    <Sparkles className="h-12 w-12 text-primary-foreground" />
+                  </div>
                 </div>
               </div>
-            </div>
+            </Tilt>
           </div>
         </div>
       </div>
