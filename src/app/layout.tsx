@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { MadeWithDyad } from "@/components/made-with-dyad";
 import { EnterpriseHeader } from "@/components/enterprise-header";
 import { EnterpriseFooter } from "@/components/enterprise-footer";
 import { Toaster } from "@/components/ui/sonner";
@@ -37,7 +36,6 @@ export default function RootLayout({
         </main>
         <EnterpriseFooter />
         <Toaster />
-        <MadeWithDyad />
       </body>
     </html>
   );

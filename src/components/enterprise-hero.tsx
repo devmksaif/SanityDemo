@@ -18,94 +18,82 @@ export function EnterpriseHero({ data }: EnterpriseHeroProps) {
     : "https://images.unsplash.com/photo-1504270997622-AF7a2a4d3a23?q=80&w=2070&auto=format&fit=crop";
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden">
+    <section className="relative w-full overflow-hidden bg-black h-[90vh] min-h-[700px] flex items-center">
       {/* Background with gradient overlay */}
       <div className="absolute inset-0">
         <Image
           src={bgImage}
           alt="Creative background"
           fill
-          className="object-cover"
+          className="object-cover opacity-30"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/20" />
       </div>
 
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -left-40 h-80 w-80 rounded-full bg-primary/20 blur-3xl animate-pulse" />
-        <div className="absolute -bottom-40 -right-40 h-80 w-80 rounded-full bg-primary/20 blur-3xl animate-pulse delay-1000" />
-      </div>
-
-      <div className="relative z-10 flex min-h-screen items-center">
-        <div className="container mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-            {/* Content */}
-            <div className="space-y-8 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
-                <Sparkles className="h-4 w-4" />
-                <span>Creative Enterprise</span>
-              </div>
-
-              <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl">
-                {headline}
-              </h1>
-
-              <p className="text-lg text-white/80 sm:text-xl lg:text-2xl">
-                {subheadline}
-              </p>
-
-              <div className="flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
-                <Button
-                  size="lg"
-                  className="group bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
-                >
-                  Explore Our Work
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white/20 bg-white/10 text-white hover:bg-white/20 hover:text-white"
-                >
-                  Learn More
-                </Button>
-              </div>
-
-              {/* Stats */}
-              <div className="flex flex-wrap justify-center gap-8 pt-8 lg:justify-start">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-white">500+</div>
-                  <div className="text-sm text-white/60">Projects</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-white">50+</div>
-                  <div className="text-sm text-white/60">Talents</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-white">5+</div>
-                  <div className="text-sm text-white/60">Divisions</div>
-                </div>
-              </div>
+      <div className="relative z-10 container mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+          {/* Content */}
+          <div className="space-y-8 text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
+              <Sparkles className="h-4 w-4" />
+              <span>Creative Enterprise</span>
             </div>
 
-            {/* Visual Element */}
-            <div className="relative">
-              <div className="relative aspect-square rounded-2xl bg-gradient-to-br from-white/10 to-white/5 p-8 backdrop-blur-sm">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="mb-4 inline-flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/60">
-                      <Users className="h-10 w-10 text-primary-foreground" />
-                    </div>
-                    <h3 className="text-xl font-semibold text-white">Global Reach</h3>
-                    <p className="text-white/60">Connecting creative talents worldwide</p>
-                  </div>
+            <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl">
+              {headline}
+            </h1>
+
+            <p className="text-lg text-white/80 sm:text-xl lg:text-2xl">
+              {subheadline}
+            </p>
+
+            <div className="flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
+              <Button
+                size="lg"
+                className="group bg-white text-black hover:bg-white/90"
+              >
+                Explore Our Work
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white/20 bg-white/10 text-white hover:bg-white/20 hover:text-white"
+              >
+                Learn More
+              </Button>
+            </div>
+          </div>
+
+          {/* Visual Element */}
+          <div className="relative hidden lg:block">
+            <div className="relative aspect-square w-full max-w-md mx-auto">
+              {/* Base card */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm border border-white/10" />
+              
+              {/* Floating card 1 */}
+              <div className="absolute -top-8 -left-8 w-48 h-64 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 animate-float" style={{ animationDelay: '0s' }}>
+                <div className="p-4">
+                  <TrendingUp className="h-8 w-8 text-white/50" />
+                  <p className="mt-2 text-xs text-white/50">Growth</p>
                 </div>
               </div>
-              
-              {/* Decorative elements */}
-              <div className="absolute -top-4 -right-4 h-24 w-24 rounded-full bg-primary/10 blur-2xl" />
-              <div className="absolute -bottom-4 -left-4 h-24 w-24 rounded-full bg-primary/10 blur-2xl" />
+
+              {/* Floating card 2 */}
+              <div className="absolute -bottom-8 -right-8 w-56 h-40 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 animate-float" style={{ animationDelay: '2s' }}>
+                 <div className="p-4 text-right">
+                  <Users className="h-8 w-8 text-white/50 ml-auto" />
+                  <p className="mt-2 text-xs text-white/50">Talent</p>
+                </div>
+              </div>
+
+               {/* Center element */}
+              <div className="absolute inset-12 flex items-center justify-center">
+                <div className="flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-primary to-primary/60 shadow-2xl shadow-primary/30">
+                  <Sparkles className="h-12 w-12 text-primary-foreground" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
