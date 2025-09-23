@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { MadeWithDyad } from "@/components/made-with-dyad";
 import { EnterpriseHeader } from "@/components/enterprise-header";
 import { EnterpriseFooter } from "@/components/enterprise-footer";
 import { Toaster } from "@/components/ui/sonner";
+import { DebugClickTracker } from "@/components/debug-click-tracker";
 
 const inter = Inter({ 
   subsets: ["latin"], 
@@ -30,12 +32,14 @@ export default function RootLayout({
           inter.variable
         )}
       >
+        <DebugClickTracker />
         <EnterpriseHeader />
         <main className="flex-1">
           {children}
         </main>
         <EnterpriseFooter />
         <Toaster />
+        <MadeWithDyad />
       </body>
     </html>
   );
