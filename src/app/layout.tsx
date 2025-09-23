@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
- 
+import { MadeWithDyad } from "@/components/made-with-dyad";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "ModernBlog - Discover Amazing Stories",
-  description: "A modern blog platform featuring insightful articles, stories, and ideas from our community of writers.",
+  title: "Shubz Entertainment - Creative Enterprise",
+  description: "Integrating media, music, and talent platforms to tell global stories.",
 };
 
 export default function RootLayout({
@@ -22,14 +22,16 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-background font-sans antialiased flex flex-col",
           inter.variable
         )}
       >
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1">
+          {children}
+        </main>
         <Footer />
-       
+        <MadeWithDyad />
       </body>
     </html>
   );

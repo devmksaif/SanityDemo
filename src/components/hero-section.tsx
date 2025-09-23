@@ -18,7 +18,7 @@ export function HeroSection({ data }: HeroSectionProps) {
     : "https://images.unsplash.com/photo-1504270997622-AF7a2a4d3a23?q=80&w=2070&auto=format&fit=crop";
 
   return (
-    <section className="relative flex h-screen min-h-[700px] w-full flex-col items-center justify-center text-center text-white">
+    <section className="relative flex h-screen w-full flex-col items-center justify-center text-center text-white">
       <div className="absolute inset-0 bg-black">
         <Image
           src={bgImage}
