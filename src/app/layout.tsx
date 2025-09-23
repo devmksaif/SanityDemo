@@ -3,10 +3,14 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { MadeWithDyad } from "@/components/made-with-dyad";
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
+import { EnterpriseHeader } from "@/components/enterprise-header";
+import { EnterpriseFooter } from "@/components/enterprise-footer";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const inter = Inter({ 
+  subsets: ["latin"], 
+  variable: "--font-sans",
+  weight: ["300", "400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Shubz Entertainment - Creative Enterprise",
@@ -26,11 +30,11 @@ export default function RootLayout({
           inter.variable
         )}
       >
-        <Header />
+        <EnterpriseHeader />
         <main className="flex-1">
           {children}
         </main>
-        <Footer />
+        <EnterpriseFooter />
         <MadeWithDyad />
       </body>
     </html>
