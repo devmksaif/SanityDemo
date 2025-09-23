@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
- import { EnterpriseHeader } from "@/components/enterprise-header";
+import { MadeWithDyad } from "@/components/made-with-dyad";
+import { EnterpriseHeader } from "@/components/enterprise-header";
 import { EnterpriseFooter } from "@/components/enterprise-footer";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ 
   subsets: ["latin"], 
@@ -34,7 +36,9 @@ export default function RootLayout({
           {children}
         </main>
         <EnterpriseFooter />
-       </body>
+        <Toaster />
+        <MadeWithDyad />
+      </body>
     </html>
   );
 }
