@@ -4,7 +4,8 @@ import { DivisionCard } from "@/components/division-card";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, AlertTriangle } from "lucide-react";
+import { ensureSlugsExist } from "@/lib/sanity-helpers";
 
 async function getDivisions() {
   const query = `*[_type == "division"] | order(_createdAt asc){
@@ -21,9 +22,26 @@ async function getDivisions() {
 
 export default async function DivisionsPage() {
   const divisions = await getDivisions();
+  const slugIssues = await ensureSlugsExist();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-background to-secondary/20">
+      {slugIssues.divisions.length > 0 && (
+        <div className="bg-yellow-50 border-b border-yellow-200">
+          <Container className="py-4">
+            <div className="flex items-center gap-2 text-yellow-800">
+              <AlertTriangle className="h-5 w-5" />
+              <span className="text-sm font-medium">
+                {slugIssues.divisions.length} division(s) missing slugs. Please generate them in Sanity Studio for SEO.
+              </span>
+              <Button asChild size="sm" variant="outline" className="ml-auto">
+                <Link href="/studio">Fix in Studio</Link>
+              </Button>
+            </div>
+          </Container>
+        </div>
+      )}
+
       <section className="py-20 sm:py-32">
         <Container>
           <div className="mx-auto max-w-4xl text-center">

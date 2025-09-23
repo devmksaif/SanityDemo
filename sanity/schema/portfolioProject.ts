@@ -15,8 +15,15 @@ export default defineType({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      options: { source: 'title', maxLength: 96 },
-      validation: (Rule) => Rule.required(),
+      options: { 
+        source: 'title',
+        maxLength: 96,
+        slugify: (input) => input
+          .toLowerCase()
+          .replace(/\s+/g, '-')
+          .slice(0, 96)
+      },
+      validation: (Rule) => Rule.required().error('Slug is required for SEO'),
     }),
     defineField({
       name: 'category',
@@ -53,8 +60,15 @@ export default defineType({
   preview: {
     select: {
       title: 'title',
-      subtitle: 'category',
+      subtitle: 'slug.current',
       media: 'thumbnailImage',
+    },
+    prepare({ title, subtitle, media }) {
+      return {
+        title,
+        subtitle: subtitle ? `/${subtitle}` : '⚠️ Missing slug',
+        media,
+      }
     },
   },
 })

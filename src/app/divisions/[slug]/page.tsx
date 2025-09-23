@@ -5,10 +5,17 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 
 async function getDivision(slug: string) {
-  // Try to find by slug first, then fallback to ID
-  const query = `*[_type == "division" && (slug.current == $slug || _id == $slug)][0]`;
-  const data: DivisionData = await client.fetch(query, { slug });
-  return data;
+  // First try to find by exact slug match
+  const queryBySlug = `*[_type == "division" && slug.current == $slug][0]`;
+  let division = await client.fetch<DivisionData>(queryBySlug, { slug });
+  
+  // If not found by slug and the slug looks like an ID, try to find by ID
+  if (!division && slug.match(/^[a-zA-Z0-9]+$/)) {
+    const queryById = `*[_type == "division" && _id == $slug][0]`;
+    division = await client.fetch<DivisionData>(queryById, { slug });
+  }
+  
+  return division;
 }
 
 export default async function DivisionPage({ params }: { params: { slug: string } }) {

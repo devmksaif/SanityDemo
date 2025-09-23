@@ -3,6 +3,7 @@ import { urlFor } from "@/lib/sanity";
 import { Card } from "@/components/ui/card";
 import type { DivisionData } from "@/types/sanity";
 import Link from "next/link";
+import { AlertTriangle } from "lucide-react";
 
 type DivisionCardProps = {
   division: DivisionData;
@@ -10,7 +11,8 @@ type DivisionCardProps = {
 
 export function DivisionCard({ division }: DivisionCardProps) {
   const imageUrl = urlFor(division.coverImage).width(500).height(600).url();
-  const slug = division.slug?.current || division._id; // Fallback to ID if no slug
+  const hasSlug = division.slug?.current;
+  const slug = hasSlug ? division.slug.current : division._id;
 
   return (
     <Link href={`/divisions/${slug}`}>
@@ -26,7 +28,7 @@ export function DivisionCard({ division }: DivisionCardProps) {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-               {division.logo && (
+              {division.logo && (
                 <div className="relative h-12 w-12 mb-4">
                   <Image
                     src={urlFor(division.logo).width(100).url()}
@@ -37,6 +39,12 @@ export function DivisionCard({ division }: DivisionCardProps) {
                 </div>
               )}
               <h3 className="text-3xl font-bold">{division.title}</h3>
+              {!hasSlug && (
+                <div className="mt-2 flex items-center gap-1 text-xs text-yellow-300">
+                  <AlertTriangle className="h-3 w-3" />
+                  <span>Missing slug - SEO impact</span>
+                </div>
+              )}
             </div>
           </div>
         </Card>
