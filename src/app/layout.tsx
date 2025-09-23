@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/navbar";
+import { EnterpriseHeader } from "@/components/enterprise-header";
 import { Footer } from "@/components/footer";
 import { DebugClickTracker } from "@/components/debug-click-tracker";
 
@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <DebugClickTracker />
-        <Navbar />
+        <EnterpriseHeader />
         <main className="min-h-screen">{children}</main>
         <Footer />
       </body>
