@@ -13,3 +13,26 @@ export type DivisionData = {
   logo?: Image;
   coverImage: Image;
 };
+
+export type PortfolioProjectData = {
+  _id: string;
+  title: string;
+  category: string;
+  division?: {
+    title: string;
+  };
+  thumbnailImage: Image;
+  releaseDate?: string;
+};
+
+export type NewsArticleData = {
+  _id: string;
+  title: string;
+  slug: {
+    current: string;
+  };
+  publishedAt: string;
+  coverImage: Image;
+  excerpt: string;
+  body?: any[]; // Portable Text
+};
