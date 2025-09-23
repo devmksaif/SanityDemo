@@ -14,9 +14,14 @@ async function getDivisions() {
     description, 
     logo, 
     coverImage, 
-    "slug": slug.current
+    slug
   }`;
   const data: DivisionData[] = await client.fetch(query);
+  
+  // Add detailed logging
+  console.log('📊 Divisions query result:', data);
+  console.log('📊 First division data:', data[0]);
+  
   return data;
 }
 
