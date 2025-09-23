@@ -32,7 +32,7 @@ export function EnterpriseHero({ data }: EnterpriseHeroProps) {
         <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/20" />
       </div>
 
-      <div className="relative z-10 container mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 container mx-auto max-w-screen-2xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           {/* Content */}
           <div className="space-y-8 text-center lg:text-left">

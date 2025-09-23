@@ -30,7 +30,7 @@ export function HeroSection({ data }: HeroSectionProps) {
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
 
-      <div className="container z-10 flex flex-col items-center gap-8 px-4">
+      <div className="container mx-auto max-w-screen-2xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 z-10 flex flex-col items-center gap-8">
         <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
           {headline}
         </h1>

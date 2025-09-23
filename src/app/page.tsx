@@ -18,7 +18,7 @@ async function getPageData() {
     description, 
     logo, 
     coverImage, 
-    "slug": slug.current
+    slug
   }`;
   const portfolioQuery = `*[_type == "portfolioProject"] | order(releaseDate desc)[0...3]{
     _id, 
@@ -27,7 +27,7 @@ async function getPageData() {
     division->{title}, 
     thumbnailImage, 
     releaseDate, 
-    "slug": slug.current
+    slug
   }`;
   const newsQuery = `*[_type == "newsArticle"] | order(publishedAt desc)[0...3]`;
 
