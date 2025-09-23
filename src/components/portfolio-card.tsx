@@ -11,10 +11,12 @@ type PortfolioCardProps = {
 
 export function PortfolioCard({ project }: PortfolioCardProps) {
   const imageUrl = urlFor(project.thumbnailImage).width(600).height(450).url();
-  const slug = project.slug?.current || project._id; // Fallback to ID if no slug
+  const hasSlug = project.slug?.current;
+  const slug = hasSlug ? project.slug.current : project._id;
+  const href = `/portfolio/${slug}`;
 
   return (
-    <Link href={`/portfolio/${slug}`}>
+    <Link href={href}>
       <Card className="group relative block w-full overflow-hidden rounded-lg">
         <div className="relative aspect-[4/3] w-full">
           <Image

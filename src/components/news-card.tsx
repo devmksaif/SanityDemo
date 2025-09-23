@@ -11,9 +11,12 @@ type NewsCardProps = {
 
 export function NewsCard({ article }: NewsCardProps) {
   const imageUrl = urlFor(article.coverImage).width(500).height(350).url();
+  const hasSlug = article.slug?.current;
+  const slug = hasSlug ? article.slug.current : article._id;
+  const href = `/newsroom/${slug}`;
 
   return (
-    <Link href={`/newsroom/${article.slug.current}`}>
+    <Link href={href}>
       <Card className="group flex h-full flex-col overflow-hidden rounded-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
         <CardHeader className="p-0">
           <div className="relative aspect-[16/10] w-full overflow-hidden">

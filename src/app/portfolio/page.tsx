@@ -14,7 +14,7 @@ async function getPortfolioProjects() {
     division->{title}, 
     thumbnailImage, 
     releaseDate, 
-    "slug": slug.current
+    slug
   }`;
   const data: PortfolioProjectData[] = await client.fetch(query);
   return data;
