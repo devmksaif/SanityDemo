@@ -5,38 +5,46 @@ import { Mail, MapPin, Phone, Sparkles } from "lucide-react";
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-background">
-      {/* Page Header */}
-      <section className="relative overflow-hidden py-20 sm:py-32 bg-muted">
-        <div className="absolute inset-0 opacity-50">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+      {/* Modern Hero Section */}
+      <section className="relative overflow-hidden h-[60vh] min-h-[450px] w-full bg-primary text-primary-foreground">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-accent rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary rounded-full blur-3xl" />
         </div>
-        <Container className="relative">
-          <div className="mx-auto max-w-4xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-6">
+        
+        <Container className="relative flex h-full flex-col items-center justify-center text-center">
+          <div className="max-w-4xl mx-auto space-y-6 animate-fade-in-up">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm">
               <Sparkles className="h-4 w-4" />
-              Get In Touch
+              <span>Get In Touch</span>
             </div>
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl mb-6">
+            
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
               Let's Create Together
             </h1>
-            <p className="text-lg text-muted-foreground">
-              Have a project in mind or just want to say hello? We'd love to hear from you.
+            
+            <p className="text-lg text-white/80 max-w-3xl mx-auto">
+              Have a project in mind or just want to say hello? We'd love to hear from you and explore how we can bring your creative vision to life.
             </p>
           </div>
         </Container>
       </section>
 
       {/* Contact Section */}
-      <section className="pb-20 sm:pb-32">
+      <section className="py-16 sm:py-24">
         <Container>
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
             {/* Contact Info */}
             <div className="space-y-8">
-              <h2 className="text-2xl font-semibold">Contact Information</h2>
-              <p className="text-muted-foreground">
-                Fill out the form and our team will get back to you within 24 hours.
-              </p>
+              <div>
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+                  Start the Conversation
+                </h2>
+                <p className="text-lg text-muted-foreground">
+                  Fill out the form and our team will get back to you within 24 hours.
+                </p>
+              </div>
+              
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
                   <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
