@@ -16,30 +16,33 @@ export default async function AboutPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Page Header */}
-      <section className="relative overflow-hidden py-20 sm:py-32 bg-muted">
-        <div className="absolute inset-0 opacity-50">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+      {/* Modern Hero Section */}
+      <section className="relative overflow-hidden h-[60vh] min-h-[450px] w-full bg-primary text-primary-foreground">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 left-0 w-96 h-96 bg-accent rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary rounded-full blur-3xl" />
         </div>
-        <Container className="relative">
-          <div className="mx-auto max-w-4xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-6">
+        
+        <Container className="relative flex h-full flex-col items-center justify-center text-center">
+          <div className="max-w-4xl mx-auto space-y-6 animate-fade-in-up">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm">
               <Sparkles className="h-4 w-4" />
-              Who We Are
+              <span>Who We Are</span>
             </div>
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl mb-6">
+            
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
               The Creative Force Behind Global Stories
             </h1>
-            <p className="text-lg text-muted-foreground">
+            
+            <p className="text-lg text-white/80 max-w-3xl mx-auto">
               Shubz Entertainment is a dynamic creative enterprise dedicated to shaping culture and connecting audiences through media, music, and talent.
             </p>
           </div>
         </Container>
       </section>
 
-      {/* Our Mission & Vision */}
-      <section className="pb-20 sm:pb-32">
+      {/* Mission & Vision Section */}
+      <section className="py-16 sm:py-24">
         <Container>
           <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
             <div className="space-y-4">
@@ -65,7 +68,7 @@ export default async function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section className="pb-20 sm:pb-32 bg-background">
+      <section className="py-16 sm:py-24 bg-muted">
         <Container>
           <div className="mb-12 text-center">
             <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-4">
