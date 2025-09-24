@@ -7,7 +7,6 @@ import { PortableText } from "@portabletext/react";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, User, Tag, ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 async function getProject(slug: string) {
   const query = `*[_type == "portfolioProject" && (slug.current == $slug || _id == $slug)][0]{
