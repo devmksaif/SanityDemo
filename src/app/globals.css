@@ -4,47 +4,113 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 220 13% 22%;
-    --card: 0 0% 100%;
-    --card-foreground: 220 13% 22%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 13% 22%;
-    --primary: 334 46% 34%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 220 13% 22%;
+    /* Shubz Entertainment Color Palette - Light Mode */
+    --background: 0 0% 100%; /* White */
+    --foreground: 220 13% 22%; /* Dark text */
+    
+    --card: 0 0% 100%; /* White cards */
+    --card-foreground: 220 13% 22%; /* Dark card text */
+    
+    --popover: 0 0% 100%; /* White popovers */
+    --popover-foreground: 220 13% 22%; /* Dark popover text */
+    
+    /* Primary: Deep Magenta #8C2D5A */
+    --primary: 330 51% 36%; 
+    --primary-foreground: 0 0% 100%; /* White text on primary */
+    
+    /* Secondary: Muted Lilac #C782B7 */
+    --secondary: 315 39% 65%;
+    --secondary-foreground: 0 0% 100%; /* White text on secondary */
+    
+    /* Muted: Light gray for subtle backgrounds */
     --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 47%;
-    --accent: 52 93% 55%;
-    --accent-foreground: 220 13% 22%;
+    --muted-foreground: 220 9% 47%; /* Gray text */
+    
+    /* Accent: Rich Gold #D6A84C */
+    --accent: 40 64% 57%;
+    --accent-foreground: 0 0% 100%; /* White text on accent */
+    
+    /* Destructive: Red for errors */
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
+    
+    /* Borders and inputs */
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 334 46% 34%;
+    --ring: 330 51% 36%; /* Primary color for focus rings */
+    
+    /* Chart colors using palette */
+    --chart-1: 330 51% 36%; /* Deep Magenta */
+    --chart-2: 315 39% 65%; /* Muted Lilac */
+    --chart-3: 40 64% 57%; /* Rich Gold */
+    --chart-4: 55 86% 65%; /* Golden Yellow */
+    --chart-5: 220 13% 22%; /* Charcoal Gray */
+    
+    /* Sidebar using palette */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 220 13% 22%;
+    --sidebar-primary: 330 51% 36%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 40 64% 57%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 330 51% 36%;
+    
+    --radius: 0.75rem;
   }
 
   .dark {
-    --background: 220 13% 10%;
-    --foreground: 220 15% 90%;
-    --card: 220 13% 12%;
-    --card-foreground: 220 15% 90%;
-    --popover: 220 13% 10%;
-    --popover-foreground: 220 15% 90%;
-    --primary: 326 60% 61%;
-    --primary-foreground: 326 50% 10%;
-    --secondary: 220 13% 18%;
-    --secondary-foreground: 220 15% 90%;
+    /* Shubz Entertainment Color Palette - Dark Mode */
+    --background: 220 13% 10%; /* Dark background */
+    --foreground: 0 0% 95%; /* Light text */
+    
+    --card: 220 13% 12%; /* Dark cards */
+    --card-foreground: 0 0% 95%; /* Light card text */
+    
+    --popover: 220 13% 10%; /* Dark popovers */
+    --popover-foreground: 0 0% 95%; /* Light popover text */
+    
+    /* Primary: Brightened Deep Magenta for dark mode */
+    --primary: 330 60% 45%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary: Brightened Muted Lilac for dark mode */
+    --secondary: 315 45% 75%;
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Muted: Dark gray for subtle backgrounds */
     --muted: 220 13% 18%;
-    --muted-foreground: 220 10% 60%;
-    --accent: 52 93% 55%;
-    --accent-foreground: 52 90% 10%;
+    --muted-foreground: 220 10% 70%; /* Light gray text */
+    
+    /* Accent: Golden Yellow #F2D54C for dark mode */
+    --accent: 55 86% 65%;
+    --accent-foreground: 220 13% 22%; /* Dark text on accent */
+    
+    /* Destructive: Brightened red for dark mode */
     --destructive: 0 72% 51%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
+    
+    /* Borders and inputs */
     --border: 220 13% 20%;
     --input: 220 13% 20%;
-    --ring: 326 60% 61%;
+    --ring: 330 60% 45%; /* Brightened primary for focus rings */
+    
+    /* Chart colors for dark mode */
+    --chart-1: 330 60% 45%; /* Brightened Deep Magenta */
+    --chart-2: 315 45% 75%; /* Brightened Muted Lilac */
+    --chart-3: 55 86% 65%; /* Golden Yellow */
+    --chart-4: 40 64% 57%; /* Rich Gold */
+    --chart-5: 0 0% 95%; /* Light text color */
+    
+    /* Sidebar for dark mode */
+    --sidebar-background: 220 13% 8%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 330 60% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 55 86% 65%;
+    --sidebar-accent-foreground: 220 13% 22%;
+    --sidebar-border: 220 13% 20%;
+    --sidebar-ring: 330 60% 45%;
   }
 }
 
@@ -133,4 +199,21 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--primary));
+}
+
+/* Custom utility classes for Shubz palette */
+.bg-primary-gradient {
+  background: linear-gradient(135deg, hsl(330 51% 36%), hsl(315 39% 65%));
+}
+
+.bg-accent-gradient {
+  background: linear-gradient(135deg, hsl(40 64% 57%), hsl(55 86% 65%));
+}
+
+.text-primary-glow {
+  text-shadow: 0 0 20px hsl(330 51% 36% / 0.5);
+}
+
+.text-accent-glow {
+  text-shadow: 0 0 20px hsl(40 64% 57% / 0.5);
 }

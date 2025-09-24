@@ -50,7 +50,7 @@ export function PortfolioCard({ project }: PortfolioCardProps) {
             </div>
           </div>
 
-          <div className="absolute top-4 right-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:opacity-100 group-hover:scale-110 group-hover:bg-white/20">
+          <div className="absolute top-4 right-4 flex h-12 w-12 items-center justify-center rounded-full bg-accent/20 text-accent opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:opacity-100 group-hover:scale-110 group-hover:bg-accent/30">
             <ArrowUpRight className="h-6 w-6" />
           </div>
         </Card>

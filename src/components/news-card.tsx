@@ -20,9 +20,9 @@ export function NewsCard({ article }: NewsCardProps) {
   return (
     <Link href={href} className="group block">
       <Card className="relative flex h-full flex-col overflow-hidden rounded-xl border-transparent transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
-        {/* Animated gradient border */}
+        {/* Animated gradient border using primary color */}
         <div className="absolute -inset-px rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden="true">
-          <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/50 via-secondary/50 to-primary/50" />
+          <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/50 via-secondary/50 to-accent/50" />
         </div>
         
         <div className="relative z-10 flex h-full flex-col overflow-hidden rounded-[11px] bg-card">
