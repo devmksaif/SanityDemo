@@ -1,17 +1,11 @@
 "use client";
 
-import type { Metadata } from "next";
 import { useState, useEffect } from "react";
 import { EnterpriseHeader } from "@/components/enterprise-header";
 import { Footer } from "@/components/footer";
 import { DebugClickTracker } from "@/components/debug-click-tracker";
 import { FontSwitcher, FontStyle } from "@/components/font-switcher";
 import { fontCombinations } from "@/lib/fonts";
-
-export const metadata: Metadata = {
-  title: "Shubz Entertainment",
-  description: "Creative Entertainment Company",
-};
 
 export default function RootLayout({
   children,
@@ -47,6 +41,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={isMounted ? fontVariables : 'font-sans'}>
       <head>
+        <title>Shubz Entertainment - Creative Entertainment Company</title>
+        <meta name="description" content="Creative Entertainment Company integrating media, music, and talent platforms" />
+        <meta name="keywords" content="entertainment, media, music, talent, creative" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
         <style jsx global>{`
           :root {
             --font-heading: ${headingFont.style.fontFamily};
