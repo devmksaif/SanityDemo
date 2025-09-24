@@ -67,8 +67,8 @@ export default async function AboutPage() {
         </Container>
       </section>
 
-      {/* Team Section */}
-      <section className="py-16 sm:py-24 bg-muted">
+      {/* Team Section - Updated with distinct background color */}
+      <section className="py-16 sm:py-24 bg-secondary/10">
         <Container>
           <div className="mb-12 text-center">
             <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-4">
@@ -82,7 +82,7 @@ export default async function AboutPage() {
           {teamMembers.length > 0 ? (
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
               {teamMembers.map((member) => (
-                <Card key={member._id} className="text-center">
+                <Card key={member._id} className="text-center bg-background/80 backdrop-blur-sm">
                   <CardContent className="pt-6">
                     <Avatar className="h-24 w-24 mx-auto mb-4">
                       <AvatarImage src={urlFor(member.image).width(200).url()} alt={member.name} />
