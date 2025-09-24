@@ -16,7 +16,7 @@ export default async function NewsroomPage() {
   const articles = await getNewsArticles();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background to-secondary/20">
+    <div className="min-h-screen bg-background">
       <header className="py-20 sm:py-32">
         <Container>
           <div className="mx-auto max-w-4xl text-center">

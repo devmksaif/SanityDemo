@@ -29,7 +29,7 @@ export default async function DivisionPage({ params }: { params: Promise<{ slug:
   const imageUrl = urlFor(division.coverImage).width(1600).height(800).url();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background to-secondary/20">
+    <div className="min-h-screen bg-background">
       {/* Animated Hero Section */}
       <header className="relative h-[70vh] min-h-[500px] w-full overflow-hidden">
         <div className="absolute inset-0">
@@ -41,7 +41,6 @@ export default async function DivisionPage({ params }: { params: Promise<{ slug:
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-secondary/20" />
         </div>
         
         <Container className="relative flex h-full flex-col items-center justify-center text-center text-white">
@@ -89,7 +88,7 @@ export default async function DivisionPage({ params }: { params: Promise<{ slug:
                 </p>
               </div>
               
-              <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-8">
+              <div className="bg-muted rounded-2xl p-8">
                 <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
                 <p className="text-muted-foreground">
                   {division.title} is dedicated to pushing creative boundaries and delivering exceptional experiences that resonate with audiences worldwide.
@@ -117,7 +116,7 @@ export default async function DivisionPage({ params }: { params: Promise<{ slug:
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-primary to-primary/80 rounded-2xl p-6 text-primary-foreground">
+              <div className="bg-primary rounded-2xl p-6 text-primary-foreground">
                 <h3 className="text-lg font-semibold mb-2">Ready to Collaborate?</h3>
                 <p className="text-sm mb-4 opacity-90">
                   Let's create something amazing together.

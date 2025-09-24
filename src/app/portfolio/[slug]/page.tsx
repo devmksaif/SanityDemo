@@ -29,7 +29,7 @@ export default async function PortfolioProjectPage({ params }: { params: Promise
   const imageUrl = urlFor(project.thumbnailImage).width(1200).height(600).url();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background to-secondary/20">
+    <div className="min-h-screen bg-background">
       {/* Back Navigation */}
       <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b">
         <Container className="py-4">
@@ -131,7 +131,7 @@ export default async function PortfolioProjectPage({ params }: { params: Promise
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-6">
+              <div className="bg-muted rounded-2xl p-6">
                 <h3 className="text-lg font-semibold mb-2">Interested in Similar Work?</h3>
                 <p className="text-sm text-muted-foreground mb-4">
                   Let's discuss your next creative project.

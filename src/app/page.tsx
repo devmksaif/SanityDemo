@@ -43,7 +43,7 @@ export default async function IndexPage() {
   const { homePageData, divisions, portfolio, news } = await getPageData();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background to-secondary/20">
+    <div className="min-h-screen bg-background">
       {/* Enterprise Hero */}
       <EnterpriseHero data={homePageData} />
 
@@ -161,7 +161,7 @@ export default async function IndexPage() {
       )}
 
       {/* CTA Section */}
-      <section className="py-20 sm:py-32 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5">
+      <section className="py-20 sm:py-32 bg-muted">
         <Container>
           <AnimatedContainer>
             <div className="mx-auto max-w-4xl text-center">

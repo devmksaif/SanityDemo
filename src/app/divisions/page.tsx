@@ -30,7 +30,7 @@ export default async function DivisionsPage() {
   const slugIssues = await ensureSlugsExist();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background to-secondary/20">
+    <div className="min-h-screen bg-background">
       {slugIssues.divisions.length > 0 && (
         <div className="bg-yellow-50 border-b border-yellow-200">
           <Container className="py-4">

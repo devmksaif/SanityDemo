@@ -26,7 +26,7 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
   const readTime = Math.ceil(article.body ? article.body.length / 200 : 5);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background to-secondary/20">
+    <div className="min-h-screen bg-background">
       {/* Back Navigation */}
       <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b">
         <Container className="py-4">
@@ -114,7 +114,7 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-6">
+              <div className="bg-muted rounded-2xl p-6">
                 <h3 className="text-lg font-semibold mb-2">Stay Updated</h3>
                 <p className="text-sm text-muted-foreground mb-4">
                   Get the latest news and updates from Shubz Entertainment.

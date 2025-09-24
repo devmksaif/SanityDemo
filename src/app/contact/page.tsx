@@ -4,7 +4,7 @@ import { Mail, MapPin, Phone, Sparkles } from "lucide-react";
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background to-secondary/20">
+    <div className="min-h-screen bg-background">
       {/* Page Header */}
       <section className="py-20 sm:py-32">
         <Container>
