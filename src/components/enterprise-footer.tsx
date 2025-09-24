@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Github, Twitter, Instagram, Youtube, Mail, ArrowRight, MapPin, Phone } from "lucide-react";
+import { ThemedLogo } from "@/components/themed-logo";
 
 export function EnterpriseFooter() {
   return (
@@ -14,14 +15,8 @@ export function EnterpriseFooter() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand Section */}
           <div className="space-y-6">
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/60">
-                <span className="text-xl font-bold text-primary-foreground">SE</span>
-              </div>
-              <div>
-                <span className="text-xl font-semibold">Shubz Entertainment</span>
-                <p className="text-sm text-muted-foreground">Creative Enterprise</p>
-              </div>
+            <Link href="/">
+              <ThemedLogo width={200} height={45} className="h-10 w-auto" />
             </Link>
             <p className="text-sm text-muted-foreground">
               Integrating media, music, and talent platforms to tell unforgettable global stories.

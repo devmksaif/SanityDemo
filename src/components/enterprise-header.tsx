@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -14,6 +14,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { ThemedLogo } from "@/components/themed-logo";
 
 const navLinks = [
   { href: "/divisions", label: "Divisions" },
@@ -29,11 +30,8 @@ export function EnterpriseHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-lg supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-20 max-w-screen-2xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center space-x-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/60">
-            <span className="text-lg font-bold text-primary-foreground">SE</span>
-          </div>
-          <span className="text-xl font-semibold">Shubz Entertainment</span>
+        <Link href="/" className="flex items-center">
+          <ThemedLogo width={180} height={40} className="h-9 w-auto" />
         </Link>
 
         {/* Desktop Navigation */}
