@@ -30,41 +30,38 @@ export default async function DivisionPage({ params }: { params: Promise<{ slug:
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Animated Hero Section */}
-      <header className="relative h-[70vh] min-h-[500px] w-full overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-secondary">
-          <Image 
-            src={imageUrl} 
-            alt={division.title} 
-            fill 
-            className="object-cover opacity-30 mix-blend-overlay" 
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-          
-          {/* Modern geometric elements */}
-          <div className="absolute top-20 right-20 w-32 h-32 bg-accent/20 rotate-45 rounded-lg" />
-          <div className="absolute bottom-32 left-32 w-24 h-24 bg-secondary/20 rotate-12 rounded-xl" />
-          <div className="absolute top-1/3 right-1/4 w-16 h-16 bg-white/10 rotate-45 rounded-full" />
+      {/* Modernized Hero Section */}
+      <header className="relative h-[60vh] min-h-[450px] w-full overflow-hidden bg-primary text-primary-foreground">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 left-0 w-96 h-96 bg-accent rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary rounded-full blur-3xl" />
         </div>
+        <Image 
+          src={imageUrl} 
+          alt={division.title} 
+          fill 
+          className="absolute inset-0 object-cover opacity-10" 
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent" />
         
-        <Container className="relative flex h-full flex-col items-center justify-center text-center text-white">
+        <Container className="relative flex h-full flex-col items-center justify-center text-center">
           {division.logo && (
-            <div className="relative h-24 w-24 mb-6 animate-float">
+            <div className="relative h-20 w-20 mb-4 animate-float">
               <Image 
                 src={urlFor(division.logo).url()} 
                 alt={`${division.title} Logo`} 
                 fill 
-                className="object-contain drop-shadow-2xl" 
+                className="object-contain drop-shadow-lg" 
               />
             </div>
           )}
           
-          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight animate-fade-in-up">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight animate-fade-in-up">
             {division.title}
           </h1>
           
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-6 text-sm">
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm opacity-80">
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4" />
               <span>Established</span>
@@ -82,18 +79,18 @@ export default async function DivisionPage({ params }: { params: Promise<{ slug:
       </header>
 
       {/* Main Content */}
-      <main className="py-16 sm:py-24">
+      <main className="py-12 sm:py-20">
         <Container size="lg">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Content */}
-            <div className="lg:col-span-2 space-y-8">
+            <div className="lg:col-span-2 space-y-6">
               <div className="prose prose-lg max-w-none dark:prose-invert">
                 <p className="text-xl text-muted-foreground leading-relaxed">
                   {division.description}
                 </p>
               </div>
               
-              <div className="bg-muted rounded-2xl p-8">
+              <div className="bg-muted rounded-2xl p-6">
                 <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
                 <p className="text-muted-foreground">
                   {division.title} is dedicated to pushing creative boundaries and delivering exceptional experiences that resonate with audiences worldwide.
@@ -102,10 +99,10 @@ export default async function DivisionPage({ params }: { params: Promise<{ slug:
             </div>
 
             {/* Sidebar */}
-            <div className="space-y-8">
+            <div className="space-y-6">
               <div className="bg-card rounded-2xl p-6 border">
                 <h3 className="text-lg font-semibold mb-4">Quick Facts</h3>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Division</span>
                     <span className="font-medium">{division.title}</span>

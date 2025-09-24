@@ -32,7 +32,7 @@ export default async function PortfolioProjectPage({ params }: { params: Promise
     <div className="min-h-screen bg-background">
       {/* Back Navigation */}
       <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm border-b">
-        <Container className="py-4">
+        <Container className="py-3">
           <Link 
             href="/portfolio" 
             className="inline-flex items-center text-sm text-muted-foreground hover:text-primary transition-colors"
@@ -43,21 +43,25 @@ export default async function PortfolioProjectPage({ params }: { params: Promise
         </Container>
       </div>
 
-      {/* Animated Hero Section */}
-      <header className="relative py-16 sm:py-24 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5">
-        <Container size="lg">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      {/* Modernized Hero Section */}
+      <header className="relative overflow-hidden py-12 sm:py-20 bg-muted">
+        <div className="absolute inset-0 opacity-50">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+        </div>
+        <Container size="lg" className="relative">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             {/* Content */}
-            <div className="space-y-6 animate-fade-in-left">
+            <div className="space-y-4 animate-fade-in-left">
               <Badge variant="outline" className="text-sm border-primary text-primary">
                 {project.category}
               </Badge>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-primary-glow">
+              <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
                 {project.title}
               </h1>
               
-              <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
                 {project.releaseDate && (
                   <div className="flex items-center gap-2">
                     <Calendar className="h-4 w-4 text-primary" />
@@ -79,7 +83,7 @@ export default async function PortfolioProjectPage({ params }: { params: Promise
             </div>
 
             {/* Image */}
-            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl shadow-2xl animate-fade-in-right border-2 border-primary/20">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl shadow-lg animate-fade-in-right border">
               <Image
                 src={imageUrl}
                 alt={project.title}
@@ -92,11 +96,11 @@ export default async function PortfolioProjectPage({ params }: { params: Promise
       </header>
 
       {/* Main Content */}
-      <main className="pb-20 sm:pb-32">
+      <main className="pb-16 sm:pb-24 pt-12 sm:pt-20">
         <Container size="lg">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Content */}
-            <div className="lg:col-span-2 space-y-12">
+            <div className="lg:col-span-2 space-y-8">
               {project.body && (
                 <div className="prose prose-lg max-w-none dark:prose-invert">
                   <PortableText value={project.body} />
@@ -105,10 +109,10 @@ export default async function PortfolioProjectPage({ params }: { params: Promise
             </div>
 
             {/* Sidebar */}
-            <div className="space-y-8">
+            <div className="space-y-6">
               <div className="bg-card rounded-2xl p-6 border">
                 <h3 className="text-lg font-semibold mb-4">Project Details</h3>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {project.releaseDate && (
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Release Date</span>
