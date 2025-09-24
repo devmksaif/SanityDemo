@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/container";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { ArrowRight, Calendar, Users, Award } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 async function getDivision(slug: string) {
   const queryBySlug = `*[_type == "division" && slug.current == $slug][0]`;
