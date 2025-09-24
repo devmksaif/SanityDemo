@@ -32,15 +32,20 @@ export default async function DivisionPage({ params }: { params: Promise<{ slug:
     <div className="min-h-screen bg-background">
       {/* Animated Hero Section */}
       <header className="relative h-[70vh] min-h-[500px] w-full overflow-hidden">
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-secondary">
           <Image 
             src={imageUrl} 
             alt={division.title} 
             fill 
-            className="object-cover" 
+            className="object-cover opacity-30 mix-blend-overlay" 
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+          
+          {/* Modern geometric elements */}
+          <div className="absolute top-20 right-20 w-32 h-32 bg-accent/20 rotate-45 rounded-lg" />
+          <div className="absolute bottom-32 left-32 w-24 h-24 bg-secondary/20 rotate-12 rounded-xl" />
+          <div className="absolute top-1/3 right-1/4 w-16 h-16 bg-white/10 rotate-45 rounded-full" />
         </div>
         
         <Container className="relative flex h-full flex-col items-center justify-center text-center text-white">

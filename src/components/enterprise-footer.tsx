@@ -16,7 +16,7 @@ export function EnterpriseFooter() {
           {/* Brand Section */}
           <div className="space-y-6">
             <Link href="/">
-              <ThemedLogo width={200} height={45} className="h-10 w-auto" />
+              <ThemedLogo width={150} height={150} className="  w-auto" />
             </Link>
             <p className="text-sm text-muted-foreground">
               Integrating media, music, and talent platforms to tell unforgettable global stories.

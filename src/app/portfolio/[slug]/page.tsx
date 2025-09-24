@@ -44,23 +44,23 @@ export default async function PortfolioProjectPage({ params }: { params: Promise
       </div>
 
       {/* Animated Hero Section */}
-      <header className="relative py-16 sm:py-24">
+      <header className="relative py-16 sm:py-24 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5">
         <Container size="lg">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Content */}
             <div className="space-y-6 animate-fade-in-left">
-              <Badge variant="outline" className="text-sm">
+              <Badge variant="outline" className="text-sm border-primary text-primary">
                 {project.category}
               </Badge>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-primary-glow">
                 {project.title}
               </h1>
               
               <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
                 {project.releaseDate && (
                   <div className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4" />
+                    <Calendar className="h-4 w-4 text-primary" />
                     <span>
                       {new Date(project.releaseDate).toLocaleDateString("en-US", {
                         year: "numeric",
@@ -71,7 +71,7 @@ export default async function PortfolioProjectPage({ params }: { params: Promise
                 )}
                 {project.division && (
                   <div className="flex items-center gap-2">
-                    <Tag className="h-4 w-4" />
+                    <Tag className="h-4 w-4 text-accent" />
                     <span>{project.division.title}</span>
                   </div>
                 )}
@@ -79,14 +79,13 @@ export default async function PortfolioProjectPage({ params }: { params: Promise
             </div>
 
             {/* Image */}
-            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl shadow-2xl animate-fade-in-right">
+            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl shadow-2xl animate-fade-in-right border-2 border-primary/20">
               <Image
                 src={imageUrl}
                 alt={project.title}
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
             </div>
           </div>
         </Container>

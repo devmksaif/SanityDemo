@@ -41,11 +41,11 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
       </div>
 
       {/* Animated Hero Section */}
-      <header className="relative py-16 sm:py-24">
+      <header className="relative py-16 sm:py-24 bg-gradient-to-br from-accent/10 via-primary/10 to-secondary/10">
         <Container size="lg">
           <div className="max-w-4xl mx-auto text-center space-y-6 animate-fade-in-up">
-            <div className="flex items-center justify-center gap-4 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
+            <div className="flex items-center justify-center gap-4 text-sm">
+              <div className="flex items-center gap-2 text-primary">
                 <Calendar className="h-4 w-4" />
                 <span>
                   {new Date(article.publishedAt).toLocaleDateString("en-US", {
@@ -55,13 +55,13 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
                   })}
                 </span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 text-accent">
                 <Clock className="h-4 w-4" />
                 <span>{readTime} min read</span>
               </div>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-primary-glow">
               {article.title}
             </h1>
             
@@ -73,7 +73,7 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
       </header>
 
       {/* Hero Image */}
-      <div className="relative aspect-[16/9] w-full overflow-hidden">
+      <div className="relative aspect-[16/9] w-full overflow-hidden border-b-4 border-primary">
         <Image
           src={imageUrl}
           alt={article.title}

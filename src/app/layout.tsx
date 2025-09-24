@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { EnterpriseHeader } from "@/components/enterprise-header";
-import { Footer } from "@/components/footer";
+import { EnterpriseFooter } from "@/components/enterprise-footer";
 import { DebugClickTracker } from "@/components/debug-click-tracker";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,7 +23,7 @@ export default function RootLayout({
         <DebugClickTracker />
         <EnterpriseHeader />
         <main className="min-h-screen">{children}</main>
-        <Footer />
+        <EnterpriseFooter />
       </body>
     </html>
   );
