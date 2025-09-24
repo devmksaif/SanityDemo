@@ -19,7 +19,7 @@ export function NewsCard({ article }: NewsCardProps) {
 
   return (
     <Link href={href} className="group block">
-      <Card className="flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:border-primary">
+      <Card className="flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-all duration-300 hover:shadow-2xl hover:shadow-primary/20 hover:-translate-y-2">
         <CardHeader className="p-0">
           <div className="relative aspect-[16/10] w-full overflow-hidden">
             <Image

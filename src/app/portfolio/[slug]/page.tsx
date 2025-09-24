@@ -96,7 +96,7 @@ export default async function PortfolioProjectPage({ params }: { params: Promise
       </header>
 
       {/* Main Content */}
-      <main className="pb-16 sm:pb-24 pt-12 sm:pt-20">
+      <main className="py-12 sm:py-16">
         <Container size="lg">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Main Content */}
