@@ -25,8 +25,12 @@ export default async function PortfolioPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="py-20 sm:py-32">
-        <Container>
+      <header className="relative overflow-hidden py-20 sm:py-32 bg-muted">
+        <div className="absolute inset-0 opacity-50">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+        </div>
+        <Container className="relative">
           <div className="mx-auto max-w-4xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-6">
               <Sparkles className="h-4 w-4" />

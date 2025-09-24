@@ -161,26 +161,30 @@ export default async function IndexPage() {
       )}
 
       {/* CTA Section */}
-      <section className="py-20 sm:py-32 bg-muted">
+      <section className="relative overflow-hidden py-20 sm:py-32 bg-primary text-primary-foreground">
         <Container>
           <AnimatedContainer>
-            <div className="mx-auto max-w-4xl text-center">
-              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-6">
+            <div className="relative mx-auto max-w-4xl text-center">
+              {/* Creative background elements */}
+              <div className="absolute -top-20 -left-20 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
+              <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />
+
+              <div className="relative inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white mb-6 backdrop-blur-sm">
                 <TrendingUp className="h-4 w-4" />
                 Ready to Collaborate?
               </div>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-6">
                 Let's Create Something Extraordinary Together
               </h2>
-              <p className="mb-8 text-lg text-muted-foreground">
+              <p className="mb-8 text-lg text-white/80">
                 Whether you're an artist, brand, or creative professional, we have the expertise and resources to bring your vision to life.
               </p>
               <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-                <Button size="lg" className="group">
+                <Button size="lg" className="group bg-white text-primary hover:bg-white/90">
                   Start a Project
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
-                <Button variant="outline" size="lg">
+                <Button variant="outline" size="lg" className="border-white/30 bg-white/10 text-white hover:bg-white/20 hover:text-white backdrop-blur-sm">
                   Schedule a Call
                 </Button>
               </div>
