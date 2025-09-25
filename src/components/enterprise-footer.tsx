@@ -5,26 +5,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Github, Twitter, Instagram, Youtube, Mail, ArrowRight, MapPin, Phone } from "lucide-react";
-import Image from "next/image";
+import { ThemedLogo } from "@/components/themed-logo";
 
 export function EnterpriseFooter() {
   return (
-    <footer className="w-full border-t bg-gradient-to-b from-background to-secondary/10">
+    <footer className="w-full border-t bg-muted">
       <div className="mx-auto w-full max-w-screen-2xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20 py-16">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
-          {/* Brand Section with Creative Logo */}
+          {/* Brand Section */}
           <div className="space-y-6">
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="relative h-16 w-56">
-                <Image
-                  src="/logo-4.png"
-                  alt="Shubz Entertainment Group"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </div>
+            <Link href="/">
+              <ThemedLogo width={150} height={150} className="  w-auto" />
             </Link>
             <p className="text-sm text-muted-foreground">
               Integrating media, music, and talent platforms to tell unforgettable global stories.
