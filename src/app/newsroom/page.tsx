@@ -9,6 +9,23 @@ import { Sparkles } from "lucide-react";
 async function getNewsArticles() {
   const query = `*[_type == "newsArticle"] | order(publishedAt desc)`;
   const data: NewsArticleData[] = await client.fetch(query);
+  
+  // Add comprehensive debugging
+  console.log('📊 News articles query result:', data);
+  console.log('📊 Number of articles:', data.length);
+  console.log('📊 Articles data type:', typeof data);
+  console.log('📊 Is array:', Array.isArray(data));
+  
+  if (data.length > 0) {
+    console.log('📊 First article:', data[0]);
+    console.log('📊 First article keys:', Object.keys(data[0]));
+    console.log('📊 First article title:', data[0]?.title);
+    console.log('📊 First article excerpt:', data[0]?.excerpt);
+    console.log('📊 First article slug:', data[0]?.slug);
+    console.log('📊 First article publishedAt:', data[0]?.publishedAt);
+    console.log('📊 First article coverImage:', data[0]?.coverImage);
+  }
+  
   return data;
 }
 
@@ -46,12 +63,21 @@ export default async function NewsroomPage() {
         <Container>
           {articles.length > 0 ? (
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {articles.map((article) => (
-                <NewsCard key={article._id} article={article} />
+              {articles.map((article, index) => (
+                <div key={article._id} className="border border-green-500">
+                  <div className="p-2 bg-green-100 text-xs text-green-800">
+                    DEBUG: Article {index + 1} - {article.title}
+                  </div>
+                  <NewsCard article={article} />
+                </div>
               ))}
             </div>
           ) : (
             <div className="text-center py-12">
+              <div className="mb-4 p-4 bg-yellow-100 rounded-lg">
+                <p className="text-lg text-yellow-800">No news articles found</p>
+                <p className="text-sm text-yellow-600 mt-2">Debug: {articles.length} articles returned from query</p>
+              </div>
               <p className="text-lg text-muted-foreground">News articles coming soon.</p>
               <Button asChild className="mt-4">
                 <Link href="/studio">Add Articles in Studio</Link>
