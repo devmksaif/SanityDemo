@@ -18,8 +18,8 @@ export function PortfolioCard({ project }: PortfolioCardProps) {
   const href = `/portfolio/${slug}`;
 
   return (
-    <Link href={href} className="group block">
-      <Card className="flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-all duration-300 hover:shadow-xl hover:border-primary">
+    <Link href={href} className="group block h-full">
+      <Card className="flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-all duration-300 hover:shadow-xl">
         {/* Image Section */}
         <div className="relative aspect-[16/10] w-full overflow-hidden">
           <Image
@@ -35,11 +35,19 @@ export function PortfolioCard({ project }: PortfolioCardProps) {
         </div>
         
         {/* Content Section */}
-        <CardContent className="flex flex-1 flex-col p-6">
-          <span className="text-sm font-semibold uppercase tracking-wider text-primary">
-            {project.category}
-          </span>
-          <h3 className="mt-2 text-2xl font-bold">{project.title}</h3>
+        <CardContent className="relative flex flex-1 flex-col justify-center p-6 overflow-hidden">
+          {/* Wipe effect bar */}
+          <div className="absolute left-0 top-0 h-full w-1.5 bg-primary transition-all duration-500 ease-in-out group-hover:w-full" />
+          
+          {/* Content Wrapper */}
+          <div className="relative">
+            <span className="text-sm font-semibold uppercase tracking-wider text-primary transition-colors duration-500 group-hover:text-primary-foreground/80">
+              {project.category}
+            </span>
+            <h3 className="mt-2 text-2xl font-bold transition-colors duration-500 group-hover:text-primary-foreground">
+              {project.title}
+            </h3>
+          </div>
         </CardContent>
       </Card>
     </Link>
