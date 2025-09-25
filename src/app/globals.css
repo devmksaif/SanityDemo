@@ -61,56 +61,56 @@
 
   .dark {
     /* Shubz Entertainment Color Palette - Dark Mode */
-    --background: 220 13% 10%; /* Dark background */
-    --foreground: 0 0% 95%; /* Light text */
+    --background: 240 10% 3.9%; /* Charcoal Gray Base */
+    --foreground: 0 0% 98%; /* Light text */
     
-    --card: 220 13% 12%; /* Dark cards */
-    --card-foreground: 0 0% 95%; /* Light card text */
+    --card: 240 4% 10%; /* Slightly lighter card */
+    --card-foreground: 0 0% 98%;
     
-    --popover: 220 13% 10%; /* Dark popovers */
-    --popover-foreground: 0 0% 95%; /* Light popover text */
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
     
-    /* Primary: Brightened Deep Magenta for dark mode */
-    --primary: 330 60% 45%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary: Muted Lilac for dark mode */
+    --primary: 315 39% 65%;
+    --primary-foreground: 315 30% 15%; /* Dark text for contrast */
     
-    /* Secondary: Brightened Muted Lilac for dark mode */
-    --secondary: 315 45% 75%;
-    --secondary-foreground: 0 0% 100%;
+    /* Secondary: Rich Gold for dark mode */
+    --secondary: 40 64% 57%;
+    --secondary-foreground: 40 50% 15%; /* Dark text for contrast */
     
-    /* Muted: Dark gray for subtle backgrounds */
-    --muted: 220 13% 18%;
-    --muted-foreground: 220 10% 70%; /* Light gray text */
+    /* Muted: Darker gray for subtle backgrounds */
+    --muted: 240 4% 12%;
+    --muted-foreground: 240 5% 65%;
     
-    /* Accent: Golden Yellow #F2D54C for dark mode */
+    /* Accent: Golden Yellow for highlights */
     --accent: 55 86% 65%;
-    --accent-foreground: 220 13% 22%; /* Dark text on accent */
+    --accent-foreground: 55 70% 15%; /* Dark text for contrast */
     
-    /* Destructive: Brightened red for dark mode */
+    /* Destructive: Brighter red for dark mode */
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
     
     /* Borders and inputs */
-    --border: 220 13% 20%;
-    --input: 220 13% 20%;
-    --ring: 330 60% 45%; /* Brightened primary for focus rings */
+    --border: 240 4% 15%;
+    --input: 240 4% 15%;
+    --ring: 315 39% 65%; /* Muted Lilac for focus rings */
     
     /* Chart colors for dark mode */
-    --chart-1: 330 60% 45%; /* Brightened Deep Magenta */
-    --chart-2: 315 45% 75%; /* Brightened Muted Lilac */
+    --chart-1: 315 39% 65%; /* Muted Lilac */
+    --chart-2: 40 64% 57%; /* Rich Gold */
     --chart-3: 55 86% 65%; /* Golden Yellow */
-    --chart-4: 40 64% 57%; /* Rich Gold */
+    --chart-4: 330 51% 36%; /* Deep Magenta (as a darker accent) */
     --chart-5: 0 0% 95%; /* Light text color */
     
     /* Sidebar for dark mode */
-    --sidebar-background: 220 13% 8%;
-    --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 330 60% 45%;
-    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-background: 240 10% 3.9%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 315 39% 65%;
+    --sidebar-primary-foreground: 315 30% 15%;
     --sidebar-accent: 55 86% 65%;
-    --sidebar-accent-foreground: 220 13% 22%;
-    --sidebar-border: 220 13% 20%;
-    --sidebar-ring: 330 60% 45%;
+    --sidebar-accent-foreground: 55 70% 15%;
+    --sidebar-border: 240 4% 15%;
+    --sidebar-ring: 315 39% 65%;
   }
 }
 

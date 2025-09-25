@@ -4,6 +4,7 @@ import "./globals.css";
 import { EnterpriseHeader } from "@/components/enterprise-header";
 import { EnterpriseFooter } from "@/components/enterprise-footer";
 import { DebugClickTracker } from "@/components/debug-click-tracker";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,12 +19,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <DebugClickTracker />
-        <EnterpriseHeader />
-        <main className="min-h-screen">{children}</main>
-        <EnterpriseFooter />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <DebugClickTracker />
+          <EnterpriseHeader />
+          <main className="min-h-screen">{children}</main>
+          <EnterpriseFooter />
+        </ThemeProvider>
       </body>
     </html>
   );

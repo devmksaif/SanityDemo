@@ -15,6 +15,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { ThemedLogo } from "@/components/themed-logo";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const navLinks = [
   { href: "/divisions", label: "Divisions" },
@@ -53,7 +54,8 @@ export function EnterpriseHeader() {
           </NavigationMenuList>
         </NavigationMenu>
 
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-1">
+          <ThemeToggle />
           <Button asChild size="sm" className="hidden lg:inline-flex">
             <Link href="/contact">Contact Us</Link>
           </Button>
