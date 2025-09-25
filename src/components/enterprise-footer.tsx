@@ -16,7 +16,7 @@ export function EnterpriseFooter() {
           {/* Brand Section */}
           <div className="space-y-6">
             <Link href="/">
-              <ThemedLogo width={150} height={150} className="  w-auto" />
+              <ThemedLogo width={180} height={180} className="  w-auto" />
             </Link>
             <p className="text-sm text-muted-foreground">
               Integrating media, music, and talent platforms to tell unforgettable global stories.
@@ -24,7 +24,7 @@ export function EnterpriseFooter() {
             <div className="space-y-2">
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4" />
-                <span>Lagos, Nigeria</span>
+                <span>Netherlands</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4" />
