@@ -39,7 +39,7 @@ export function DivisionCard({ division }: DivisionCardProps) {
         {/* Gradient overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
-        {/* Content with wipe effect */}
+        {/* Content with modern wipe effect - matches other cards */}
         <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
           {division.logo && (
             <div className="relative h-12 w-12 mb-4 transition-transform duration-300 group-hover:scale-110">
@@ -52,13 +52,13 @@ export function DivisionCard({ division }: DivisionCardProps) {
             </div>
           )}
           
-          {/* Wipe effect container */}
+          {/* Modern wipe effect container - matches portfolio/news cards */}
           <div className="relative">
             <h3 className="text-3xl font-bold tracking-tight transition-colors duration-500 group-hover:text-primary-foreground">
               {division.title}
             </h3>
             
-            {/* Wipe effect bar with slide-up content */}
+            {/* Wipe effect with slide-up content */}
             <div className="mt-4 overflow-hidden transition-all duration-500 ease-in-out max-h-0 group-hover:max-h-40">
               <p className="text-sm text-white/80 line-clamp-2 pt-2 transition-colors duration-500 group-hover:text-primary-foreground/90">
                 {division.description}
