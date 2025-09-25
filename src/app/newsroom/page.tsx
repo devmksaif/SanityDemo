@@ -64,12 +64,9 @@ export default async function NewsroomPage() {
           {articles.length > 0 ? (
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
               {articles.map((article, index) => (
-                <div key={article._id} className="border border-green-500">
-                  <div className="p-2 bg-green-100 text-xs text-green-800">
-                    DEBUG: Article {index + 1} - {article.title}
-                  </div>
+               
                   <NewsCard article={article} />
-                </div>
+                 
               ))}
             </div>
           ) : (
