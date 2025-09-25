@@ -1,9 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles } from "lucide-react";
-import { ThemedLogo } from "@/components/themed-logo";
+import { ArrowRight, Sparkles, TrendingUp, Users } from "lucide-react";
+import Image from "next/image";
+import { urlFor } from "@/lib/sanity";
 import type { HomePageData } from "@/types/sanity";
+import Tilt from "react-parallax-tilt";
 
 type EnterpriseHeroProps = {
   data?: HomePageData | null;
@@ -12,6 +14,9 @@ type EnterpriseHeroProps = {
 export function EnterpriseHero({ data }: EnterpriseHeroProps) {
   const headline = data?.heroHeadline || "Integrating Media, Music, and Talent Platforms.";
   const subheadline = data?.heroSubheadline || "We are Shubz Entertainment, a creative enterprise building bridges between industries to tell unforgettable global stories.";
+  const bgImage = data?.heroBackgroundImage
+    ? urlFor(data.heroBackgroundImage).url()
+    : "https://images.unsplash.com/photo-1504270997622-AF7a2a4d3a23?q=80&w=2070&auto=format&fit=crop";
 
   return (
     <section className="relative w-full overflow-hidden h-[90vh] min-h-[700px] flex items-center">
@@ -74,19 +79,21 @@ export function EnterpriseHero({ data }: EnterpriseHeroProps) {
             </div>
           </div>
 
-          {/* Visual Element - Clean Logo Display */}
+          {/* Visual Element - Creative Logo Display */}
           <div className="relative hidden lg:block">
             <div className="relative aspect-square w-full max-w-md mx-auto">
               {/* Clean background circle */}
               <div className="absolute inset-0 rounded-full bg-white/10 backdrop-blur-sm border border-white/20" />
               
-              {/* Logo display */}
+              {/* Logo display with creative positioning */}
               <div className="absolute inset-12 flex items-center justify-center">
                 <div className="relative w-full h-full">
-                  <ThemedLogo 
-                    width={200} 
-                    height={200} 
+                  <Image
+                    src="/logo-3-2.png"
+                    alt="Shubz Entertainment"
+                    fill
                     className="w-full h-full object-contain drop-shadow-2xl"
+                    priority
                   />
                 </div>
               </div>

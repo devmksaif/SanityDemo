@@ -41,7 +41,8 @@ export function DivisionCard({ division }: DivisionCardProps) {
 
         {/* Content */}
         <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
-          {division.logo && (
+          {/* Creative logo implementation */}
+          {division.logo ? (
             <div className="relative h-12 w-12 mb-4 transition-transform duration-300 group-hover:scale-110">
               <Image
                 src={urlFor(division.logo).width(100).url()}
@@ -50,7 +51,18 @@ export function DivisionCard({ division }: DivisionCardProps) {
                 className="object-contain"
               />
             </div>
+          ) : (
+            // Fallback to Shubz logo if no division logo
+            <div className="relative h-12 w-32 mb-4 transition-transform duration-300 group-hover:scale-110">
+              <Image
+                src="/logo-3.png"
+                alt="Shubz Entertainment"
+                fill
+                className="object-contain"
+              />
+            </div>
           )}
+          
           <h3 className="text-3xl font-bold tracking-tight">{division.title}</h3>
           
           {/* Slide-up panel on hover */}
