@@ -41,11 +41,13 @@ export function PortfolioCard({ project }: PortfolioCardProps) {
           
           {/* Content Wrapper */}
           <div className="relative">
-            <span className="text-sm font-semibold uppercase tracking-wider text-primary transition-colors duration-500 group-hover:text-primary-foreground/80">
-              {project.category}
-            </span>
-            <h3 className="mt-2 text-2xl font-bold transition-colors duration-500 group-hover:text-primary-foreground">
+            <h3 className="text-2xl font-bold transition-colors duration-500 group-hover:text-primary-foreground">
               {project.title}
+              {project.category && (
+                <span className="ml-2 text-lg font-normal text-muted-foreground group-hover:text-primary-foreground/80">
+                  ({project.category})
+                </span>
+              )}
             </h3>
             {project.division?.title && (
               <p className="mt-1 text-sm text-muted-foreground transition-colors duration-500 group-hover:text-primary-foreground/70">
