@@ -47,6 +47,11 @@ export function PortfolioCard({ project }: PortfolioCardProps) {
             <h3 className="mt-2 text-2xl font-bold transition-colors duration-500 group-hover:text-primary-foreground">
               {project.title}
             </h3>
+            {project.division?.title && (
+              <p className="mt-1 text-sm text-muted-foreground transition-colors duration-500 group-hover:text-primary-foreground/70">
+                — {project.division.title}
+              </p>
+            )}
           </div>
         </CardContent>
       </Card>
