@@ -12,10 +12,25 @@ type DivisionCardProps = {
 };
 
 export function DivisionCard({ division }: DivisionCardProps) {
-  const imageUrl = urlFor(division.coverImage).width(500).height(600).url();
+  const imageUrl = urlFor(division.coverImage).width(400).height(300).url();
   const hasSlug = division.slug?.current;
   const slug = hasSlug ? division.slug.current : division._id;
   const href = `/divisions/${slug}`;
+
+  // Extract category from description or use a default
+  const getCategory = () => {
+    // Try to extract category from description (first word or common patterns)
+    const desc = division.description.toLowerCase();
+    if (desc.includes('film') || desc.includes('movie')) return 'Film';
+    if (desc.includes('music') || desc.includes('record')) return 'Music';
+    if (desc.includes('dance') || desc.includes('choreography')) return 'Dance';
+    if (desc.includes('model') || desc.includes('fashion')) return 'Modeling';
+    if (desc.includes('app') || desc.includes('software')) return 'App';
+    if (desc.includes('visual') || desc.includes('video')) return 'Visuals';
+    if (desc.includes('percussion') || desc.includes('drum')) return 'Percussion';
+    if (desc.includes('talent') || desc.includes('creative')) return 'Creative';
+    return 'Entertainment'; // Default category
+  };
 
   const handleClick = (e: React.MouseEvent) => {
     if (!hasSlug) {
@@ -27,52 +42,38 @@ export function DivisionCard({ division }: DivisionCardProps) {
 
   return (
     <Link href={href} onClick={handleClick} className="group block">
-      <Card className={`relative h-[60vh] min-h-[500px] w-full overflow-hidden rounded-xl border bg-card transition-all duration-300 hover:shadow-2xl ${!hasSlug ? 'opacity-75 cursor-not-allowed' : ''}`}>
-        <Image
-          src={imageUrl}
-          alt={division.title}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
-        />
+      <Card className={`relative h-full w-full overflow-hidden rounded-lg border bg-card transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${!hasSlug ? 'opacity-75 cursor-not-allowed' : ''}`}>
+        {/* Image Thumbnail */}
+        <div className="relative aspect-[4/3] w-full overflow-hidden">
+          <Image
+            src={imageUrl}
+            alt={division.title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+          />
+          {/* Overlay on hover */}
+          <div className="absolute inset-0 bg-black/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        </div>
         
-        {/* Gradient overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-
-        {/* Content with modern wipe effect - matches other cards */}
-        <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
-          {division.logo && (
-            <div className="relative h-12 w-12 mb-4 transition-transform duration-300 group-hover:scale-110">
-              <Image
-                src={urlFor(division.logo).width(100).url()}
-                alt={`${division.title} logo`}
-                fill
-                className="object-contain"
-              />
-            </div>
-          )}
+        {/* Content Section */}
+        <div className="p-4">
+          {/* Title */}
+          <h3 className="text-lg font-semibold text-foreground transition-colors duration-300 group-hover:text-primary">
+            {division.title}
+          </h3>
           
-          {/* Modern wipe effect container - matches portfolio/news cards */}
-          <div className="relative">
-            <h3 className="text-3xl font-bold tracking-tight transition-colors duration-500 group-hover:text-primary-foreground">
-              {division.title}
-            </h3>
-            
-            {/* Wipe effect with slide-up content */}
-            <div className="mt-4 overflow-hidden transition-all duration-500 ease-in-out max-h-0 group-hover:max-h-40">
-              <p className="text-sm text-white/80 line-clamp-2 pt-2 transition-colors duration-500 group-hover:text-primary-foreground/90">
-                {division.description}
-              </p>
-              <div className="mt-4 flex items-center text-sm font-semibold text-accent transition-colors duration-500">
-                Explore Division <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </div>
-            </div>
+          {/* Category Tag */}
+          <div className="mt-2">
+            <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary-foreground">
+              {getCategory()}
+            </span>
           </div>
 
           {!hasSlug && (
-            <div className="mt-2 flex items-center gap-1 text-xs text-yellow-300 bg-yellow-900/50 px-2 py-1 rounded">
+            <div className="mt-3 flex items-center gap-1 text-xs text-yellow-700 bg-yellow-100 px-2 py-1 rounded">
               <AlertTriangle className="h-3 w-3" />
-              <span>No slug - click to fix</span>
+              <span>No slug</span>
             </div>
           )}
         </div>

@@ -75,7 +75,7 @@ export default async function DivisionsPage() {
       <section className="py-16 sm:py-24">
         <Container>
           {divisions.length > 0 ? (
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {divisions.map((division) => (
                 <DivisionCard key={division._id} division={division} />
               ))}
