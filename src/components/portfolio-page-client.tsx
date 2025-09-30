@@ -4,9 +4,9 @@ import type { PortfolioProjectData } from "@/types/sanity";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Sparkles, Play, Image as ImageIcon, Calendar, User } from "lucide-react";
+import { Sparkles, Play, Image as ImageIcon, Calendar, User, AlertTriangle } from "lucide-react";
 import Image from "next/image";
-import { urlFor } from "@/lib/sanity";
+import { getImageUrl } from "@/lib/cloudinary-helpers";
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { CaseStudiesShowcase } from "@/components/case-studies-showcase";
@@ -17,9 +17,7 @@ const FALLBACK_THUMBNAIL_URL = "https://images.unsplash.com/photo-1511379938547-
 
 function CaseStudyCard({ project }: { project: PortfolioProjectData }) {
   // Robust image URL handling
-  const imageUrl = project.thumbnailImage 
-    ? urlFor(project.thumbnailImage).width(600).height(400).url()
-    : FALLBACK_THUMBNAIL_URL;
+  const imageUrl = getImageUrl(project.thumbnailImage, { width: 600, height: 400 }) || FALLBACK_THUMBNAIL_URL;
 
   const hasSlug = project.slug?.current;
   const slug = hasSlug ? project.slug.current : project._id;

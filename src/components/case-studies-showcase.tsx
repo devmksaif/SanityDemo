@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
-import { urlFor } from "@/lib/sanity";
+import { getImageUrl } from "@/lib/cloudinary-helpers";
 import type { PortfolioProjectData } from "@/types/sanity";
 
 interface CaseStudiesShowcaseProps {
@@ -37,9 +37,7 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
         <div className="mt-8 space-y-8">
           {showcaseProjects.map((project, index) => {
             // Robust image URL handling
-            const imageUrl = project.thumbnailImage 
-              ? urlFor(project.thumbnailImage.secure_url).width(400).height(250).url()
-              : FALLBACK_IMAGE_URL;
+            const imageUrl = getImageUrl(project.thumbnailImage, { width: 400, height: 250 }) || FALLBACK_IMAGE_URL;
             const projectUrl = `/portfolio/${project.slug?.current || project._id}`;
             
             // Generate excerpt from body content
@@ -109,7 +107,7 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
                             {project.author.image && (
                               <div className="relative h-6 w-6 rounded-full overflow-hidden">
                                 <Image
-                                  src={urlFor(project.author.image).width(24).height(24).url()}
+                                  src={getImageUrl(project.author.image, { width: 24, height: 24 }) || ''}
                                   alt={project.author.name}
                                   width={24}
                                   height={24}
