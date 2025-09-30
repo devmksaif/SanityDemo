@@ -1,31 +1,12 @@
 import { client } from "@/lib/sanity";
 import type { NewsArticleData } from "@/types/sanity";
 import { Container } from "@/components/ui/container";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { Sparkles } from "lucide-react";
-import { BlogSection } from "@/components/blog-section";
+import { NewsroomList } from "@/components/newsroom-list";
 
 async function getNewsArticles() {
   const query = `*[_type == "newsArticle"] | order(publishedAt desc)`;
   const data: NewsArticleData[] = await client.fetch(query);
-  
-  // Add comprehensive debugging
-  console.log('📊 News articles query result:', data);
-  console.log('📊 Number of articles:', data.length);
-  console.log('📊 Articles data type:', typeof data);
-  console.log('📊 Is array:', Array.isArray(data));
-  
-  if (data.length > 0) {
-    console.log('📊 First article:', data[0]);
-    console.log('📊 First article keys:', Object.keys(data[0]));
-    console.log('📊 First article title:', data[0]?.title);
-    console.log('📊 First article excerpt:', data[0]?.excerpt);
-    console.log('📊 First article slug:', data[0]?.slug);
-    console.log('📊 First article publishedAt:', data[0]?.publishedAt);
-    console.log('📊 First article coverImage:', data[0]?.coverImage);
-  }
-  
   return data;
 }
 
@@ -59,15 +40,27 @@ export default async function NewsroomPage() {
         </Container>
       </header>
 
-      {/* Blog7 Theme BlogSection */}
-      <BlogSection 
-        articles={articles}
-        tagline="Latest News"
-        heading="From the Newsroom"
-        description="Stay updated with the latest stories and announcements from Shubz Entertainment."
-        buttonText="View All Articles"
-        buttonUrl="/newsroom"
-      />
+      {/* Newsroom List Section */}
+      <section className="py-16 sm:py-24">
+        <Container>
+          <div className="text-center mb-16">
+            <h2 className="mx-auto mb-6 text-3xl font-semibold text-pretty md:text-4xl lg:max-w-3xl">
+              Latest Articles
+            </h2>
+            <p className="mx-auto max-w-2xl text-muted-foreground md:text-lg">
+              Discover the latest insights, announcements, and stories from the world of Shubz Entertainment.
+            </p>
+          </div>
+          
+          {articles.length > 0 ? (
+            <NewsroomList articles={articles} />
+          ) : (
+            <div className="text-center">
+              <p className="text-lg text-muted-foreground">No news articles found. Check back soon!</p>
+            </div>
+          )}
+        </Container>
+      </section>
     </div>
   );
 }
