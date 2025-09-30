@@ -12,7 +12,7 @@ type DivisionCardProps = {
 };
 
 export function DivisionCard({ division }: DivisionCardProps) {
-  const imageUrl = urlFor(division.coverImage).width(400).height(300).url();
+  const imageUrl = urlFor(division.coverImage).width(600).height(400).url();
   const logoUrl = division.logo ? urlFor(division.logo).width(80).url() : null;
   const hasSlug = division.slug?.current;
   const href = hasSlug ? `/divisions/${division.slug.current}` : "#";
@@ -29,26 +29,23 @@ export function DivisionCard({ division }: DivisionCardProps) {
     <Link href={href} onClick={handleClick} className="group block">
       <div
         className={cn(
-          "h-[16em] w-[18em] border-2 border-[rgba(75,30,133,0.5)] rounded-[1.5em] bg-gradient-to-br from-[rgba(75,30,133,1)] to-[rgba(75,30,133,0.01)] text-white font-nunito p-[1em] flex justify-center items-left flex-col gap-[0.75em] backdrop-blur-[12px] transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/20 hover:border-[rgba(75,30,133,0.8)]",
+          "flex flex-col w-full max-w-sm overflow-hidden rounded-[1em] bg-gradient-to-br from-white to-gray-100 dark:from-gray-800 dark:to-gray-900 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1",
           !hasSlug && "cursor-not-allowed opacity-70"
         )}
       >
-        {/* Background Image with Overlay */}
-        <div className="absolute inset-0 rounded-[1.5em] overflow-hidden">
+        {/* Card Header with Image */}
+        <div className="relative h-48 w-full overflow-hidden">
           <Image
             src={imageUrl}
             alt={division.title}
             fill
-            className="object-cover opacity-30 group-hover:opacity-40 transition-opacity duration-300"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-900/60 to-transparent"></div>
-        </div>
-
-        {/* Content */}
-        <div className="relative z-10">
-          {/* Logo */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+          
+          {/* Logo Overlay */}
           {logoUrl && (
-            <div className="mb-3">
+            <div className="absolute top-4 left-4">
               <Image
                 src={logoUrl}
                 alt={`${division.title} Logo`}
@@ -58,40 +55,64 @@ export function DivisionCard({ division }: DivisionCardProps) {
               />
             </div>
           )}
-          
+        </div>
+
+        {/* Card Body */}
+        <div className="p-6 flex flex-col gap-4">
+          {/* Category Tag */}
+          <div className="flex items-center gap-2">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-purple-500 to-pink-500 text-white">
+              Division
+            </span>
+            {division.divisionType && (
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-orange-400 to-yellow-400 text-white">
+                {division.divisionType}
+              </span>
+            )}
+          </div>
+
           {/* Title and Description */}
-          <h1 className="text-[1.8em] font-medium leading-tight">
+          <h4 className="text-xl font-bold text-gray-900 dark:text-white capitalize">
             {division.title}
-          </h1>
-          <p className="text-[0.85em] leading-relaxed text-white/90 line-clamp-3">
+          </h4>
+          <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed line-clamp-3">
             {division.description}
           </p>
         </div>
 
-        {/* Button */}
-        <button
-          className="relative z-10 h-fit w-fit px-[1em] py-[0.25em] border-[1px] border-white/30 rounded-full flex justify-center items-center gap-[0.5em] overflow-hidden group hover:translate-y-[0.125em] duration-200 backdrop-blur-[12px] bg-white/10 hover:bg-white/20"
-        >
-          <p className="text-sm">Explore</p>
-          <svg
-            className="w-5 h-5 group-hover:translate-x-[10%] duration-300"
-            stroke="currentColor"
-            strokeWidth="1"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-              strokeLinejoin="round"
-              strokeLinecap="round"
-            ></path>
-          </svg>
-        </button>
+        {/* Card Footer */}
+        <div className="flex items-center justify-between p-6 pt-0 mt-auto">
+          <div className="flex items-center gap-3">
+            <div className="relative h-8 w-8 rounded-full overflow-hidden bg-gradient-to-r from-purple-400 to-pink-400">
+              {logoUrl ? (
+                <Image
+                  src={logoUrl}
+                  alt={division.title}
+                  width={32}
+                  height={32}
+                  className="object-cover"
+                />
+              ) : (
+                <div className="flex items-center justify-center h-full w-full text-white text-xs font-bold">
+                  {division.title.charAt(0)}
+                </div>
+              )}
+            </div>
+            <div>
+              <h5 className="text-sm font-medium text-gray-900 dark:text-white">Shubz Entertainment</h5>
+              <small className="text-xs text-gray-500 dark:text-gray-400">Creative Division</small>
+            </div>
+          </div>
+          
+          {/* Explore Button */}
+          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white group-hover:scale-110 transition-transform duration-300">
+            <ArrowRight className="w-5 h-5" />
+          </div>
+        </div>
 
         {/* No Slug Warning */}
         {!hasSlug && (
-          <div className="absolute top-3 right-3 flex items-center gap-1 rounded-full bg-yellow-500/90 px-2 py-1 text-xs font-semibold text-white z-20">
+          <div className="absolute top-3 right-3 flex items-center gap-1 rounded-full bg-yellow-500/90 px-2 py-1 text-xs font-semibold text-white">
             <AlertTriangle className="h-3 w-3" />
             <span>No Slug</span>
           </div>
