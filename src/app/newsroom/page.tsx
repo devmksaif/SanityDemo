@@ -59,7 +59,15 @@ export default async function NewsroomPage() {
         </Container>
       </header>
 
-      <BlogSection articles={articles} />
+      {/* Blog7 Theme BlogSection */}
+      <BlogSection 
+        articles={articles}
+        tagline="Latest News"
+        heading="From the Newsroom"
+        description="Stay updated with the latest stories and announcements from Shubz Entertainment."
+        buttonText="View All Articles"
+        buttonUrl="/newsroom"
+      />
     </div>
   );
 }
