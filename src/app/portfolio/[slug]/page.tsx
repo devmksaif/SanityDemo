@@ -40,23 +40,10 @@ export default async function PortfolioProjectPage({ params }: { params: { slug:
     <section className="py-12 sm:py-16">
       <div className="container">
         <div className="mx-auto max-w-7xl">
-          <Breadcrumb className="mb-6 lg:mb-10">
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/">Home</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/portfolio">Portfolio</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>{project.title}</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+          
 
           <div className="relative flex-col gap-10 lg:flex lg:flex-row lg:justify-center">
+            
             {/* Main Content */}
             <div className="lg:max-w-[692px]">
               <div>
