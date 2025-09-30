@@ -27,7 +27,8 @@ async function getPageData() {
     division->{title}, 
     thumbnailImage, 
     releaseDate, 
-    slug
+    slug,
+    author->{name, role, image}
   }`;
   const newsQuery = `*[_type == "newsArticle"] | order(publishedAt desc)[0...3]`;
 
@@ -49,7 +50,7 @@ export default async function IndexPage() {
 
       {/* Featured Divisions Section */}
       {divisions.length > 0 && (
-        <section className="py-20 sm:py-32">
+        <section className="py-16 sm:py-20">
           <Container>
             <AnimatedContainer>
               <div className="mb-12 text-center">
@@ -66,7 +67,7 @@ export default async function IndexPage() {
               </div>
             </AnimatedContainer>
             
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {divisions.map((division, i) => (
                 <AnimatedContainer key={division._id} delay={i * 0.1}>
                   <DivisionCard division={division} />
@@ -74,7 +75,7 @@ export default async function IndexPage() {
               ))}
             </div>
             
-            <AnimatedContainer className="mt-12 text-center">
+            <AnimatedContainer className="mt-10 text-center">
               <Button asChild size="lg" className="group">
                 <Link href="/divisions">
                   Explore All Divisions
@@ -88,23 +89,57 @@ export default async function IndexPage() {
 
       {/* Featured Portfolio Section */}
       {portfolio.length > 0 && (
-        <CaseStudiesShowcase projects={portfolio} />
+        <section className="py-16 sm:py-20 bg-background">
+          <Container>
+            <AnimatedContainer>
+              <div className="mb-12 text-center">
+                <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-4">
+                  <Briefcase className="h-4 w-4" />
+                  Featured Work
+                </div>
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+                  Our Creative Portfolio
+                </h2>
+                <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
+                  A glimpse into the impactful projects we've brought to life.
+                </p>
+              </div>
+            </AnimatedContainer>
+            
+            <div className="mt-12">
+              <CaseStudiesShowcase projects={portfolio} />
+            </div>
+            
+            <AnimatedContainer className="mt-16 text-center">
+              <Button asChild size="lg" variant="outline" className="group">
+                <Link href="/portfolio">
+                  View Full Portfolio
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </Button>
+            </AnimatedContainer>
+          </Container>
+        </section>
       )}
 
       {/* Latest News Section with Blog7 Theme */}
       {news.length > 0 && (
-        <BlogSection
-          articles={news}
-          tagline="Latest News"
-          heading="From the Newsroom"
-          description="Stay updated with the latest stories and announcements from Shubz Entertainment."
-          buttonText="Visit Newsroom"
-          buttonUrl="/newsroom"
-        />
+        <section className="py-16 sm:py-20">
+          <Container>
+            <BlogSection
+              articles={news}
+              tagline="Latest News"
+              heading="From the Newsroom"
+              description="Stay updated with the latest stories and announcements from Shubz Entertainment."
+              buttonText="Visit Newsroom"
+              buttonUrl="/newsroom"
+            />
+          </Container>
+        </section>
       )}
 
       {/* CTA Section */}
-      <section className="relative overflow-hidden py-20 sm:py-32 bg-primary text-primary-foreground">
+      <section className="relative overflow-hidden py-16 sm:py-20 bg-primary text-primary-foreground">
         <Container>
           <AnimatedContainer>
             <div className="relative mx-auto max-w-4xl text-center">
