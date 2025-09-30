@@ -1,11 +1,10 @@
-import { client } from "@/lib/sanity";
+import { client, urlFor } from "@/lib/sanity";
 import type { DivisionData } from "@/types/sanity";
 import { Container } from "@/components/ui/container";
 import { notFound } from "next/navigation";
 import { ArrowRight, Award, Users, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DivisionHero } from "@/components/division-hero";
-import { getImageUrl } from "@/lib/cloudinary-helpers";
 
 async function getDivision(slug: string) {
   const queryBySlug = `*[_type == "division" && slug.current == $slug][0]`;
@@ -28,10 +27,12 @@ export default async function DivisionPage({ params }: { params: Promise<{ slug:
   }
 
   // Robust image URL handling
-  const imageUrl = getImageUrl(division.coverImage, { width: 1600, height: 800 }) || "https://images.unsplash.com/photo-1511379938547-c1f33886168f?w=1600&h=800&fit=crop";
+  const imageUrl = division.coverImage 
+    ? urlFor(division.coverImage).width(1600).height(800).url()
+    : "https://images.unsplash.com/photo-1511379938547-c1f33886168f?w=1600&h=800&fit=crop";
   
   const logoUrl = division.logo 
-    ? getImageUrl(division.logo)
+    ? urlFor(division.logo).url()
     : null;
 
   return (

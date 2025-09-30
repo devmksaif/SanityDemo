@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { getImageUrl } from "@/lib/cloudinary-helpers";
+import { urlFor } from "@/lib/sanity";
 import type { NewsArticleData } from "@/types/sanity";
 
 interface NewsroomListProps {
@@ -19,7 +19,9 @@ export function NewsroomList({ articles }: NewsroomListProps) {
     <div className="grid gap-y-10 sm:grid-cols-12 sm:gap-y-12 md:gap-y-16 lg:gap-y-20">
       {articles.map((article) => {
         // Robust image URL handling
-        const imageUrl = getImageUrl(article.coverImage, { width: 800, height: 450 }) || FALLBACK_IMAGE_URL;
+        const imageUrl = article.coverImage 
+          ? urlFor(article.coverImage).width(800).height(450).url()
+          : FALLBACK_IMAGE_URL;
 
         return (
           <Card

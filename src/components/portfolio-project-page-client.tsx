@@ -1,6 +1,6 @@
 "use client";
 
-import { getImageUrl } from "@/lib/cloudinary-helpers";
+import { urlFor } from "@/lib/sanity";
 import type { PortfolioProjectData } from "@/types/sanity";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,7 +22,9 @@ interface PortfolioProjectPageClientProps {
 }
 
 export function PortfolioProjectPageClient({ project }: PortfolioProjectPageClientProps) {
-  const imageUrl = getImageUrl(project.thumbnailImage, { width: 1200, height: 675 }) || "https://images.unsplash.com/photo-1511379938547-c1f33886168f?w=1200&h=675&fit=crop";
+  const imageUrl = project.thumbnailImage 
+    ? urlFor(project.thumbnailImage).width(1200).height(675).url()
+    : "https://images.unsplash.com/photo-1511379938547-c1f33886168f?w=1200&h=675&fit=crop";
   
   const excerpt = project.body?.[0]?.children?.[0]?.text || 
     `An in-depth look at the creative process and impact of ${project.title}.`;
@@ -73,7 +75,7 @@ export function PortfolioProjectPageClient({ project }: PortfolioProjectPageClie
                   <div className="flex items-center gap-4 mt-6">
                     {project.author.image && (
                       <Image
-                        src={getImageUrl(project.author.image, { width: 40, height: 40 }) || ''}
+                        src={urlFor(project.author.image).width(40).height(40).url()}
                         alt={project.author.name}
                         width={40}
                         height={40}
@@ -122,7 +124,7 @@ export function PortfolioProjectPageClient({ project }: PortfolioProjectPageClie
               <div className="rounded-lg border bg-card p-6">
                 {project.division?.coverImage && (
                   <Image
-                    src={getImageUrl(project.division.coverImage, { width: 144 }) || ''}
+                    src={urlFor(project.division.coverImage.secure_url).width(144).url()}
                     alt={`${project.division.title} logo`}
                     width={144}
                     height={40}

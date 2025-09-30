@@ -1,4 +1,4 @@
-import { client } from "@/lib/sanity";
+import { client, urlFor } from "@/lib/sanity";
 import type { NewsArticleData } from "@/types/sanity";
 import { Container } from "@/components/ui/container";
 import { notFound } from "next/navigation";
@@ -7,7 +7,6 @@ import { ArrowLeft, Share2, Bookmark } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { NewsArticleHero } from "@/components/news-article-hero";
-import { getImageUrl } from "@/lib/cloudinary-helpers";
 
 async function getArticle(slug: string) {
   const query = `*[_type == "newsArticle" && slug.current == $slug][0]`;
@@ -24,7 +23,9 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
   }
 
   // Robust image URL handling
-  const imageUrl = getImageUrl(article.coverImage, { width: 1200, height: 600 }) || "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&h=600&fit=crop";
+  const imageUrl = article.coverImage 
+    ? urlFor(article.coverImage).width(1200).height(600).url()
+    : "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&h=600&fit=crop";
   
   const readTime = Math.ceil(article.body ? article.body.length / 200 : 5);
 
