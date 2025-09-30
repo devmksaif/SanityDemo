@@ -8,6 +8,7 @@ import Image from "next/image";
 import { urlFor } from "@/lib/sanity";
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import { CaseStudiesShowcase } from "@/components/case-studies-showcase";
 
 async function getPortfolioProjects() {
   const query = `*[_type == "portfolioProject"] | order(releaseDate desc){
@@ -116,21 +117,34 @@ export default async function PortfolioPage() {
         </Container>
       </header>
 
+      {/* Featured Case Studies Section */}
+      <CaseStudiesShowcase projects={projects} />
+
+      {/* All Projects Grid */}
       <main className="py-16 sm:py-24">
         <Container>
+          <div className="mb-12 text-center">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+              All Projects
+            </h2>
+            <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
+              Browse through our complete portfolio of creative work
+            </p>
+          </div>
+          
           {projects.length > 0 ? (
             <motion.div 
               className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1.2, duration: 0.8 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
             >
               {projects.map((project, index) => (
                 <motion.div
                   key={project._id}
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.4 + (index * 0.1), duration: 0.6 }}
+                  transition={{ delay: 0.4 + (index * 0.1), duration: 0.6 }}
                 >
                   <CaseStudyCard project={project} />
                 </motion.div>
