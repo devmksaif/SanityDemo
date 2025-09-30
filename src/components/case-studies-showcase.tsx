@@ -19,21 +19,21 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
   }
 
   return (
-    <section className="py-16 sm:py-24 bg-background">
+    <section className="py-12 sm:py-16 bg-background">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col gap-6 text-center mb-20">
+        <div className="flex flex-col gap-6 text-center mb-12">
           <p className="font-medium text-primary">Featured Case Studies</p>
-          <h2 className="text-4xl font-medium md:text-5xl">
+          <h2 className="text-3xl font-medium md:text-4xl">
             Real results from creative excellence
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base text-muted-foreground max-w-2xl mx-auto">
             Showcasing our work across film, music, dance, and digital media through our sister companies
           </p>
         </div>
         
-        <div className="mt-20 space-y-20">
+        <div className="mt-8 space-y-8">
           {showcaseProjects.map((project, index) => {
-            const imageUrl = project.thumbnailImage ? urlFor(project.thumbnailImage).width(600).height(700).url() : "";
+            const imageUrl = project.thumbnailImage ? urlFor(project.thumbnailImage).width(400).height(250).url() : "";
             const projectUrl = `/portfolio/${project.slug?.current || project._id}`;
             
             // Generate excerpt from body content
@@ -43,99 +43,96 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
             return (
               <div key={project._id}>
                 <div className="flex justify-center">
-                  <div className="flex w-full max-w-5xl flex-col gap-8 sm:gap-10 sm:flex-row">
-                    {/* Project Image */}
-                    <div className="h-full w-full max-w-[260px] flex-shrink-0 overflow-hidden rounded-2xl sm:max-w-none sm:aspect-[29/35] sm:w-60 mx-auto sm:mx-0">
+                  <div className="flex w-full max-w-4xl flex-col gap-6 sm:flex-row sm:items-center">
+                    {/* Project Image - More Compact */}
+                    <div className="h-48 w-full sm:h-40 sm:w-64 flex-shrink-0 overflow-hidden rounded-xl sm:rounded-lg">
                       <Link href={projectUrl} className="block h-full w-full group">
                         {imageUrl ? (
                           <Image
                             src={imageUrl}
                             alt={project.title}
-                            width={260}
-                            height={350}
+                            width={400}
+                            height={250}
                             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                           />
                         ) : (
-                          <div className="h-full w-full bg-muted flex items-center justify-center">
-                            <span className="text-muted-foreground">No image</span>
+                          <div className="h-full w-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                            <span className="text-gray-500 text-sm">No image</span>
                           </div>
                         )}
                       </Link>
                     </div>
                     
-                    {/* Project Content */}
-                    <div className="flex flex-col justify-between gap-6 sm:gap-8">
-                      <div className="space-y-4">
-                        {/* Category and Division Tags */}
-                        <div className="flex flex-wrap items-center gap-2">
+                    {/* Project Content - More Compact */}
+                    <div className="flex flex-1 flex-col justify-center gap-3">
+                      <div className="space-y-2">
+                        {/* Category and Division Tags - Smaller */}
+                        <div className="flex flex-wrap items-center gap-1.5">
                           {project.category && (
-                            <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                            <span className="inline-flex items-center rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
                               {project.category}
                             </span>
                           )}
                           {project.division?.title && (
-                            <span className="inline-flex items-center rounded-full bg-secondary/10 px-3 py-1 text-xs font-medium text-secondary">
+                            <span className="inline-flex items-center rounded-full bg-secondary/10 px-2 py-0.5 text-xs font-medium text-secondary">
                               {project.division.title}
                             </span>
                           )}
                         </div>
                         
-                        {/* Project Title */}
-                        <h3 className="text-2xl font-semibold hover:underline">
+                        {/* Project Title - Smaller */}
+                        <h3 className="text-lg font-semibold hover:underline">
                           <Link href={projectUrl}>
                             {project.title}
                           </Link>
                         </h3>
                         
-                        {/* Author Information */}
+                        {/* Author Information - More Compact */}
                         {project.author && (
-                          <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-2">
                             {project.author.image && (
-                              <div className="relative h-10 w-10 rounded-full overflow-hidden">
+                              <div className="relative h-6 w-6 rounded-full overflow-hidden">
                                 <Image
-                                  src={urlFor(project.author.image).width(40).height(40).url()}
+                                  src={urlFor(project.author.image).width(24).height(24).url()}
                                   alt={project.author.name}
-                                  width={40}
-                                  height={40}
+                                  width={24}
+                                  height={24}
                                   className="object-cover"
                                 />
                               </div>
                             )}
                             <div>
-                              <p className="text-sm font-medium">{project.author.name}</p>
-                              <p className="text-xs text-muted-foreground">{project.author.role}</p>
+                              <p className="text-xs font-medium text-gray-700 dark:text-gray-300">{project.author.name}</p>
+                              <p className="text-[10px] text-gray-500 dark:text-gray-400">{project.author.role}</p>
                             </div>
                           </div>
                         )}
                         
-                        {/* Project Excerpt */}
-                        <p className="text-lg text-muted-foreground">
+                        {/* Project Excerpt - More Compact */}
+                        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
                           {excerpt}
                         </p>
                       </div>
                       
-                      {/* Project Metadata */}
-                      <div className="flex flex-wrap items-center gap-4 text-sm">
+                      {/* Project Metadata - More Compact */}
+                      <div className="flex flex-wrap items-center gap-3 text-xs">
                         {project.releaseDate && (
                           <div className="flex items-center gap-1 text-muted-foreground">
-                            <span>Released:</span>
-                            <span className="font-medium">
-                              {new Date(project.releaseDate).toLocaleDateString("en-US", {
-                                year: "numeric",
-                                month: "short",
-                                day: "numeric",
-                              })}
-                            </span>
+                            <span>{new Date(project.releaseDate).toLocaleDateString("en-US", {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
+                            })}</span>
                           </div>
                         )}
                         
                         <Link
                           href={projectUrl}
-                          className="inline-flex items-center font-medium text-primary hover:underline group"
+                          className="inline-flex items-center font-medium text-primary hover:underline group text-xs"
                         >
-                          <span>View case study</span>
+                          <span>Read more</span>
                           <svg 
-                            className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" 
+                            className="ml-1 h-3 w-3 transition-transform group-hover:translate-x-0.5" 
                             fill="none" 
                             viewBox="0 0 24 24" 
                             stroke="currentColor"
@@ -147,7 +144,7 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
                     </div>
                   </div>
                 </div>
-                {index < showcaseProjects.length - 1 && <Separator className="my-20" />}
+                {index < showcaseProjects.length - 1 && <Separator className="my-6" />}
               </div>
             );
           })}

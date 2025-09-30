@@ -126,18 +126,7 @@ export default async function IndexPage() {
       {news.length > 0 && (
         <section className="py-12 sm:py-16 bg-gradient-to-br from-teal-50 via-emerald-50 to-green-50 dark:from-teal-950/20 dark:via-emerald-950/20 dark:to-green-950/20">
           <Container>
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center gap-2 rounded-full bg-teal-100 dark:bg-teal-900/30 px-4 py-2 text-sm font-medium text-teal-700 dark:text-teal-300 mb-3">
-                <BookOpen className="h-4 w-4" />
-                Latest News
-              </div>
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-teal-900 dark:text-teal-100">
-                From the Newsroom
-              </h2>
-              <p className="mt-3 max-w-2xl mx-auto text-lg text-teal-700 dark:text-teal-400">
-                Stay updated with the latest stories and announcements from Shubz Entertainment.
-              </p>
-            </div>
+            
             <BlogSection
               articles={news}
               tagline="Latest News"
