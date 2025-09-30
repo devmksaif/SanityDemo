@@ -58,10 +58,10 @@ export default async function IndexPage() {
                   <Sparkles className="h-4 w-4" />
                   Our Creative Divisions
                 </div>
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl leading-tight">
                   Powering Creative Excellence
                 </h2>
-                <p className="mt-3 max-w-2xl mx-auto text-lg text-muted-foreground">
+                <p className="mt-3 max-w-2xl mx-auto text-lg text-muted-foreground leading-relaxed">
                   From music to media, our divisions are the heart of our creative enterprise.
                 </p>
               </div>
@@ -97,10 +97,10 @@ export default async function IndexPage() {
                   <Briefcase className="h-4 w-4" />
                   Featured Work
                 </div>
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl leading-tight">
                   Our Creative Portfolio
                 </h2>
-                <p className="mt-3 max-w-2xl mx-auto text-lg text-muted-foreground">
+                <p className="mt-3 max-w-2xl mx-auto text-lg text-muted-foreground leading-relaxed">
                   A glimpse into the impactful projects we've brought to life.
                 </p>
               </div>
@@ -131,10 +131,10 @@ export default async function IndexPage() {
                 <BookOpen className="h-4 w-4" />
                 Latest News
               </div>
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl leading-tight">
                 From the Newsroom
               </h2>
-              <p className="mt-3 max-w-2xl mx-auto text-lg text-muted-foreground">
+              <p className="mt-3 max-w-2xl mx-auto text-lg text-muted-foreground leading-relaxed">
                 Stay updated with the latest stories and announcements from Shubz Entertainment.
               </p>
             </div>
@@ -163,10 +163,10 @@ export default async function IndexPage() {
                 <TrendingUp className="h-4 w-4" />
                 Ready to Collaborate?
               </div>
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-4">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-4 leading-tight">
                 Let's Create Something Extraordinary Together
               </h2>
-              <p className="mb-6 text-lg text-white/90">
+              <p className="mb-6 text-lg text-white/90 leading-relaxed">
                 Whether you're an artist, brand, or creative professional, we have the expertise and resources to bring your vision to life.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
