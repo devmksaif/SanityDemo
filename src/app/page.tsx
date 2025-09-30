@@ -4,7 +4,7 @@ import type { HomePageData, DivisionData, PortfolioProjectData, NewsArticleData 
 import { DivisionCard } from "@/components/division-card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ArrowRight, Sparkles, TrendingUp, Users, BookOpen, Briefcase } from "lucide-react";
+import { ArrowRight, Sparkles, TrendingUp, BookOpen, Briefcase } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { AnimatedContainer } from "@/components/ui/animated-container";
 import { BlogSection } from "@/components/blog-section";
@@ -50,24 +50,24 @@ export default async function IndexPage() {
 
       {/* Featured Divisions Section */}
       {divisions.length > 0 && (
-        <section className="py-16 sm:py-20">
+        <section className="py-12 sm:py-16">
           <Container>
             <AnimatedContainer>
-              <div className="mb-12 text-center">
-                <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-4">
+              <div className="mb-8 text-center">
+                <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-3">
                   <Sparkles className="h-4 w-4" />
                   Our Creative Divisions
                 </div>
                 <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
                   Powering Creative Excellence
                 </h2>
-                <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
+                <p className="mt-3 max-w-2xl mx-auto text-lg text-muted-foreground">
                   From music to media, our divisions are the heart of our creative enterprise.
                 </p>
               </div>
             </AnimatedContainer>
             
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
               {divisions.map((division, i) => (
                 <AnimatedContainer key={division._id} delay={i * 0.1}>
                   <DivisionCard division={division} />
@@ -75,7 +75,7 @@ export default async function IndexPage() {
               ))}
             </div>
             
-            <AnimatedContainer className="mt-10 text-center">
+            <AnimatedContainer className="mt-8 text-center">
               <Button asChild size="lg" className="group">
                 <Link href="/divisions">
                   Explore All Divisions
@@ -89,28 +89,28 @@ export default async function IndexPage() {
 
       {/* Featured Portfolio Section */}
       {portfolio.length > 0 && (
-        <section className="py-16 sm:py-20 bg-background">
+        <section className="py-12 sm:py-16 bg-background">
           <Container>
             <AnimatedContainer>
-              <div className="mb-12 text-center">
-                <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-4">
+              <div className="mb-8 text-center">
+                <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-3">
                   <Briefcase className="h-4 w-4" />
                   Featured Work
                 </div>
                 <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
                   Our Creative Portfolio
                 </h2>
-                <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
+                <p className="mt-3 max-w-2xl mx-auto text-lg text-muted-foreground">
                   A glimpse into the impactful projects we've brought to life.
                 </p>
               </div>
             </AnimatedContainer>
             
-            <div className="mt-12">
+            <div className="mt-8">
               <CaseStudiesShowcase projects={portfolio} />
             </div>
             
-            <AnimatedContainer className="mt-16 text-center">
+            <AnimatedContainer className="mt-8 text-center">
               <Button asChild size="lg" variant="outline" className="group">
                 <Link href="/portfolio">
                   View Full Portfolio
@@ -124,7 +124,7 @@ export default async function IndexPage() {
 
       {/* Latest News Section with Blog7 Theme */}
       {news.length > 0 && (
-        <section className="py-16 sm:py-20">
+        <section className="py-12 sm:py-16">
           <Container>
             <BlogSection
               articles={news}
@@ -139,7 +139,7 @@ export default async function IndexPage() {
       )}
 
       {/* CTA Section */}
-      <section className="relative overflow-hidden py-16 sm:py-20 bg-primary text-primary-foreground">
+      <section className="relative overflow-hidden py-12 sm:py-16 bg-primary text-primary-foreground">
         <Container>
           <AnimatedContainer>
             <div className="relative mx-auto max-w-4xl text-center">
@@ -147,17 +147,17 @@ export default async function IndexPage() {
               <div className="absolute -top-20 -left-20 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
               <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />
 
-              <div className="relative inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white mb-6 backdrop-blur-sm">
+              <div className="relative inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white mb-4 backdrop-blur-sm">
                 <TrendingUp className="h-4 w-4" />
                 Ready to Collaborate?
               </div>
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-6">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-4">
                 Let's Create Something Extraordinary Together
               </h2>
-              <p className="mb-8 text-lg text-white/80">
+              <p className="mb-6 text-lg text-white/80">
                 Whether you're an artist, brand, or creative professional, we have the expertise and resources to bring your vision to life.
               </p>
-              <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
+              <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
                 <Button size="lg" className="group bg-white text-primary hover:bg-white/90">
                   Start a Project
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
