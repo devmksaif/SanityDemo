@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { GitBranch, Lightbulb, Users, TrendingUp, Smile, Award } from "lucide-react";
+import { GitBranch, Lightbulb, Users, TrendingUp, Smile, Award, Image as ImageIcon } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 async function getProject(slug: string) {
@@ -27,7 +27,7 @@ async function getProject(slug: string) {
   return data;
 }
 
-export default async function PortfolioProjectPage({ params }: { params: { slug: string } }) {
+export default async function PortfolioProjectPage({ params }: { params: { slug: string }> }) {
   const project = await getProject(params.slug);
 
   if (!project) {
@@ -66,6 +66,7 @@ export default async function PortfolioProjectPage({ params }: { params: { slug:
     <section className="py-12 sm:py-16">
       <div className="container">
         <div className="mx-auto max-w-7xl">
+          {/* Breadcrumb with error handling */}
           <Breadcrumb className="mb-6 lg:mb-10">
             <BreadcrumbList>
               <BreadcrumbItem>
@@ -113,7 +114,7 @@ export default async function PortfolioProjectPage({ params }: { params: { slug:
                   </div>
                 )}
                 
-                {/* Image with error handling */}
+                {/* Hero Image with Error Handling */}
                 <Image
                   src={imageUrl}
                   alt={project.title}
@@ -123,16 +124,17 @@ export default async function PortfolioProjectPage({ params }: { params: { slug:
                   priority
                   onError={(e) => {
                     console.warn(`Failed to load main image for project: ${project.title}`);
+                    // Fallback to gradient if image fails
                     (e.target as HTMLImageElement).style.display = 'none';
                     (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
                   }}
                 />
-                {/* Fallback for image error */}
+                {/* Fallback gradient for main image */}
                 <div className="hidden my-8 aspect-video w-full bg-gradient-to-br from-purple-400 to-pink-500 rounded-lg flex items-center justify-center">
                   <span className="text-white text-lg font-medium">No Image Available</span>
                 </div>
                 
-                {/* Stats with error handling */}
+                {/* Stats Section */}
                 <div className="mb-8 grid grid-cols-2 gap-5 lg:grid-cols-4">
                   <div className="flex flex-col gap-2">
                     <p className="text-4xl font-semibold sm:text-5xl text-primary">98%</p>
@@ -169,7 +171,7 @@ export default async function PortfolioProjectPage({ params }: { params: { slug:
               )}
             </div>
 
-            {/* Sticky Sidebar with error handling */}
+            {/* Sticky Sidebar with Error Handling */}
             <div className="h-fit lg:sticky lg:top-24 lg:max-w-80 w-full">
               <div className="rounded-lg border bg-card p-6">
                 {/* Division logo with error handling */}

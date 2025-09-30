@@ -10,6 +10,7 @@ import { urlFor } from "@/lib/sanity";
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { CaseStudiesShowcase } from "@/components/case-studies-showcase";
+import { cn } from "@/lib/utils";
 
 // Fallback image for missing thumbnails
 const FALLBACK_THUMBNAIL_URL = "https://images.unsplash.com/photo-1511379938547-c1f33886168f?w=600&h=400&fit=crop";

@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/container";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
-import { Calendar, Clock, User, ArrowLeft, Share2, Bookmark } from "lucide-react";
+import { Calendar, Clock, User, ArrowLeft, Share2, Bookmark, Image as ImageIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -22,7 +22,11 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
     notFound();
   }
 
-  const imageUrl = urlFor(article.coverImage).width(1200).height(600).url();
+  // Robust image URL handling
+  const imageUrl = article.coverImage 
+    ? urlFor(article.coverImage).width(1200).height(600).url()
+    : "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&h=600&fit=crop";
+  
   const readTime = Math.ceil(article.body ? article.body.length / 200 : 5);
 
   return (
@@ -40,19 +44,29 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
         </Container>
       </div>
 
-      {/* Modernized Hero Section */}
-      <header className="relative h-[60vh] min-h-[450px] w-full overflow-hidden bg-primary text-primary-foreground">
+      {/* Hero Section with Image Error Handling */}
+      <header className="relative overflow-hidden h-[60vh] min-h-[450px] w-full bg-primary text-primary-foreground">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 left-0 w-96 h-96 bg-accent rounded-full blur-3xl" />
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary rounded-full blur-3xl" />
         </div>
+        
+        {/* Hero Image with Error Handling */}
         <Image
           src={imageUrl}
           alt={article.title}
           fill
           className="absolute inset-0 object-cover opacity-20"
           priority
+          onError={(e) => {
+            console.warn(`Failed to load hero image for article: ${article.title}`);
+            // Fallback to gradient if image fails
+            (e.target as HTMLImageElement).style.display = 'none';
+            (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
+          }}
         />
+        {/* Fallback gradient for hero image */}
+        <div className="hidden absolute inset-0 bg-gradient-to-br from-indigo-600 to-purple-700"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-primary/70 to-transparent" />
 
         <Container size="lg" className="relative flex h-full flex-col items-center justify-center text-center">

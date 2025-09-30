@@ -3,7 +3,7 @@ import type { DivisionData } from "@/types/sanity";
 import { Container } from "@/components/ui/container";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { ArrowRight, Calendar, Users, Award } from "lucide-react";
+import { ArrowRight, Calendar, Users, Award, Image as ImageIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 async function getDivision(slug: string) {
@@ -26,33 +26,54 @@ export default async function DivisionPage({ params }: { params: Promise<{ slug:
     notFound();
   }
 
-  const imageUrl = urlFor(division.coverImage).width(1600).height(800).url();
+  // Robust image URL handling
+  const imageUrl = division.coverImage 
+    ? urlFor(division.coverImage).width(1600).height(800).url()
+    : "https://images.unsplash.com/photo-1511379938547-c1f33886168f?w=1600&h=800&fit=crop";
+  
+  const logoUrl = division.logo 
+    ? urlFor(division.logo).url()
+    : null;
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Modernized Hero Section */}
+      {/* Modernized Hero Section with Image Error Handling */}
       <header className="relative h-[60vh] min-h-[450px] w-full overflow-hidden bg-primary text-primary-foreground">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 left-0 w-96 h-96 bg-accent rounded-full blur-3xl" />
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary rounded-full blur-3xl" />
         </div>
+        
+        {/* Hero Image with Error Handling */}
         <Image 
           src={imageUrl} 
           alt={division.title} 
           fill 
           className="absolute inset-0 object-cover opacity-10" 
           priority
+          onError={(e) => {
+            console.warn(`Failed to load hero image for division: ${division.title}`);
+            // Fallback to gradient if image fails
+            (e.target as HTMLImageElement).style.display = 'none';
+            (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
+          }}
         />
+        {/* Fallback gradient for hero image */}
+        <div className="hidden absolute inset-0 bg-gradient-to-br from-purple-600 to-indigo-700"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent" />
         
         <Container className="relative flex h-full flex-col items-center justify-center text-center">
-          {division.logo && (
+          {logoUrl && (
             <div className="relative h-20 w-20 mb-4 animate-float">
               <Image 
-                src={urlFor(division.logo).url()} 
+                src={logoUrl} 
                 alt={`${division.title} Logo`} 
                 fill 
                 className="object-contain drop-shadow-lg" 
+                onError={(e) => {
+                  console.warn(`Failed to load division logo: ${division.title}`);
+                  (e.target as HTMLImageElement).style.display = 'none';
+                }}
               />
             </div>
           )}
@@ -123,7 +144,7 @@ export default async function DivisionPage({ params }: { params: Promise<{ slug:
                 <p className="text-sm mb-4 opacity-90">
                   Let's create something amazing together.
                 </p>
-                <Button className="w-full bg-white text-primary hover:bg-white/90">
+                <Button className="w-full">
                   Get In Touch
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
