@@ -4,6 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Sparkles, Users, Target, Eye } from "lucide-react";
 import { client, urlFor } from "@/lib/sanity";
 import type { TeamMemberData } from "@/types/sanity";
+import { AnimatedContainer } from "@/components/ui/animated-container";
+import { TeamMemberCard } from "@/components/team-member-card";
 
 async function getTeamMembers() {
   const query = `*[_type == "teamMember"] | order(order asc)`;
@@ -82,16 +84,9 @@ export default async function AboutPage() {
           {teamMembers.length > 0 ? (
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
               {teamMembers.map((member) => (
-                <Card key={member._id} className="text-center">
-                  <CardContent className="pt-6">
-                    <Avatar className="h-24 w-24 mx-auto mb-4">
-                      <AvatarImage src={urlFor(member.image).width(200).url()} alt={member.name} />
-                      <AvatarFallback>{member.name.charAt(0)}</AvatarFallback>
-                    </Avatar>
-                    <h3 className="text-lg font-semibold">{member.name}</h3>
-                    <p className="text-sm text-primary">{member.role}</p>
-                  </CardContent>
-                </Card>
+                <AnimatedContainer key={member._id}>
+                  <TeamMemberCard member={member} />
+                </AnimatedContainer>
               ))}
             </div>
           ) : (

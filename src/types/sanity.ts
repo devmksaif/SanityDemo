@@ -45,5 +45,13 @@ export type TeamMemberData = {
   _id: string;
   name: string;
   role: string;
-  image: Image;
+  image?: Image; // Make optional
+  bio?: string; // Make optional
+  email?: string; // Make optional
+  phone?: string; // Make optional
+  linkedIn?: string; // Make optional
+  socialLinks?: Array<{
+    platform?: string;
+    url: string;
+  }>; // Make optional
 };

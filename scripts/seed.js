@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require("uuid");
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "dfvr7i1k";
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
 const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2024-01-01";
-const token = process.env.SANITY_API_WRITE_TOKEN;
+const token = process.env.NEXT_PUBLIC_SANITY_API_KEY || "skkstxJ2rBznKIbVRDqCXeXxg5M6mG418KD1C6LaVIONHIu3fEigMz7aMSOJ4fU6q1mz2VNBZHA7YeGyegBQicJvLbF84ZhwXj7tHYKUuoQJjlcTGSbDTW6vxFnF8SBB0DzPVmq5RfjxIyHUBKUgBWr9TpdqmxYMrkkhXJlTDzC49tB09hMf";
 
 if (!token) {
   console.error(
