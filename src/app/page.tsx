@@ -48,20 +48,20 @@ export default async function IndexPage() {
       {/* Enterprise Hero */}
       <EnterpriseHero data={homePageData} />
 
-      {/* Featured Divisions Section - Using Shubz palette: Deep Magenta to Muted Lilac */}
+      {/* Featured Divisions Section - Sophisticated slate to purple gradient */}
       {divisions.length > 0 && (
-        <section className="py-12 sm:py-16 bg-gradient-to-br from-[#8C2D5A]/10 via-[#C782B7]/10 to-[#D6A84C]/10 dark:from-[#8C2D5A]/20 dark:via-[#C782B7]/20 dark:to-[#D6A84C]/20">
+        <section className="py-12 sm:py-16 bg-gradient-to-br from-slate-50 via-slate-100 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900/30">
           <Container>
             <AnimatedContainer>
               <div className="mb-8 text-center">
-                <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-3">
+                <div className="inline-flex items-center gap-2 rounded-full bg-indigo-100 dark:bg-indigo-900/30 px-4 py-2 text-sm font-medium text-indigo-700 dark:text-indigo-300 mb-3">
                   <Sparkles className="h-4 w-4" />
                   Our Creative Divisions
                 </div>
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-slate-900 dark:text-white">
                   Powering Creative Excellence
                 </h2>
-                <p className="mt-3 max-w-2xl mx-auto text-lg text-muted-foreground">
+                <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-400">
                   From music to media, our divisions are the heart of our creative enterprise.
                 </p>
               </div>
@@ -76,7 +76,7 @@ export default async function IndexPage() {
             </div>
             
             <AnimatedContainer className="mt-8 text-center">
-              <Button asChild size="lg" className="group bg-primary hover:bg-primary/90">
+              <Button asChild size="lg" className="group bg-indigo-600 hover:bg-indigo-700 text-white">
                 <Link href="/divisions">
                   Explore All Divisions
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -87,20 +87,20 @@ export default async function IndexPage() {
         </section>
       )}
 
-      {/* Featured Portfolio Section - Using Shubz palette: Rich Gold to Golden Yellow */}
+      {/* Featured Portfolio Section - Warm neutral to amber gradient */}
       {portfolio.length > 0 && (
-        <section className="py-12 sm:py-16 bg-gradient-to-br from-[#D6A84C]/10 via-[#E6C547]/10 to-[#F7D154]/10 dark:from-[#D6A84C]/20 dark:via-[#E6C547]/20 dark:to-[#F7D154]/20">
+        <section className="py-12 sm:py-16 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950/20 dark:via-orange-950/20 dark:to-yellow-950/20">
           <Container>
             <AnimatedContainer>
               <div className="mb-8 text-center">
-                <div className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-4 py-2 text-sm font-medium text-accent-foreground mb-3">
+                <div className="inline-flex items-center gap-2 rounded-full bg-amber-100 dark:bg-amber-900/30 px-4 py-2 text-sm font-medium text-amber-700 dark:text-amber-300 mb-3">
                   <Briefcase className="h-4 w-4" />
                   Featured Work
                 </div>
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-amber-900 dark:text-amber-100">
                   Our Creative Portfolio
                 </h2>
-                <p className="mt-3 max-w-2xl mx-auto text-lg text-muted-foreground">
+                <p className="mt-3 max-w-2xl mx-auto text-lg text-amber-700 dark:text-amber-400">
                   A glimpse into the impactful projects we've brought to life.
                 </p>
               </div>
@@ -111,7 +111,7 @@ export default async function IndexPage() {
             </div>
             
             <AnimatedContainer className="mt-8 text-center">
-              <Button asChild size="lg" variant="outline" className="group border-accent text-accent-foreground hover:bg-accent/10">
+              <Button asChild size="lg" variant="outline" className="group border-amber-600 text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/30">
                 <Link href="/portfolio">
                   View Full Portfolio
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -122,19 +122,19 @@ export default async function IndexPage() {
         </section>
       )}
 
-      {/* Latest News Section - Using Shubz palette: Muted Lilac with subtle accents */}
+      {/* Latest News Section - Soft mint to teal gradient */}
       {news.length > 0 && (
-        <section className="py-12 sm:py-16 bg-gradient-to-br from-[#C782B7]/10 via-[#D6A84C]/5 to-[#8C2D5A]/10 dark:from-[#C782B7]/20 dark:via-[#D6A84C]/10 dark:to-[#8C2D5A]/20">
+        <section className="py-12 sm:py-16 bg-gradient-to-br from-teal-50 via-emerald-50 to-green-50 dark:from-teal-950/20 dark:via-emerald-950/20 dark:to-green-950/20">
           <Container>
             <div className="text-center mb-8">
-              <div className="inline-flex items-center gap-2 rounded-full bg-secondary/10 px-4 py-2 text-sm font-medium text-secondary-foreground mb-3">
+              <div className="inline-flex items-center gap-2 rounded-full bg-teal-100 dark:bg-teal-900/30 px-4 py-2 text-sm font-medium text-teal-700 dark:text-teal-300 mb-3">
                 <BookOpen className="h-4 w-4" />
                 Latest News
               </div>
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-teal-900 dark:text-teal-100">
                 From the Newsroom
               </h2>
-              <p className="mt-3 max-w-2xl mx-auto text-lg text-muted-foreground">
+              <p className="mt-3 max-w-2xl mx-auto text-lg text-teal-700 dark:text-teal-400">
                 Stay updated with the latest stories and announcements from Shubz Entertainment.
               </p>
             </div>
@@ -150,14 +150,14 @@ export default async function IndexPage() {
         </section>
       )}
 
-      {/* CTA Section - Deep gradient using Shubz charcoal gray */}
-      <section className="relative overflow-hidden py-16 sm:py-20 bg-gradient-to-br from-[#2D3748] via-[#1A202C] to-[#171923] text-white">
+      {/* CTA Section - Deep charcoal with gold accent */}
+      <section className="relative overflow-hidden py-16 sm:py-20 bg-gradient-to-br from-gray-900 via-slate-800 to-zinc-900 text-white">
         <Container>
           <AnimatedContainer>
             <div className="relative mx-auto max-w-4xl text-center">
               {/* Creative background elements */}
-              <div className="absolute -top-20 -left-20 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
-              <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-[#D6A84C]/20 rounded-full blur-3xl" />
+              <div className="absolute -top-20 -left-20 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
+              <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-yellow-500/20 rounded-full blur-3xl" />
 
               <div className="relative inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium mb-4 backdrop-blur-sm">
                 <TrendingUp className="h-4 w-4" />
@@ -170,7 +170,7 @@ export default async function IndexPage() {
                 Whether you're an artist, brand, or creative professional, we have the expertise and resources to bring your vision to life.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-                <Button size="lg" className="group bg-[#D6A84C] hover:bg-[#D6A84C]/90 text-white">
+                <Button size="lg" className="group bg-yellow-500 hover:bg-yellow-600 text-gray-900">
                   Start a Project
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
