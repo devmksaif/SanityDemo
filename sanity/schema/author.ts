@@ -23,7 +23,7 @@ export default defineType({
     defineField({
       name: 'image',
       title: 'Image',
-      type: 'image',
+       type: 'cloudinary.asset', // Use the type provided by the plugin
       options: {
         hotspot: true, // allows better cropping
       },

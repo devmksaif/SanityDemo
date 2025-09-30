@@ -5,6 +5,7 @@ import { urlFor } from "@/lib/sanity";
 import type { TeamMemberData } from "@/types/sanity";
 import { User, AlertTriangle } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { getImageUrl, isCloudinaryAsset } from "@/lib/cloudinary-helpers";
 
 interface TeamMemberCardProps {
   member: TeamMemberData;
@@ -14,22 +15,15 @@ interface TeamMemberCardProps {
 // Fallback avatar URL
 const FALLBACK_AVATAR_URL = "https://images.unsplash.com/photo-1494790108755-2616b612b5bc?w=200&h=200&fit=crop&crop=face";
 
-// Function to build Cloudinary URL with transformations
-function getCloudinaryImageUrl(publicId: string) {
-  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || "shubz-entertainment"; // Add a fallback
-  if (!publicId || !cloudName) return FALLBACK_AVATAR_URL;
-  // Example transformations: width 200, height 200, crop to fill, focus on face
-  return `https://res.cloudinary.com/${cloudName}/image/upload/w_200,h_200,c_fill,g_face/${publicId}`;
-}
-
 export function TeamMemberCard({ member, className }: TeamMemberCardProps) {
   // Handle both Sanity and Cloudinary image objects
   let imageUrl = FALLBACK_AVATAR_URL;
+  
   if (member.image) {
-    if (member.image._type === 'cloudinary.asset' && member.image.public_id) {
+    if (isCloudinaryAsset(member.image)) {
       // It's a Cloudinary image
-      imageUrl = getCloudinaryImageUrl(member.image.public_id);
-    } else if (member.image._type === 'sanity.imageAsset' || member.image._type === 'image') {
+      imageUrl = getImageUrl(member.image, { width: 200, height: 200, crop: 'fill' }) || FALLBACK_AVATAR_URL;
+    } else if (member.image._type === 'image' || member.image._type === 'sanity.imageAsset') {
       // It's a standard Sanity image
       imageUrl = urlFor(member.image).width(200).height(200).url();
     }

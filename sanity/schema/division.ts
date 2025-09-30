@@ -45,13 +45,13 @@ export default defineType({
     defineField({
       name: 'logo',
       title: 'Logo',
-      type: 'image',
+       type: 'cloudinary.asset', // Use the type provided by the plugin
       description: 'A square or circular logo is recommended.',
     }),
     defineField({
       name: 'coverImage',
       title: 'Cover Image',
-      type: 'image',
+       type: 'cloudinary.asset', // Use the type provided by the plugin
       options: { hotspot: true },
       validation: (Rule) => Rule.required(),
     }),

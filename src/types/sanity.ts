@@ -45,13 +45,19 @@ export type TeamMemberData = {
   _id: string;
   name: string;
   role: string;
-  image?: Image; // Make optional
-  bio?: string; // Make optional
-  email?: string; // Make optional
-  phone?: string; // Make optional
-  linkedIn?: string; // Make optional
+  image?: {
+    _type: 'cloudinary.asset' | 'image';
+    public_id?: string; // For Cloudinary
+    _id?: string; // For Sanity
+    url?: string; // Raw URL
+    asset?: any; // Sanity asset reference
+  };
+  bio?: string;
+  email?: string;
+  phone?: string;
+  linkedIn?: string;
   socialLinks?: Array<{
     platform?: string;
     url: string;
-  }>; // Make optional
+  }>;
 };

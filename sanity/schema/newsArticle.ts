@@ -34,7 +34,7 @@ export default defineType({
     defineField({
       name: 'coverImage',
       title: 'Cover Image',
-      type: 'image',
+       type: 'cloudinary.asset', // Use the type provided by the plugin
       options: { hotspot: true },
       validation: (Rule) => Rule.required(),
     }),

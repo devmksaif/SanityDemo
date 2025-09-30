@@ -47,7 +47,7 @@ export default defineType({
     defineField({
       name: 'thumbnailImage',
       title: 'Thumbnail Image',
-      type: 'image',
+       type: 'cloudinary.asset', // Use the type provided by the plugin
       options: { hotspot: true },
       validation: (Rule) => Rule.required(),
     }),
