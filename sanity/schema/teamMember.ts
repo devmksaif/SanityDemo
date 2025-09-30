@@ -20,23 +20,8 @@ export default defineType({
     defineField({
       name: 'image',
       title: 'Image',
-      type: 'image', // Keep as 'image' type but allow Cloudinary as source
+      type: 'cloudinary.asset', // Use the type provided by the plugin
       description: 'Upload or select an image from Cloudinary.',
-      validation: (Rule) => Rule.required(),
-      options: {
-        sources: [
-          {
-            name: 'cloudinary',
-            title: 'Cloudinary',
-            component: 'cloudinary-image-input', // Use our custom component
-          },
-          {
-            name: 'sanity',
-            title: 'Sanity',
-            component: 'sanity-default', // Keep Sanity as fallback
-          }
-        ]
-      }
     }),
     defineField({
       name: 'order',
@@ -44,6 +29,19 @@ export default defineType({
       type: 'number',
       description: 'A number to sort the team members (e.g., 1 for CEO). Lower numbers appear first.',
       validation: (Rule) => Rule.unique(),
+    }),
+    // Note: The other fields like bio, email, etc., were in the frontend component but not the schema.
+    // You can add them here if you want them to be editable in Sanity.
+    defineField({
+      name: 'bio',
+      title: 'Biography',
+      type: 'text',
+      rows: 3,
+    }),
+    defineField({
+      name: 'email',
+      title: 'Email Address',
+      type: 'string',
     }),
   ],
   preview: {
