@@ -7,8 +7,8 @@ import Link from "next/link";
 import { ArrowRight, Sparkles, TrendingUp, Users, BookOpen, Briefcase } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { PortfolioCard } from "@/components/portfolio-card";
-import { NewsCard } from "@/components/news-card";
 import { AnimatedContainer } from "@/components/ui/animated-container";
+import { BlogSection } from "@/components/blog-section";
 
 async function getPageData() {
   const homePageQuery = `*[_type == "homePage"][0]`;
@@ -141,21 +141,7 @@ export default async function IndexPage() {
                 </p>
               </div>
             </AnimatedContainer>
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {news.map((article, i) => (
-                <AnimatedContainer key={article._id} delay={i * 0.1}>
-                  <NewsCard article={article} />
-                </AnimatedContainer>
-              ))}
-            </div>
-            <AnimatedContainer className="mt-12 text-center">
-              <Button asChild size="lg" className="group">
-                <Link href="/newsroom">
-                  Visit Newsroom
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </Button>
-            </AnimatedContainer>
+            <BlogSection articles={news} buttonText="Visit Newsroom" buttonUrl="/newsroom" />
           </Container>
         </section>
       )}
