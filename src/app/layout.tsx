@@ -27,7 +27,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <DebugClickTracker />
+           
           <EnterpriseHeader />
           <main className="min-h-screen">{children}</main>
           <EnterpriseFooter />

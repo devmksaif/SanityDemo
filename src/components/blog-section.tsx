@@ -50,7 +50,7 @@ const BlogSection = ({
   }));
 
   return (
-    <section className="py-32">
+    <section className="py-24">
       <div className="container mx-auto flex flex-col items-center gap-16 lg:px-16">
         <div className="text-center">
           <Badge variant="secondary" className="mb-6">

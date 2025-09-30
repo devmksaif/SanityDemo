@@ -48,20 +48,20 @@ export default async function IndexPage() {
       {/* Enterprise Hero */}
       <EnterpriseHero data={homePageData} />
 
-      {/* Featured Divisions Section */}
+      {/* Featured Divisions Section - Warm gradient background */}
       {divisions.length > 0 && (
-        <section className="py-12 sm:py-16">
+        <section className="py-12 sm:py-16 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-orange-950/20 dark:via-amber-950/20 dark:to-yellow-950/20">
           <Container>
             <AnimatedContainer>
               <div className="mb-8 text-center">
-                <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-3">
+                <div className="inline-flex items-center gap-2 rounded-full bg-orange-100 dark:bg-orange-900/30 px-4 py-2 text-sm font-medium text-orange-700 dark:text-orange-300 mb-3">
                   <Sparkles className="h-4 w-4" />
                   Our Creative Divisions
                 </div>
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-gray-900 dark:text-white">
                   Powering Creative Excellence
                 </h2>
-                <p className="mt-3 max-w-2xl mx-auto text-lg text-muted-foreground">
+                <p className="mt-3 max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-400">
                   From music to media, our divisions are the heart of our creative enterprise.
                 </p>
               </div>
@@ -76,7 +76,7 @@ export default async function IndexPage() {
             </div>
             
             <AnimatedContainer className="mt-8 text-center">
-              <Button asChild size="lg" className="group">
+              <Button asChild size="lg" className="group bg-orange-500 hover:bg-orange-600 text-white">
                 <Link href="/divisions">
                   Explore All Divisions
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -87,20 +87,20 @@ export default async function IndexPage() {
         </section>
       )}
 
-      {/* Featured Portfolio Section */}
+      {/* Featured Portfolio Section - Cool blue gradient */}
       {portfolio.length > 0 && (
-        <section className="py-12 sm:py-16 bg-background">
+        <section className="py-12 sm:py-16 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950/20 dark:via-indigo-950/20 dark:to-purple-950/20">
           <Container>
             <AnimatedContainer>
               <div className="mb-8 text-center">
-                <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-3">
+                <div className="inline-flex items-center gap-2 rounded-full bg-blue-100 dark:bg-blue-900/30 px-4 py-2 text-sm font-medium text-blue-700 dark:text-blue-300 mb-3">
                   <Briefcase className="h-4 w-4" />
                   Featured Work
                 </div>
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-gray-900 dark:text-white">
                   Our Creative Portfolio
                 </h2>
-                <p className="mt-3 max-w-2xl mx-auto text-lg text-muted-foreground">
+                <p className="mt-3 max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-400">
                   A glimpse into the impactful projects we've brought to life.
                 </p>
               </div>
@@ -111,7 +111,7 @@ export default async function IndexPage() {
             </div>
             
             <AnimatedContainer className="mt-8 text-center">
-              <Button asChild size="lg" variant="outline" className="group">
+              <Button asChild size="lg" variant="outline" className="group border-blue-500 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950/30">
                 <Link href="/portfolio">
                   View Full Portfolio
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -122,10 +122,22 @@ export default async function IndexPage() {
         </section>
       )}
 
-      {/* Latest News Section with Blog7 Theme */}
+      {/* Latest News Section - Soft green gradient */}
       {news.length > 0 && (
-        <section className="py-12 sm:py-16">
+        <section className="py-12 sm:py-16 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 dark:from-green-950/20 dark:via-emerald-950/20 dark:to-teal-950/20">
           <Container>
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 rounded-full bg-green-100 dark:bg-green-900/30 px-4 py-2 text-sm font-medium text-green-700 dark:text-green-300 mb-3">
+                <BookOpen className="h-4 w-4" />
+                Latest News
+              </div>
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-gray-900 dark:text-white">
+                From the Newsroom
+              </h2>
+              <p className="mt-3 max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-400">
+                Stay updated with the latest stories and announcements from Shubz Entertainment.
+              </p>
+            </div>
             <BlogSection
               articles={news}
               tagline="Latest News"
@@ -138,27 +150,27 @@ export default async function IndexPage() {
         </section>
       )}
 
-      {/* CTA Section */}
-      <section className="relative overflow-hidden py-12 sm:py-16 bg-primary text-primary-foreground">
+      {/* CTA Section - Deep gradient with contrast */}
+      <section className="relative overflow-hidden py-16 sm:py-20 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
         <Container>
           <AnimatedContainer>
             <div className="relative mx-auto max-w-4xl text-center">
               {/* Creative background elements */}
-              <div className="absolute -top-20 -left-20 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
-              <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />
+              <div className="absolute -top-20 -left-20 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
+              <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-orange-500/20 rounded-full blur-3xl" />
 
-              <div className="relative inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white mb-4 backdrop-blur-sm">
+              <div className="relative inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium mb-4 backdrop-blur-sm">
                 <TrendingUp className="h-4 w-4" />
                 Ready to Collaborate?
               </div>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-4">
                 Let's Create Something Extraordinary Together
               </h2>
-              <p className="mb-6 text-lg text-white/80">
+              <p className="mb-6 text-lg text-white/90">
                 Whether you're an artist, brand, or creative professional, we have the expertise and resources to bring your vision to life.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-                <Button size="lg" className="group bg-white text-primary hover:bg-white/90">
+                <Button size="lg" className="group bg-orange-500 hover:bg-orange-600 text-white">
                   Start a Project
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
