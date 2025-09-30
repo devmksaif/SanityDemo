@@ -1,8 +1,12 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
+  html {
+    @apply scroll-smooth;
+  }
+  
   :root {
     /* Shubz Entertainment Color Palette - Light Mode */
     --background: 0 0% 100%; /* White */
@@ -176,11 +180,6 @@
 
 .animate-fade-in-right {
   animation: fade-in-right 0.8s ease-out;
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
 }
 
 /* Custom scrollbar */

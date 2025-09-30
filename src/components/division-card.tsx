@@ -4,152 +4,51 @@ import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/lib/sanity";
 import type { DivisionData } from "@/types/sanity";
-import { ArrowRight, AlertTriangle, Image as ImageIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type DivisionCardProps = {
   division: DivisionData;
 };
 
-// Fallback image URL for when no image is provided
-const FALLBACK_IMAGE_URL = "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=600&h=400&fit=crop";
-
 export function DivisionCard({ division }: DivisionCardProps) {
-  // Robust image URL handling
   const imageUrl = division.coverImage 
-    ? urlFor(division.coverImage).width(600).height(400).url()
-    : FALLBACK_IMAGE_URL;
-  
-  const logoUrl = division.logo 
-    ? urlFor(division.logo).width(80).url() 
-    : null;
+    ? urlFor(division.coverImage).width(500).height(650).url()
+    : "https://images.unsplash.com/photo-1511379938547-c1f33886168f?w=500&h=650&fit=crop";
   
   const hasSlug = division.slug?.current;
   const href = hasSlug ? `/divisions/${division.slug.current}` : "#";
 
-  const handleClick = (e: React.MouseEvent) => {
-    if (!hasSlug) {
-      e.preventDefault();
-      console.warn(`🚨 Division "${division.title}" has no slug! ID: ${division._id}`);
-      alert(`This division has no slug generated. Please go to Sanity Studio and click "Generate" next to the Slug field.`);
-    }
-  };
-
   return (
-    <Link href={href} onClick={handleClick} className="group block">
+    <Link href={href} className="group block h-[450px] w-full">
       <div
         className={cn(
-          "flex flex-col w-full max-w-sm overflow-hidden rounded-[1em] bg-gradient-to-br from-white to-gray-100 dark:from-gray-800 dark:to-gray-900 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1",
-          !hasSlug && "cursor-not-allowed opacity-70"
+          "relative h-full w-full overflow-hidden rounded-lg shadow-lg transition-shadow duration-300 group-hover:shadow-xl",
+          !hasSlug && "cursor-not-allowed"
         )}
       >
-        {/* Card Header with Image - Error handled */}
-        <div className="relative h-48 w-full overflow-hidden">
-          <Image
-            src={imageUrl}
-            alt={division.title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-            onError={(e) => {
-              console.warn(`Failed to load image for division: ${division.title}`);
-              // Fallback to a solid color if image fails
-              (e.target as HTMLImageElement).style.display = 'none';
-              (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
-            }}
-          />
-          {/* Fallback for image error */}
-          <div className="hidden absolute inset-0 bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center">
-            <ImageIcon className="w-12 h-12 text-white/60" />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-          
-          {/* Logo Overlay - Error handled */}
-          {logoUrl && (
-            <div className="absolute top-4 left-4">
-              <Image
-                src={logoUrl}
-                alt={`${division.title} Logo`}
-                width={60}
-                height={30}
-                className="h-auto w-12 object-contain drop-shadow-lg"
-                onError={(e) => {
-                  console.warn(`Failed to load logo for division: ${division.title}`);
-                  (e.target as HTMLImageElement).style.display = 'none';
-                }}
-              />
-            </div>
-          )}
-        </div>
+        {/* Background Image */}
+        <Image
+          src={imageUrl}
+          alt={division.title}
+          fill
+          sizes="(max-width: 768px) 80vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+        />
+        
+        {/* Darkening Overlay on Hover */}
+        <div className="absolute inset-0 bg-black/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-        {/* Card Body */}
-        <div className="p-6 flex flex-col gap-4">
-          {/* Category Tag */}
-          <div className="flex items-center gap-2">
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-purple-500 to-pink-500 text-white">
-              Division
+        {/* Content that fades in */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-white opacity-0 transition-all duration-300 group-hover:opacity-100">
+          <div className="transform transition-transform duration-300 group-hover:translate-y-0 translate-y-4">
+            <span className="inline-flex items-center rounded-full bg-white/20 px-3 py-1 text-xs font-medium backdrop-blur-sm">
+              {division.divisionType || "Division"}
             </span>
-            {division.divisionType && (
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-orange-400 to-yellow-400 text-white">
-                {division.divisionType}
-              </span>
-            )}
-          </div>
-
-          {/* Title and Description */}
-          <h4 className="text-xl font-bold text-gray-900 dark:text-white capitalize">
-            {division.title}
-          </h4>
-          <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed line-clamp-3">
-            {division.description}
-          </p>
-        </div>
-
-        {/* Card Footer */}
-        <div className="flex items-center justify-between p-6 pt-0 mt-auto">
-          <div className="flex items-center gap-3">
-            <div className="relative h-8 w-8 rounded-full overflow-hidden bg-gradient-to-r from-purple-400 to-pink-400">
-              {logoUrl ? (
-                <Image
-                  src={logoUrl}
-                  alt={division.title}
-                  width={32}
-                  height={32}
-                  className="object-cover"
-                  onError={(e) => {
-                    console.warn(`Failed to load logo for division footer: ${division.title}`);
-                    (e.target as HTMLImageElement).style.display = 'none';
-                    (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
-                  }}
-                />
-              ) : (
-                <div className="flex items-center justify-center h-full w-full text-white text-xs font-bold">
-                  {division.title.charAt(0)}
-                </div>
-              )}
-              {/* Fallback for logo error */}
-              <div className="hidden flex items-center justify-center h-full w-full text-white text-xs font-bold">
-                {division.title.charAt(0)}
-              </div>
-            </div>
-            <div>
-              <h5 className="text-sm font-medium text-gray-900 dark:text-white">Shubz Entertainment</h5>
-              <small className="text-xs text-gray-500 dark:text-gray-400">Creative Division</small>
-            </div>
-          </div>
-          
-          {/* Explore Button */}
-          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white group-hover:scale-110 transition-transform duration-300">
-            <ArrowRight className="w-5 h-5" />
+            <h3 className="mt-3 text-2xl font-bold tracking-tight drop-shadow-md">
+              {division.title}
+            </h3>
           </div>
         </div>
-
-        {/* No Slug Warning */}
-        {!hasSlug && (
-          <div className="absolute top-3 right-3 flex items-center gap-1 rounded-full bg-yellow-500/90 px-2 py-1 text-xs font-semibold text-white">
-            <AlertTriangle className="h-3 w-3" />
-            <span>No Slug</span>
-          </div>
-        )}
       </div>
     </Link>
   );

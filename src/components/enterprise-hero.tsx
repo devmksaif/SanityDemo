@@ -5,6 +5,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { ThemedLogoSpecial } from "./themed-logo-special";
 import type { HomePageData } from "@/types/sanity";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 type EnterpriseHeroProps = {
   data?: HomePageData | null;
@@ -50,8 +51,8 @@ const logoContainerVariants = {
 };
 
 export function EnterpriseHero({ data }: EnterpriseHeroProps) {
-  const headline = data?.heroHeadline || "Integrating Media, Music, and Talent Platforms.";
-  const subheadline = data?.heroSubheadline || "We are Shubz Entertainment, a creative enterprise building bridges between industries to tell unforgettable global stories.";
+  const headline = data?.heroHeadline || "From Spark to Spotlight.";
+  const subheadline = data?.heroSubheadline || "We are Africa's Creative Nerve Center — bridging media, talent, and technology into global stories.";
 
   return (
     <section className="relative w-full overflow-hidden h-[90vh] min-h-[700px] flex items-center">
@@ -140,18 +141,24 @@ export function EnterpriseHero({ data }: EnterpriseHeroProps) {
               className="flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start"
             >
               <Button
+                asChild
                 size="lg"
                 className="group bg-white text-primary hover:bg-white/90"
               >
-                Explore Our Work
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <Link href="#divisions-section">
+                  Explore Divisions
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
               </Button>
               <Button
+                asChild
                 size="lg"
                 variant="outline"
                 className="border-white/30 bg-white/10 text-white hover:bg-white/20 hover:text-white backdrop-blur-sm"
               >
-                Learn More
+                <Link href="#portfolio-section">
+                  See Our Work
+                </Link>
               </Button>
             </motion.div>
           </motion.div>

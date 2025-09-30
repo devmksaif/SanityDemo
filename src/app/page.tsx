@@ -9,16 +9,24 @@ import { Container } from "@/components/ui/container";
 import { AnimatedContainer } from "@/components/ui/animated-container";
 import { BlogSection } from "@/components/blog-section";
 import { CaseStudiesShowcase } from "@/components/case-studies-showcase";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 async function getPageData() {
   const homePageQuery = `*[_type == "homePage"][0]`;
-  const divisionsQuery = `*[_type == "division"] | order(_createdAt asc)[0...3]{
+  const divisionsQuery = `*[_type == "division"] | order(_createdAt asc){
     _id, 
     title, 
     description, 
     logo, 
     coverImage, 
-    slug
+    slug,
+    divisionType
   }`;
   const portfolioQuery = `*[_type == "portfolioProject"] | order(releaseDate desc)[0...3]{
     _id, 
@@ -45,12 +53,10 @@ export default async function IndexPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Enterprise Hero */}
       <EnterpriseHero data={homePageData} />
 
-      {/* Featured Divisions Section - Sophisticated slate to purple gradient */}
       {divisions.length > 0 && (
-        <section className="py-12 sm:py-16 bg-gradient-to-br from-slate-50 via-slate-100 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900/30">
+        <section id="divisions-section" className="py-12 sm:py-16 bg-gradient-to-br from-slate-50 via-slate-100 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900/30">
           <Container>
             <AnimatedContainer>
               <div className="mb-8 text-center">
@@ -67,12 +73,33 @@ export default async function IndexPage() {
               </div>
             </AnimatedContainer>
             
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {/* Desktop Grid */}
+            <div className="hidden lg:grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
               {divisions.map((division, i) => (
                 <AnimatedContainer key={division._id} delay={i * 0.1}>
                   <DivisionCard division={division} />
                 </AnimatedContainer>
               ))}
+            </div>
+
+            {/* Mobile Carousel */}
+            <div className="lg:hidden">
+              <Carousel
+                opts={{ align: "start", loop: true }}
+                className="w-full max-w-sm mx-auto"
+              >
+                <CarouselContent className="-ml-4">
+                  {divisions.map((division) => (
+                    <CarouselItem key={division._id} className="pl-4 basis-4/5 md:basis-1/2">
+                      <div className="p-1">
+                        <DivisionCard division={division} />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <CarouselPrevious className="hidden sm:flex -left-4" />
+                <CarouselNext className="hidden sm:flex -right-4" />
+              </Carousel>
             </div>
             
             <AnimatedContainer className="mt-8 text-center">
@@ -87,9 +114,8 @@ export default async function IndexPage() {
         </section>
       )}
 
-      {/* Featured Portfolio Section - Warm neutral to amber gradient */}
       {portfolio.length > 0 && (
-        <section className="py-12 sm:py-16 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950/20 dark:via-orange-950/20 dark:to-yellow-950/20">
+        <section id="portfolio-section" className="py-12 sm:py-16 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950/20 dark:via-orange-950/20 dark:to-yellow-950/20">
           <Container>
             <AnimatedContainer>
               <div className="mb-8 text-center">
@@ -122,11 +148,9 @@ export default async function IndexPage() {
         </section>
       )}
 
-      {/* Latest News Section - Soft mint to teal gradient */}
       {news.length > 0 && (
         <section className="py-12 sm:py-16 bg-gradient-to-br from-teal-50 via-emerald-50 to-green-50 dark:from-teal-950/20 dark:via-emerald-950/20 dark:to-green-950/20">
           <Container>
-            
             <BlogSection
               articles={news}
               tagline="Latest News"
@@ -139,15 +163,12 @@ export default async function IndexPage() {
         </section>
       )}
 
-      {/* CTA Section - Deep charcoal with gold accent */}
       <section className="relative overflow-hidden py-16 sm:py-20 bg-gradient-to-br from-gray-900 via-slate-800 to-zinc-900 text-white">
         <Container>
           <AnimatedContainer>
             <div className="relative mx-auto max-w-4xl text-center">
-              {/* Creative background elements */}
               <div className="absolute -top-20 -left-20 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
               <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-yellow-500/20 rounded-full blur-3xl" />
-
               <div className="relative inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium mb-4 backdrop-blur-sm">
                 <TrendingUp className="h-4 w-4" />
                 Ready to Collaborate?

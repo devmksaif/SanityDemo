@@ -9,7 +9,12 @@ export default defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'divisionType',
+      title: 'Division Type',
+      type: 'string',
+      description: 'A short tag for the division (e.g., Film, Music, App).',
     }),
     defineField({
       name: 'slug',

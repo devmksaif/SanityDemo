@@ -57,44 +57,14 @@ const authors = [
   },
 ];
 
-// Divisions with comprehensive data
+// Divisions with client-specified data
 const divisions = [
-  {
-    _id: "division-shubz-records",
-    _type: "division",
-    title: "Shubz Records",
-    slug: { _type: "slug", current: "shubz-records" },
-    description:
-      "The heart of our musical endeavors, producing and promoting groundbreaking artists across Africa and beyond. We specialize in Afrobeat, Hip-Hop, and contemporary African music.",
-    author: { _type: "reference", _ref: "author-sarah-wilson" },
-  },
-  {
-    _id: "division-studio-shubz",
-    _type: "division",
-    title: "Studio Shubz",
-    slug: { _type: "slug", current: "studio-shubz" },
-    description:
-      "Our visual powerhouse, creating stunning films, music videos, and digital content. We bring stories to life through cutting-edge cinematography and post-production.",
-    author: { _type: "reference", _ref: "author-john-smith" },
-  },
-  {
-    _id: "division-africa-creative",
-    _type: "division",
-    title: "Africa Creative Talents",
-    slug: { _type: "slug", current: "africa-creative-talents" },
-    description:
-      "Discovering and nurturing creative talent across the African continent. We provide platforms for emerging artists, models, and performers to showcase their skills.",
-    author: { _type: "reference", _ref: "author-jane-doe" },
-  },
-  {
-    _id: "division-digital-innovations",
-    _type: "division",
-    title: "Digital Innovations",
-    slug: { _type: "slug", current: "digital-innovations" },
-    description:
-      "Pushing the boundaries of digital creativity through apps, web platforms, and interactive experiences. We merge technology with art to create innovative solutions.",
-    author: { _type: "reference", _ref: "author-mike-chen" },
-  },
+  { _id: "division-studio-shubz", _type: "division", title: "Studio Shubz Visuals", slug: { _type: "slug", current: "studio-shubz-visuals" }, description: "Visual storytelling powerhouse.", divisionType: "Film" },
+  { _id: "division-act", _type: "division", title: "Africa Creative Talents", slug: { _type: "slug", current: "africa-creative-talents" }, description: "Nurturing the next generation of African talent.", divisionType: "App" },
+  { _id: "division-shubz-records", _type: "division", title: "Shubz Records", slug: { _type: "slug", current: "shubz-records" }, description: "The sound of tomorrow's Africa.", divisionType: "Music" },
+  { _id: "division-miss-pact", _type: "division", title: "Miss PACT", slug: { _type: "slug", current: "miss-pact" }, description: "Redefining beauty and fashion.", divisionType: "Modeling" },
+  { _id: "division-stepxtreme", _type: "division", title: "StepXtreme", slug: { _type: "slug", current: "stepxtreme" }, description: "Movement that tells a story.", divisionType: "Dance" },
+  { _id: "division-drum-warriors", _type: "division", title: "Drum Warriors", slug: { _type: "slug", current: "drum-warriors" }, description: "The heartbeat of our culture.", divisionType: "Percussion" },
 ];
 
 // Comprehensive news articles
@@ -209,124 +179,19 @@ const newsArticles = [
   },
 ];
 
-// Comprehensive portfolio projects
+// Portfolio projects based on client examples
 const portfolioProjects = [
-  {
-    _id: `project-closure-short-film`,
-    _type: "portfolioProject",
-    title: "Closure - A Short Film",
-    slug: { _type: "slug", current: "closure-short-film" },
-    category: "Film",
-    division: { _type: "reference", _ref: "division-studio-shubz" },
-    releaseDate: "2024-05-20",
-    body: [
-      {
-        _type: "block",
-        style: "normal",
-        children: [
-          {
-            _type: "span",
-            text: "An award-winning short film exploring themes of loss and reconciliation in modern African society. The film has been recognized at multiple international film festivals for its innovative storytelling and cinematography.",
-          },
-        ],
-      },
-      {
-        _type: "block",
-        style: "h2",
-        children: [
-          {
-            _type: "span",
-            text: "Production Details",
-          },
-        ],
-      },
-      {
-        _type: "block",
-        style: "normal",
-        children: [
-          {
-            _type: "span",
-            text: "Produced entirely by Studio Shubz team, featuring local talent and showcasing the beauty of African landscapes. The production spanned 6 months and involved collaboration with international partners.",
-          },
-        ],
-      },
-    ],
-    author: { _type: "reference", _ref: "author-john-smith" },
-  },
-  {
-    _id: `project-shubzverse-debut-album`,
-    _type: "portfolioProject",
-    title: "ShubzVerse - Debut Album",
-    slug: { _type: "slug", current: "shubzverse-debut-album" },
-    category: "Music",
-    division: { _type: "reference", _ref: "division-shubz-records" },
-    releaseDate: "2024-03-15",
-    body: [
-      {
-        _type: "block",
-        style: "normal",
-        children: [
-          {
-            _type: "span",
-            text: "The debut album from Shubz Records, featuring a collective of our most talented artists. The album represents a fusion of traditional African sounds with contemporary production techniques.",
-          },
-        ],
-      },
-    ],
-    author: { _type: "reference", _ref: "author-sarah-wilson" },
-  },
-  {
-    _id: `project-africa-talent-showcase`,
-    _type: "portfolioProject",
-    title: "Africa Talent Showcase 2024",
-    slug: { _type: "slug", current: "africa-talent-showcase-2024" },
-    category: "Event",
-    division: { _type: "reference", _ref: "division-africa-creative" },
-    releaseDate: "2024-04-10",
-    body: [
-      {
-        _type: "block",
-        style: "normal",
-        children: [
-          {
-            _type: "span",
-            text: "A comprehensive talent showcase event featuring emerging artists from across Africa. The event included music performances, dance showcases, and visual art exhibitions.",
-          },
-        ],
-      },
-    ],
-    author: { _type: "reference", _ref: "author-jane-doe" },
-  },
-  {
-    _id: `project-creative-platform-app`,
-    _type: "portfolioProject",
-    title: "Creative Platform Mobile App",
-    slug: { _type: "slug", current: "creative-platform-app" },
-    category: "Technology",
-    division: { _type: "reference", _ref: "division-digital-innovations" },
-    releaseDate: "2024-02-28",
-    body: [
-      {
-        _type: "block",
-        style: "normal",
-        children: [
-          {
-            _type: "span",
-            text: "A mobile application designed to connect African creatives with global opportunities. The app features portfolio management, collaboration tools, and resource sharing capabilities.",
-          },
-        ],
-      },
-    ],
-    author: { _type: "reference", _ref: "author-mike-chen" },
-  },
+  { _id: "project-closure", _type: "portfolioProject", title: "Closure", slug: { _type: "slug", current: "closure" }, category: "Film", division: { _type: "reference", _ref: "division-studio-shubz" }, author: { _type: "reference", _ref: "author-john-smith" } },
+  { _id: "project-act-showcase", _type: "portfolioProject", title: "ACT Showcase", slug: { _type: "slug", current: "act-showcase" }, category: "App", division: { _type: "reference", _ref: "division-act" }, author: { _type: "reference", _ref: "author-jane-doe" } },
+  { _id: "project-shubzverse", _type: "portfolioProject", title: "ShubzVerse", slug: { _type: "slug", current: "shubzverse" }, category: "Music", division: { _type: "reference", _ref: "division-shubz-records" }, author: { _type: "reference", _ref: "author-sarah-wilson" } },
 ];
 
-// Home page content
+// Home page content with client-specified text
 const homePageContent = {
   _id: "homePage",
   _type: "homePage",
-  heroHeadline: "Welcome to Shubz Entertainment",
-  heroSubheadline: "Powering Creative Excellence Across Africa",
+  heroHeadline: "From Spark to Spotlight.",
+  heroSubheadline: "We are Africa's Creative Nerve Center — bridging media, talent, and technology into global stories.",
 };
 
 // Team members
