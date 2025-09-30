@@ -125,68 +125,14 @@ export default async function IndexPage() {
 
       {/* Latest News Section with Blog7 Theme */}
       {news.length > 0 && (
-        <section className="py-32">
-          <div className="container mx-auto flex flex-col items-center gap-16 lg:px-16">
-            <div className="text-center">
-              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-6">
-                <BookOpen className="h-4 w-4" />
-                Latest News
-              </div>
-              <h2 className="mb-3 text-3xl font-semibold text-pretty md:mb-4 md:text-4xl lg:mb-6 lg:max-w-3xl lg:text-5xl">
-                From the Newsroom
-              </h2>
-              <p className="mb-8 text-muted-foreground md:text-base lg:max-w-2xl lg:text-lg">
-                Stay updated with the latest stories and announcements from Shubz Entertainment.
-              </p>
-              <Button variant="link" className="w-full sm:w-auto" asChild>
-                <Link href="/newsroom">
-                  Visit Newsroom
-                  <ArrowRight className="ml-2 size-4" />
-                </Link>
-              </Button>
-            </div>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-              {news.map((article) => (
-                <Card
-                  key={article._id}
-                  className="grid grid-rows-[auto_auto_1fr_auto] pt-0"
-                >
-                  <div className="aspect-16/9 w-full">
-                    <Link
-                      href={`/newsroom/${article.slug?.current || article._id}`}
-                      className="transition-opacity duration-200 fade-in hover:opacity-70"
-                    >
-                      <img
-                        src={article.coverImage ? urlFor(article.coverImage).width(700).height(400).url() : "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg"}
-                        alt={article.title}
-                        className="h-full w-full object-cover object-center"
-                      />
-                    </Link>
-                  </div>
-                  <CardHeader>
-                    <h3 className="text-lg font-semibold hover:underline md:text-xl">
-                      <Link href={`/newsroom/${article.slug?.current || article._id}`}>
-                        {article.title}
-                      </Link>
-                    </h3>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">{article.excerpt}</p>
-                  </CardContent>
-                  <CardFooter>
-                    <Link
-                      href={`/newsroom/${article.slug?.current || article._id}`}
-                      className="flex items-center text-foreground hover:underline"
-                    >
-                      Read more
-                      <ArrowRight className="ml-2 size-4" />
-                    </Link>
-                  </CardFooter>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
+        <BlogSection
+          articles={news}
+          tagline="Latest News"
+          heading="From the Newsroom"
+          description="Stay updated with the latest stories and announcements from Shubz Entertainment."
+          buttonText="Visit Newsroom"
+          buttonUrl="/newsroom"
+        />
       )}
 
       {/* CTA Section */}
