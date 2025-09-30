@@ -77,7 +77,7 @@ export default async function IndexPage() {
             
             {/* Desktop Grid */}
             <div className="hidden lg:grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {divisions.map((division, i) => (
+              {divisions.slice(0,3).map((division, i) => (
                 <AnimatedContainer key={division._id} delay={i * 0.1}>
                   <DivisionCard division={division} />
                 </AnimatedContainer>
@@ -91,7 +91,7 @@ export default async function IndexPage() {
                 className="w-full max-w-sm mx-auto"
               >
                 <CarouselContent className="-ml-4">
-                  {divisions.map((division) => (
+                  {divisions.slice(3).map((division) => (
                     <CarouselItem key={division._id} className="pl-4 basis-4/5 md:basis-1/2">
                       <div className="p-1">
                         <DivisionCard division={division} />

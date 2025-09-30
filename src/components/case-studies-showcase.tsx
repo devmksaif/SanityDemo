@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { urlFor } from "@/lib/sanity";
 import type { PortfolioProjectData } from "@/types/sanity";
+import { getImageUrl } from "@/lib/cloudinary-helpers";
 
 interface CaseStudiesShowcaseProps {
   projects: PortfolioProjectData[];
@@ -38,7 +39,7 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
           {showcaseProjects.map((project, index) => {
             // Robust image URL handling
             const imageUrl = project.thumbnailImage 
-              ? urlFor(project.thumbnailImage.secure_url).width(400).height(250).url()
+              ? getImageUrl(project.thumbnailImage,{ width : 400, height :250}) 
               : FALLBACK_IMAGE_URL;
             const projectUrl = `/portfolio/${project.slug?.current || project._id}`;
             

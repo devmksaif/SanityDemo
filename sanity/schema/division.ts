@@ -43,17 +43,16 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'logo',
-      title: 'Logo',
-       type: 'cloudinary.asset', // Use the type provided by the plugin
-      description: 'A square or circular logo is recommended.',
-    }),
-    defineField({
       name: 'coverImage',
       title: 'Cover Image',
-       type: 'cloudinary.asset', // Use the type provided by the plugin
-      options: { hotspot: true },
-      validation: (Rule) => Rule.required(),
+      type: 'cloudinary.asset',
+      description: 'Main image for the division.',
+    }),
+    defineField({
+      name: 'logo',
+      title: 'Logo',
+      type: 'cloudinary.asset',
+      description: 'Logo for the division (optional).',
     }),
   ],
   preview: {

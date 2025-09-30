@@ -2,23 +2,21 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { urlFor } from "@/lib/sanity";
 import type { DivisionData } from "@/types/sanity";
 import { ArrowRight, AlertTriangle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { getImageUrl } from "@/lib/cloudinary-helpers";
+import { CldImage } from 'next-cloudinary';
 
 type DivisionCardProps = {
   division: DivisionData;
 };
 
 export function DivisionCard({ division }: DivisionCardProps) {
-  // Use the helper function to get the correct image URL
-  const imageUrl = getImageUrl(division.coverImage, { width: 400, height: 300 }) || "https://images.unsplash.com/photo-1511379938547-c1f33886168f?w=400&h=300&fit=crop";
-  const logoUrl = division.logo ? getImageUrl(division.logo, { width: 80 }) : null;
-  
   const hasSlug = division.slug?.current;
   const href = hasSlug ? `/divisions/${division.slug.current}` : "#";
+
+  const hasCoverImage = division.coverImage?._type === 'cloudinary.asset' && division.coverImage.public_id;
+  const hasLogo = division.logo?._type === 'cloudinary.asset' && division.logo.public_id;
 
   const handleClick = (e: React.MouseEvent) => {
     if (!hasSlug) {
@@ -36,33 +34,37 @@ export function DivisionCard({ division }: DivisionCardProps) {
           !hasSlug && "cursor-not-allowed opacity-70"
         )}
       >
-        {/* Card Header with Image */}
         <div className="relative h-48 w-full overflow-hidden">
-          <Image
-            src={imageUrl}
-            alt={division.title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-          />
+          {hasCoverImage ? (
+            <CldImage
+              src={division.coverImage.public_id!}
+              alt={division.title}
+              width="500"
+              height="500"
+              crop="fill"
+              gravity="center"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          ) : (
+            <div className="h-full w-full bg-gray-200 flex items-center justify-center">
+              <span className="text-gray-500">No Image</span>
+            </div>
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-          
-          {/* Logo Overlay */}
-          {logoUrl && (
+          {hasLogo && (
             <div className="absolute top-4 left-4">
-              <Image
-                src={logoUrl}
+              <CldImage
+                src={division.logo!.public_id!}
                 alt={`${division.title} Logo`}
-                width={60}
-                height={30}
+                width="80"
+                height="40"
                 className="h-auto w-12 object-contain drop-shadow-lg"
               />
             </div>
           )}
         </div>
 
-        {/* Card Body */}
         <div className="p-6 flex flex-col gap-4">
-          {/* Category Tag */}
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-purple-500 to-pink-500 text-white">
               Division
@@ -73,8 +75,6 @@ export function DivisionCard({ division }: DivisionCardProps) {
               </span>
             )}
           </div>
-
-          {/* Title and Description */}
           <h4 className="text-xl font-bold text-gray-900 dark:text-white capitalize">
             {division.title}
           </h4>
@@ -83,16 +83,16 @@ export function DivisionCard({ division }: DivisionCardProps) {
           </p>
         </div>
 
-        {/* Card Footer */}
         <div className="flex items-center justify-between p-6 pt-0 mt-auto">
           <div className="flex items-center gap-3">
             <div className="relative h-8 w-8 rounded-full overflow-hidden bg-gradient-to-r from-purple-400 to-pink-400">
-              {logoUrl ? (
-                <Image
-                  src={logoUrl}
+              {hasLogo ? (
+                <CldImage
+                  src={division.logo!.public_id!}
                   alt={division.title}
-                  width={32}
-                  height={32}
+                  width="32"
+                  height="32"
+                  crop="fill"
                   className="object-cover"
                 />
               ) : (
@@ -106,14 +106,11 @@ export function DivisionCard({ division }: DivisionCardProps) {
               <small className="text-xs text-gray-500 dark:text-gray-400">Creative Division</small>
             </div>
           </div>
-          
-          {/* Explore Button */}
           <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white group-hover:scale-110 transition-transform duration-300">
             <ArrowRight className="w-5 h-5" />
           </div>
         </div>
 
-        {/* No Slug Warning */}
         {!hasSlug && (
           <div className="absolute top-3 right-3 flex items-center gap-1 rounded-full bg-yellow-500/90 px-2 py-1 text-xs font-semibold text-white">
             <AlertTriangle className="h-3 w-3" />

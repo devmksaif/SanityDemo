@@ -1,24 +1,20 @@
 "use client";
 
 import Image from "next/image";
-import { urlFor } from "@/lib/sanity";
 import type { TeamMemberData } from "@/types/sanity";
 import { User, AlertTriangle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { getImageUrl } from "@/lib/cloudinary-helpers";
+import { CldImage } from 'next-cloudinary';
 
 interface TeamMemberCardProps {
   member: TeamMemberData;
   className?: string;
 }
 
-// Fallback avatar URL
 const FALLBACK_AVATAR_URL = "https://images.unsplash.com/photo-1494790108755-2616b612b5bc?w=200&h=200&fit=crop&crop=face";
 
 export function TeamMemberCard({ member, className }: TeamMemberCardProps) {
-  // Use the helper function to get the correct image URL
-  const imageUrl = getImageUrl(member.image, { width: 200, height: 200 }) || FALLBACK_AVATAR_URL;
-
+  const hasCloudinaryImage = member.image?._type === 'cloudinary.asset' && member.image.public_id;
   const displayName = member.name || "Team Member";
   const displayRole = member.role || "Creative Professional";
   const displayBio = member.bio || "A talented member of the Shubz Entertainment team contributing to creative excellence.";
@@ -29,17 +25,25 @@ export function TeamMemberCard({ member, className }: TeamMemberCardProps) {
       <div className="bg-card text-card-foreground rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 border border-border/50">
         <div className="relative mb-4">
           <div className="relative h-32 w-32 mx-auto overflow-hidden rounded-full bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900">
-            <Image
-              src={imageUrl}
-              alt={displayName}
-              width={200}
-              height={200}
-              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-              onError={(e) => {
-                console.warn(`Failed to load image for team member: ${displayName}`);
-                (e.target as HTMLImageElement).src = FALLBACK_AVATAR_URL;
-              }}
-            />
+            {hasCloudinaryImage ? (
+              <CldImage
+                src={member.image.public_id!}
+                alt={displayName}
+                width={200}
+                height={200}
+                crop="fill"
+                gravity="face"
+                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            ) : (
+              <Image
+                src={FALLBACK_AVATAR_URL}
+                alt={displayName}
+                width={200}
+                height={200}
+                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            )}
           </div>
           
           {(!member.name || !member.role || !member.image) && (

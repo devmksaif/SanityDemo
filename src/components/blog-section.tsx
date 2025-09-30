@@ -6,8 +6,8 @@ import { ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import { urlFor } from "@/lib/sanity";
 import type { NewsArticleData } from "@/types/sanity";
+import { CldImage } from 'next-cloudinary';
 
 interface Post {
   id: string;
@@ -17,7 +17,7 @@ interface Post {
   author: string;
   published: string;
   url: string;
-  image: string;
+  image: string | null; // Can be public_id or null
 }
 
 interface BlogSectionProps {
@@ -46,11 +46,11 @@ const BlogSection = ({
     author: "Shubz Entertainment",
     published: new Date(article.publishedAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
     url: `/newsroom/${article.slug?.current || article._id}`,
-    image: article.coverImage ? urlFor(article.coverImage.secure_url).width(700).height(400).url() : "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
+    image: article.coverImage?.public_id || null,
   }));
 
   return (
-    <section className="py-2 ">
+    <section className="py-12 sm:py-16">
       <div className="container mx-auto flex flex-col items-center gap-16 lg:px-16">
         <div className="text-center">
           <Badge variant="secondary" className="mb-6">
@@ -80,13 +80,20 @@ const BlogSection = ({
                   href={post.url}
                   className="transition-opacity duration-200 fade-in hover:opacity-70"
                 >
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    width={700}
-                    height={400}
-                    className="h-full w-full object-cover object-center"
-                  />
+                  {post.image ? (
+                    <CldImage
+                      src={post.image}
+                      alt={post.title}
+                      width={700}
+                      height={400}
+                      crop="fill"
+                      className="h-full w-full object-cover object-center"
+                    />
+                  ) : (
+                    <div className="h-full w-full bg-gray-200 flex items-center justify-center">
+                      <span className="text-gray-500">No Image</span>
+                    </div>
+                  )}
                 </Link>
               </div>
               <CardHeader>

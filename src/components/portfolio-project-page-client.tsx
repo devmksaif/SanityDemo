@@ -16,6 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Image as ImageIcon } from "lucide-react";
+import { getImageUrl } from "@/lib/cloudinary-helpers";
 
 interface PortfolioProjectPageClientProps {
   project: PortfolioProjectData & { author?: any };
@@ -124,7 +125,7 @@ export function PortfolioProjectPageClient({ project }: PortfolioProjectPageClie
               <div className="rounded-lg border bg-card p-6">
                 {project.division?.coverImage && (
                   <Image
-                    src={urlFor(project.division.coverImage.secure_url).width(144).url()}
+                    src={getImageUrl(project.division.coverImage,{ width : 400})}
                     alt={`${project.division.title} logo`}
                     width={144}
                     height={40}
