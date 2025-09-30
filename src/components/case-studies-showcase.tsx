@@ -10,6 +10,9 @@ interface CaseStudiesShowcaseProps {
   projects: PortfolioProjectData[];
 }
 
+// Fallback image URL for when no image is provided
+const FALLBACK_IMAGE_URL = "https://images.unsplash.com/photo-1511379938547-c1f33886168f?w=400&h=250&fit=crop";
+
 const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
   // Get the first two projects for detailed showcase
   const showcaseProjects = projects.slice(0, 2);
@@ -33,7 +36,10 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
         
         <div className="mt-8 space-y-8">
           {showcaseProjects.map((project, index) => {
-            const imageUrl = project.thumbnailImage ? urlFor(project.thumbnailImage).width(400).height(250).url() : "";
+            // Robust image URL handling
+            const imageUrl = project.thumbnailImage 
+              ? urlFor(project.thumbnailImage).width(400).height(250).url()
+              : FALLBACK_IMAGE_URL;
             const projectUrl = `/portfolio/${project.slug?.current || project._id}`;
             
             // Generate excerpt from body content
@@ -44,7 +50,7 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
               <div key={project._id}>
                 <div className="flex justify-center">
                   <div className="flex w-full max-w-4xl flex-col gap-6 sm:flex-row sm:items-center">
-                    {/* Project Image - More Compact */}
+                    {/* Project Image - Error handled */}
                     <div className="h-48 w-full sm:h-40 sm:w-64 flex-shrink-0 overflow-hidden rounded-xl sm:rounded-lg">
                       <Link href={projectUrl} className="block h-full w-full group">
                         {imageUrl ? (
@@ -54,19 +60,29 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
                             width={400}
                             height={250}
                             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                            onError={(e) => {
+                              console.warn(`Failed to load image for project: ${project.title}`);
+                              // Fallback to a solid color if image fails
+                              (e.target as HTMLImageElement).style.display = 'none';
+                              (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
+                            }}
                           />
                         ) : (
                           <div className="h-full w-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
                             <span className="text-gray-500 text-sm">No image</span>
                           </div>
                         )}
+                        {/* Fallback for image error */}
+                        <div className="hidden h-full w-full bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center">
+                          <span className="text-white text-lg font-medium">No Image</span>
+                        </div>
                       </Link>
                     </div>
                     
-                    {/* Project Content - More Compact */}
+                    {/* Project Content */}
                     <div className="flex flex-1 flex-col justify-center gap-3">
                       <div className="space-y-2">
-                        {/* Category and Division Tags - Smaller */}
+                        {/* Category and Division Tags */}
                         <div className="flex flex-wrap items-center gap-1.5">
                           {project.category && (
                             <span className="inline-flex items-center rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
@@ -80,14 +96,14 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
                           )}
                         </div>
                         
-                        {/* Project Title - Smaller */}
+                        {/* Project Title */}
                         <h3 className="text-lg font-semibold hover:underline">
                           <Link href={projectUrl}>
                             {project.title}
                           </Link>
                         </h3>
                         
-                        {/* Author Information - More Compact */}
+                        {/* Author Information - Error handled */}
                         {project.author && (
                           <div className="flex items-center gap-2">
                             {project.author.image && (
@@ -98,6 +114,10 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
                                   width={24}
                                   height={24}
                                   className="object-cover"
+                                  onError={(e) => {
+                                    console.warn(`Failed to load author image for project: ${project.title}`);
+                                    (e.target as HTMLImageElement).style.display = 'none';
+                                  }}
                                 />
                               </div>
                             )}
@@ -108,13 +128,13 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
                           </div>
                         )}
                         
-                        {/* Project Excerpt - More Compact */}
+                        {/* Project Excerpt */}
                         <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
                           {excerpt}
                         </p>
                       </div>
                       
-                      {/* Project Metadata - More Compact */}
+                      {/* Project Metadata */}
                       <div className="flex flex-wrap items-center gap-3 text-xs">
                         {project.releaseDate && (
                           <div className="flex items-center gap-1 text-muted-foreground">

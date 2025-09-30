@@ -16,6 +16,7 @@ export type DivisionData = {
 };
 
 export type PortfolioProjectData = {
+  author: any;
   _id: string;
   title: string;
   slug: { current: string };

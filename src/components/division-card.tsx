@@ -4,16 +4,26 @@ import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/lib/sanity";
 import type { DivisionData } from "@/types/sanity";
-import { ArrowRight, AlertTriangle } from "lucide-react";
+import { ArrowRight, AlertTriangle, Image as ImageIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type DivisionCardProps = {
   division: DivisionData;
 };
 
+// Fallback image URL for when no image is provided
+const FALLBACK_IMAGE_URL = "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=600&h=400&fit=crop";
+
 export function DivisionCard({ division }: DivisionCardProps) {
-  const imageUrl = urlFor(division.coverImage).width(600).height(400).url();
-  const logoUrl = division.logo ? urlFor(division.logo).width(80).url() : null;
+  // Robust image URL handling
+  const imageUrl = division.coverImage 
+    ? urlFor(division.coverImage).width(600).height(400).url()
+    : FALLBACK_IMAGE_URL;
+  
+  const logoUrl = division.logo 
+    ? urlFor(division.logo).width(80).url() 
+    : null;
+  
   const hasSlug = division.slug?.current;
   const href = hasSlug ? `/divisions/${division.slug.current}` : "#";
 
@@ -33,17 +43,27 @@ export function DivisionCard({ division }: DivisionCardProps) {
           !hasSlug && "cursor-not-allowed opacity-70"
         )}
       >
-        {/* Card Header with Image */}
+        {/* Card Header with Image - Error handled */}
         <div className="relative h-48 w-full overflow-hidden">
           <Image
             src={imageUrl}
             alt={division.title}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
+            onError={(e) => {
+              console.warn(`Failed to load image for division: ${division.title}`);
+              // Fallback to a solid color if image fails
+              (e.target as HTMLImageElement).style.display = 'none';
+              (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
+            }}
           />
+          {/* Fallback for image error */}
+          <div className="hidden absolute inset-0 bg-gradient-to-br from-purple-400 to-pink-400 flex items-center justify-center">
+            <ImageIcon className="w-12 h-12 text-white/60" />
+          </div>
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
           
-          {/* Logo Overlay */}
+          {/* Logo Overlay - Error handled */}
           {logoUrl && (
             <div className="absolute top-4 left-4">
               <Image
@@ -52,6 +72,10 @@ export function DivisionCard({ division }: DivisionCardProps) {
                 width={60}
                 height={30}
                 className="h-auto w-12 object-contain drop-shadow-lg"
+                onError={(e) => {
+                  console.warn(`Failed to load logo for division: ${division.title}`);
+                  (e.target as HTMLImageElement).style.display = 'none';
+                }}
               />
             </div>
           )}
@@ -91,12 +115,21 @@ export function DivisionCard({ division }: DivisionCardProps) {
                   width={32}
                   height={32}
                   className="object-cover"
+                  onError={(e) => {
+                    console.warn(`Failed to load logo for division footer: ${division.title}`);
+                    (e.target as HTMLImageElement).style.display = 'none';
+                    (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
+                  }}
                 />
               ) : (
                 <div className="flex items-center justify-center h-full w-full text-white text-xs font-bold">
                   {division.title.charAt(0)}
                 </div>
               )}
+              {/* Fallback for logo error */}
+              <div className="hidden flex items-center justify-center h-full w-full text-white text-xs font-bold">
+                {division.title.charAt(0)}
+              </div>
             </div>
             <div>
               <h5 className="text-sm font-medium text-gray-900 dark:text-white">Shubz Entertainment</h5>

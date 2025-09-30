@@ -16,7 +16,7 @@ const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || "2024-01-01";
 // 5. Give it a name (e.g., "Seeder Script") and choose "Editor" permissions.
 // 6. Copy the token and create a `.env.local` file in your project root if you don't have one.
 // 7. Add this line to `.env.local`: SANITY_API_WRITE_TOKEN="YOUR_TOKEN_HERE"
-const token = process.env.SANITY_API_WRITE_TOKEN;
+const token = process.env.NEXT_PUBLIC_SANITY_API_KEY || "skkstxJ2rBznKIbVRDqCXeXxg5M6mG418KD1C6LaVIONHIu3fEigMz7aMSOJ4fU6q1mz2VNBZHA7YeGyegBQicJvLbF84ZhwXj7tHYKUuoQJjlcTGSbDTW6vxFnF8SBB0DzPVmq5RfjxIyHUBKUgBWr9TpdqmxYMrkkhXJlTDzC49tB09hMf";
 
 if (!token) {
   console.error(
