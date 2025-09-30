@@ -58,6 +58,7 @@
     "react-parallax-tilt": "^1.7.309",
     "react-resizable-panels": "^3.0.2",
     "recharts": "^2.15.3",
+    "sanity-plugin-cloudinary": "^1.4.0",
     "sonner": "^2.0.3",
     "tailwind-merge": "^3.3.0",
     "tailwindcss-animate": "^1.0.7",

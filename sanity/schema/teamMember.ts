@@ -20,10 +20,8 @@ export default defineType({
     defineField({
       name: 'image',
       title: 'Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
+      type: 'cloudinary.asset', // Changed from 'image' to use Cloudinary
+      description: 'Upload or select an image from Cloudinary.',
       validation: (Rule) => Rule.required(),
     }),
     defineField({

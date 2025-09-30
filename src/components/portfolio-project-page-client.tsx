@@ -110,24 +110,7 @@ export function PortfolioProjectPageClient({ project }: PortfolioProjectPageClie
                   <ImageIcon className="w-16 h-16 text-white/70" />
                 </div>
                 
-                <div className="mb-8 grid grid-cols-2 gap-5 lg:grid-cols-4">
-                  <div className="flex flex-col gap-2">
-                    <p className="text-4xl font-semibold sm:text-5xl text-primary">98%</p>
-                    <p className="text-muted-foreground text-sm">Client Satisfaction</p>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <p className="text-4xl font-semibold sm:text-5xl text-primary">4.2x</p>
-                    <p className="text-muted-foreground text-sm">Engagement Boost</p>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <p className="text-4xl font-semibold sm:text-5xl text-primary">72%</p>
-                    <p className="text-muted-foreground text-sm">Positive Feedback</p>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <p className="text-4xl font-semibold sm:text-5xl text-primary">19%</p>
-                    <p className="text-muted-foreground text-sm">Growth Rate</p>
-                  </div>
-                </div>
+                 
               </div>
               
               {project.body && project.body.length > 0 && (
