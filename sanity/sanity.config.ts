@@ -6,6 +6,13 @@ import { cloudinaryAssetSource, cloudinarySchemaPlugin } from 'sanity-plugin-clo
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "dfvr7i1k"
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production"
 
+// Cloudinary configuration
+const cloudinaryConfig = {
+  cloudName: process.env.SANITY_STUDIO_CLOUDINARY_CLOUD_NAME || "shubz-entertainment",
+  apiKey: process.env.SANITY_STUDIO_CLOUDINARY_API_KEY,
+  apiSecret: process.env.SANITY_STUDIO_CLOUDINARY_API_SECRET, // Only needed for server-side operations
+}
+
 export default defineConfig({
   basePath: '/studio',
   name: 'shubz_visuals_content_studio',
@@ -14,7 +21,9 @@ export default defineConfig({
   projectId,
   dataset,
 
-  plugins: [structureTool(), cloudinarySchemaPlugin()],
+  plugins: [structureTool(), cloudinarySchemaPlugin({
+    cloudinary: cloudinaryConfig
+  })],
 
   schema: {
     types: schemaTypes,

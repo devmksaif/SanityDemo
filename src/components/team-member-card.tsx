@@ -29,7 +29,7 @@ export function TeamMemberCard({ member, className }: TeamMemberCardProps) {
     if (member.image._type === 'cloudinary.asset' && member.image.public_id) {
       // It's a Cloudinary image
       imageUrl = getCloudinaryImageUrl(member.image.public_id);
-    } else if (member.image._type === 'image') {
+    } else if (member.image._type === 'sanity.imageAsset' || member.image._type === 'image') {
       // It's a standard Sanity image
       imageUrl = urlFor(member.image).width(200).height(200).url();
     }

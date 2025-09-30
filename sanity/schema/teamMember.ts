@@ -20,9 +20,23 @@ export default defineType({
     defineField({
       name: 'image',
       title: 'Image',
-      type: 'cloudinary.asset', // Changed from 'image' to use Cloudinary
+      type: 'image', // Keep as 'image' type but allow Cloudinary as source
       description: 'Upload or select an image from Cloudinary.',
       validation: (Rule) => Rule.required(),
+      options: {
+        sources: [
+          {
+            name: 'cloudinary',
+            title: 'Cloudinary',
+            component: 'cloudinary-image-input', // Use our custom component
+          },
+          {
+            name: 'sanity',
+            title: 'Sanity',
+            component: 'sanity-default', // Keep Sanity as fallback
+          }
+        ]
+      }
     }),
     defineField({
       name: 'order',
