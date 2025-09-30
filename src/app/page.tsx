@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight, Sparkles, TrendingUp, Users, BookOpen, Briefcase } from "lucide-react";
 import { Container } from "@/components/ui/container";
-import { PortfolioCard } from "@/components/portfolio-card";
 import { AnimatedContainer } from "@/components/ui/animated-container";
 import { BlogSection } from "@/components/blog-section";
+import { CaseStudiesShowcase } from "@/components/case-studies-showcase";
 
 async function getPageData() {
   const homePageQuery = `*[_type == "homePage"][0]`;
@@ -88,39 +88,7 @@ export default async function IndexPage() {
 
       {/* Featured Portfolio Section */}
       {portfolio.length > 0 && (
-        <section className="py-20 sm:py-32 bg-background">
-          <Container>
-            <AnimatedContainer>
-              <div className="mb-12 text-center">
-                <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-4">
-                  <Briefcase className="h-4 w-4" />
-                  Featured Work
-                </div>
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-                  Our Creative Portfolio
-                </h2>
-                <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-                  A glimpse into the impactful projects we've brought to life.
-                </p>
-              </div>
-            </AnimatedContainer>
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {portfolio.map((project, i) => (
-                <AnimatedContainer key={project._id} delay={i * 0.1}>
-                  <PortfolioCard project={project} />
-                </AnimatedContainer>
-              ))}
-            </div>
-            <AnimatedContainer className="mt-12 text-center">
-              <Button asChild size="lg" variant="outline" className="group">
-                <Link href="/portfolio">
-                  View Full Portfolio
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </Button>
-            </AnimatedContainer>
-          </Container>
-        </section>
+        <CaseStudiesShowcase projects={portfolio} />
       )}
 
       {/* Latest News Section with Blog7 Theme */}
