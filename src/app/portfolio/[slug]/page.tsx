@@ -20,9 +20,10 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 async function getProject(slug: string) {
   const query = `*[_type == "portfolioProject" && (slug.current == $slug || _id == $slug)][0]{
     ..., 
-    "division": division->{title, logo}
+    "division": division->{title, logo},
+    "author": author->{name, role, bio, image}
   }`;
-  const data: PortfolioProjectData = await client.fetch(query, { slug });
+  const data: PortfolioProjectData & { author?: any } = await client.fetch(query, { slug });
   return data;
 }
 
@@ -40,10 +41,23 @@ export default async function PortfolioProjectPage({ params }: { params: { slug:
     <section className="py-12 sm:py-16">
       <div className="container">
         <div className="mx-auto max-w-7xl">
-          
+          <Breadcrumb className="mb-6 lg:mb-10">
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/">Home</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink href="/portfolio">Portfolio</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>{project.title}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
 
           <div className="relative flex-col gap-10 lg:flex lg:flex-row lg:justify-center">
-            
             {/* Main Content */}
             <div className="lg:max-w-[692px]">
               <div>
@@ -53,6 +67,23 @@ export default async function PortfolioProjectPage({ params }: { params: { slug:
                 <p className="text-muted-foreground mt-4 text-lg">
                   {excerpt}
                 </p>
+                {project.author && (
+                  <div className="flex items-center gap-4 mt-6">
+                    {project.author.image && (
+                      <Image
+                        src={urlFor(project.author.image).width(40).height(40).url()}
+                        alt={project.author.name}
+                        width={40}
+                        height={40}
+                        className="rounded-full"
+                      />
+                    )}
+                    <div>
+                      <p className="text-sm font-medium">{project.author.name}</p>
+                      <p className="text-sm text-muted-foreground">{project.author.role}</p>
+                    </div>
+                  </div>
+                )}
                 <Image
                   src={imageUrl}
                   alt={project.title}
