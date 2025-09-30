@@ -44,7 +44,9 @@ async function getPageData() {
   const divisions: DivisionData[] = await client.fetch(divisionsQuery);
   const portfolio: PortfolioProjectData[] = await client.fetch(portfolioQuery);
   const news: NewsArticleData[] = await client.fetch(newsQuery);
-
+  console.log(divisions);
+  console.log(news);
+  console.log(portfolio)
   return { homePageData, divisions, portfolio, news };
 }
 

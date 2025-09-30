@@ -46,7 +46,7 @@ const BlogSection = ({
     author: "Shubz Entertainment",
     published: new Date(article.publishedAt).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
     url: `/newsroom/${article.slug?.current || article._id}`,
-    image: article.coverImage ? urlFor(article.coverImage).width(700).height(400).url() : "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
+    image: article.coverImage ? urlFor(article.coverImage.secure_url).width(700).height(400).url() : "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/placeholder-dark-1.svg",
   }));
 
   return (

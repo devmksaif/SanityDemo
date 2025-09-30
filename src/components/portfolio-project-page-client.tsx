@@ -122,9 +122,9 @@ export function PortfolioProjectPageClient({ project }: PortfolioProjectPageClie
 
             <div className="h-fit lg:sticky lg:top-24 lg:max-w-80 w-full">
               <div className="rounded-lg border bg-card p-6">
-                {project.division?.logo && (
+                {project.division?.coverImage && (
                   <Image
-                    src={urlFor(project.division.logo).width(144).url()}
+                    src={urlFor(project.division.coverImage.secure_url).width(144).url()}
                     alt={`${project.division.title} logo`}
                     width={144}
                     height={40}

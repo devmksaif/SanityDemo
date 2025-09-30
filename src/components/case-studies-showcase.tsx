@@ -38,7 +38,7 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
           {showcaseProjects.map((project, index) => {
             // Robust image URL handling
             const imageUrl = project.thumbnailImage 
-              ? urlFor(project.thumbnailImage).width(400).height(250).url()
+              ? urlFor(project.thumbnailImage.secure_url).width(400).height(250).url()
               : FALLBACK_IMAGE_URL;
             const projectUrl = `/portfolio/${project.slug?.current || project._id}`;
             
