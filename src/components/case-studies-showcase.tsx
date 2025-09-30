@@ -94,6 +94,25 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
                             {project.title}
                           </Link>
                         </h3>
+                        {project.author && (
+                          <div className="flex items-center gap-3 mt-2">
+                            {project.author.image && (
+                              <div className="relative h-8 w-8 rounded-full overflow-hidden">
+                                <Image
+                                  src={urlFor(project.author.image).width(32).height(32).url()}
+                                  alt={project.author.name}
+                                  width={32}
+                                  height={32}
+                                  className="object-cover"
+                                />
+                              </div>
+                            )}
+                            <div>
+                              <p className="text-sm font-medium">{project.author.name}</p>
+                              <p className="text-xs text-muted-foreground">{project.author.role}</p>
+                            </div>
+                          </div>
+                        )}
                         <q className="text-lg text-muted-foreground italic">
                           {testimonial.quote}
                         </q>
