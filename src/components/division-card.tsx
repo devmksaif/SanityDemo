@@ -2,35 +2,21 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import Tilt from "react-parallax-tilt";
 import { urlFor } from "@/lib/sanity";
-import { Card } from "@/components/ui/card";
 import type { DivisionData } from "@/types/sanity";
 import { ArrowRight, AlertTriangle } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type DivisionCardProps = {
   division: DivisionData;
 };
 
 export function DivisionCard({ division }: DivisionCardProps) {
-  const imageUrl = urlFor(division.coverImage).width(400).height(300).url();
+  const imageUrl = urlFor(division.coverImage).width(500).height(650).url();
+  const logoUrl = division.logo ? urlFor(division.logo).width(120).url() : null;
   const hasSlug = division.slug?.current;
-  const slug = hasSlug ? division.slug.current : division._id;
-  const href = `/divisions/${slug}`;
-
-  // Extract category from description or use a default
-  const getCategory = () => {
-    // Try to extract category from description (first word or common patterns)
-    const desc = division.description.toLowerCase();
-    if (desc.includes('film') || desc.includes('movie')) return 'Film';
-    if (desc.includes('music') || desc.includes('record')) return 'Music';
-    if (desc.includes('dance') || desc.includes('choreography')) return 'Dance';
-    if (desc.includes('model') || desc.includes('fashion')) return 'Modeling';
-    if (desc.includes('app') || desc.includes('software')) return 'App';
-    if (desc.includes('visual') || desc.includes('video')) return 'Visuals';
-    if (desc.includes('percussion') || desc.includes('drum')) return 'Percussion';
-    if (desc.includes('talent') || desc.includes('creative')) return 'Creative';
-    return 'Entertainment'; // Default category
-  };
+  const href = hasSlug ? `/divisions/${division.slug.current}` : "#";
 
   const handleClick = (e: React.MouseEvent) => {
     if (!hasSlug) {
@@ -41,10 +27,22 @@ export function DivisionCard({ division }: DivisionCardProps) {
   };
 
   return (
-    <Link href={href} onClick={handleClick} className="group block">
-      <Card className={`relative h-full w-full overflow-hidden rounded-lg border bg-card transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${!hasSlug ? 'opacity-75 cursor-not-allowed' : ''}`}>
-        {/* Image Thumbnail */}
-        <div className="relative aspect-[4/3] w-full overflow-hidden">
+    <Tilt
+      tiltMaxAngleX={5}
+      tiltMaxAngleY={5}
+      glareEnable={true}
+      glareMaxOpacity={0.1}
+      glarePosition="all"
+      className="h-full w-full"
+    >
+      <Link href={href} onClick={handleClick} className="group block h-full w-full">
+        <div
+          className={cn(
+            "relative h-full w-full overflow-hidden rounded-xl border bg-card shadow-lg transition-all duration-300",
+            !hasSlug && "cursor-not-allowed opacity-80"
+          )}
+        >
+          {/* Background Image */}
           <Image
             src={imageUrl}
             alt={division.title}
@@ -52,32 +50,43 @@ export function DivisionCard({ division }: DivisionCardProps) {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
           />
-          {/* Overlay on hover */}
-          <div className="absolute inset-0 bg-black/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-        </div>
-        
-        {/* Content Section */}
-        <div className="p-4">
-          {/* Title */}
-          <h3 className="text-lg font-semibold text-foreground transition-colors duration-300 group-hover:text-primary">
-            {division.title}
-          </h3>
           
-          {/* Category Tag */}
-          <div className="mt-2">
-            <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary-foreground">
-              {getCategory()}
-            </span>
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+
+          {/* Content */}
+          <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
+            {logoUrl && (
+              <Image
+                src={logoUrl}
+                alt={`${division.title} Logo`}
+                width={100}
+                height={40}
+                className="mb-4 h-auto w-24 object-contain drop-shadow-lg"
+              />
+            )}
+            <h3 className="text-2xl font-bold tracking-tight drop-shadow-md">
+              {division.title}
+            </h3>
+            <p className="mt-1 text-sm text-white/80 drop-shadow-sm line-clamp-2">
+              {division.description}
+            </p>
+            
+            {/* Hover Arrow */}
+            <div className="mt-4 flex items-center text-sm font-medium opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              Explore Division
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </div>
           </div>
 
           {!hasSlug && (
-            <div className="mt-3 flex items-center gap-1 text-xs text-yellow-700 bg-yellow-100 px-2 py-1 rounded">
+            <div className="absolute top-3 right-3 flex items-center gap-1 rounded-full bg-yellow-500/90 px-2 py-1 text-xs font-semibold text-white">
               <AlertTriangle className="h-3 w-3" />
-              <span>No slug</span>
+              <span>No Slug</span>
             </div>
           )}
         </div>
-      </Card>
-    </Link>
+      </Link>
+    </Tilt>
   );
 }
