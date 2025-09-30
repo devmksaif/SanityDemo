@@ -46,11 +46,12 @@ export type TeamMemberData = {
   name: string;
   role: string;
   image?: {
-    _type: 'cloudinary.asset' | 'image';
+    _type: 'cloudinary.asset' | 'image' | 'sanity.imageAsset';
     public_id?: string; // For Cloudinary
     _id?: string; // For Sanity
-    url?: string; // Raw URL
+    url?: string; // Raw URL (Cloudinary secure_url)
     asset?: any; // Sanity asset reference
+    secure_url?: string; // Cloudinary secure URL
   };
   bio?: string;
   email?: string;

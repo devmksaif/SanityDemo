@@ -5,7 +5,7 @@ import { urlFor } from "@/lib/sanity";
 import type { TeamMemberData } from "@/types/sanity";
 import { User, AlertTriangle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { getImageUrl, isCloudinaryAsset } from "@/lib/cloudinary-helpers";
+import { getImageUrl } from "@/lib/cloudinary-helpers";
 
 interface TeamMemberCardProps {
   member: TeamMemberData;
@@ -16,18 +16,8 @@ interface TeamMemberCardProps {
 const FALLBACK_AVATAR_URL = "https://images.unsplash.com/photo-1494790108755-2616b612b5bc?w=200&h=200&fit=crop&crop=face";
 
 export function TeamMemberCard({ member, className }: TeamMemberCardProps) {
-  // Handle both Sanity and Cloudinary image objects
-  let imageUrl = FALLBACK_AVATAR_URL;
-  
-  if (member.image) {
-    if (isCloudinaryAsset(member.image)) {
-      // It's a Cloudinary image
-      imageUrl = getImageUrl(member.image, { width: 200, height: 200, crop: 'fill' }) || FALLBACK_AVATAR_URL;
-    } else if (member.image._type === 'image' || member.image._type === 'sanity.imageAsset') {
-      // It's a standard Sanity image
-      imageUrl = urlFor(member.image).width(200).height(200).url();
-    }
-  }
+  // Use the helper function to get the correct image URL
+  const imageUrl = getImageUrl(member.image, { width: 200, height: 200 }) || FALLBACK_AVATAR_URL;
 
   const displayName = member.name || "Team Member";
   const displayRole = member.role || "Creative Professional";
