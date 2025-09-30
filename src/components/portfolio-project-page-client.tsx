@@ -1,7 +1,5 @@
 "use client";
 
-import { urlFor } from "@/lib/sanity";
-import type { PortfolioProjectData } from "@/types/sanity";
 import Image from "next/image";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
@@ -15,28 +13,20 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Image as ImageIcon } from "lucide-react";
-import { getImageUrl } from "@/lib/cloudinary-helpers";
+import { CldImage } from 'next-cloudinary';
+import type { PortfolioProjectData } from "@/types/sanity";
 
 interface PortfolioProjectPageClientProps {
   project: PortfolioProjectData & { author?: any };
 }
 
 export function PortfolioProjectPageClient({ project }: PortfolioProjectPageClientProps) {
-  const imageUrl = project.thumbnailImage 
-    ? urlFor(project.thumbnailImage).width(1200).height(675).url()
-    : "https://images.unsplash.com/photo-1511379938547-c1f33886168f?w=1200&h=675&fit=crop";
-  
-  const excerpt = project.body?.[0]?.children?.[0]?.text || 
-    `An in-depth look at the creative process and impact of ${project.title}.`;
+  const excerpt = project.body?.[0]?.children?.[0]?.text || `An in-depth look at the creative process and impact of ${project.title}.`;
 
   const displayAuthor = project.author?.name || "Shubz Entertainment Team";
   const displayAuthorRole = project.author?.role || "Creative Team";
-  
   const displayCategory = project.category || "Creative Project";
-  
   const displayDivision = project.division?.title || "Shubz Entertainment";
-  
   const displayDate = project.releaseDate 
     ? new Date(project.releaseDate).toLocaleDateString("en-US", {
         year: "numeric",
@@ -44,6 +34,10 @@ export function PortfolioProjectPageClient({ project }: PortfolioProjectPageClie
         day: "numeric",
       })
     : "Release date to be announced";
+
+  const hasThumbnail = project.thumbnailImage?._type === 'cloudinary.asset' && project.thumbnailImage.public_id;
+  const hasDivisionLogo = project.division?.logo?._type === 'cloudinary.asset' && project.division.logo.public_id;
+  const hasAuthorImage = project.author?.image?._type === 'cloudinary.asset' && project.author.image.public_id;
 
   return (
     <section className="py-12 sm:py-16">
@@ -74,17 +68,14 @@ export function PortfolioProjectPageClient({ project }: PortfolioProjectPageClie
                 
                 {project.author && (
                   <div className="flex items-center gap-4 mt-6">
-                    {project.author.image && (
-                      <Image
-                        src={urlFor(project.author.image).width(40).height(40).url()}
+                    {hasAuthorImage && (
+                      <CldImage
+                        src={project.author.image.public_id}
                         alt={project.author.name}
                         width={40}
                         height={40}
+                        crop="fill"
                         className="rounded-full"
-                        onError={(e) => {
-                          console.warn(`Failed to load author image for project: ${project.title}`);
-                          (e.target as HTMLImageElement).style.display = 'none';
-                        }}
                       />
                     )}
                     <div>
@@ -94,24 +85,35 @@ export function PortfolioProjectPageClient({ project }: PortfolioProjectPageClie
                   </div>
                 )}
                 
-                <Image
-                  src={imageUrl}
-                  alt={project.title}
-                  width={1200}
-                  height={675}
-                  className="my-8 aspect-video w-full rounded-lg object-cover"
-                  priority
-                  onError={(e) => {
-                    console.warn(`Failed to load main image for project: ${project.title}`);
-                    (e.target as HTMLImageElement).style.display = 'none';
-                    (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
-                  }}
-                />
-                <div className="hidden my-8 aspect-video w-full bg-gradient-to-br from-purple-400 to-pink-500 rounded-lg flex items-center justify-center">
-                  <ImageIcon className="w-16 h-16 text-white/70" />
-                </div>
+                {hasThumbnail && (
+                  <CldImage
+                    src={project.thumbnailImage.public_id}
+                    alt={project.title}
+                    width={1200}
+                    height={675}
+                    crop="fill"
+                    className="my-8 aspect-video w-full rounded-lg object-cover"
+                  />
+                )}
                 
-                 
+                <div className="mb-8 grid grid-cols-2 gap-5 lg:grid-cols-4">
+                  <div className="flex flex-col gap-2">
+                    <p className="text-4xl font-semibold sm:text-5xl text-primary">98%</p>
+                    <p className="text-muted-foreground text-sm">Client Satisfaction</p>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <p className="text-4xl font-semibold sm:text-5xl text-primary">4.2x</p>
+                    <p className="text-muted-foreground text-sm">Engagement Boost</p>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <p className="text-4xl font-semibold sm:text-5xl text-primary">72%</p>
+                    <p className="text-muted-foreground text-sm">Positive Feedback</p>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <p className="text-4xl font-semibold sm:text-5xl text-primary">19%</p>
+                    <p className="text-muted-foreground text-sm">Growth Rate</p>
+                  </div>
+                </div>
               </div>
               
               {project.body && project.body.length > 0 && (
@@ -123,17 +125,13 @@ export function PortfolioProjectPageClient({ project }: PortfolioProjectPageClie
 
             <div className="h-fit lg:sticky lg:top-24 lg:max-w-80 w-full">
               <div className="rounded-lg border bg-card p-6">
-                {project.division?.coverImage && (
-                  <Image
-                    src={getImageUrl(project.division.coverImage,{ width : 400})}
+                {hasDivisionLogo && (
+                  <CldImage
+                    src={project.division.logo.public_id}
                     alt={`${project.division.title} logo`}
                     width={144}
                     height={40}
                     className="mb-6"
-                    onError={(e) => {
-                      console.warn(`Failed to load division logo for project: ${project.title}`);
-                      (e.target as HTMLImageElement).style.display = 'none';
-                    }}
                   />
                 )}
                 

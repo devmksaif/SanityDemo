@@ -3,16 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
-import { urlFor } from "@/lib/sanity";
+import { CldImage } from 'next-cloudinary';
 import type { PortfolioProjectData } from "@/types/sanity";
-import { getImageUrl } from "@/lib/cloudinary-helpers";
 
 interface CaseStudiesShowcaseProps {
   projects: PortfolioProjectData[];
 }
-
-// Fallback image URL for when no image is provided
-const FALLBACK_IMAGE_URL = "https://images.unsplash.com/photo-1511379938547-c1f33886168f?w=400&h=250&fit=crop";
 
 const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
   // Get the first two projects for detailed showcase
@@ -37,53 +33,39 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
         
         <div className="mt-8 space-y-8">
           {showcaseProjects.map((project, index) => {
-            // Robust image URL handling
-            const imageUrl = project.thumbnailImage 
-              ? getImageUrl(project.thumbnailImage,{ width : 400, height :250}) 
-              : FALLBACK_IMAGE_URL;
+            const hasThumbnail = project.thumbnailImage?._type === 'cloudinary.asset' && project.thumbnailImage.public_id;
             const projectUrl = `/portfolio/${project.slug?.current || project._id}`;
-            
-            // Generate excerpt from body content
-            const excerpt = project.body?.[0]?.children?.[0]?.text || 
-              `An in-depth look at the creative process and impact of ${project.title}.`;
+            const excerpt = project.body?.[0]?.children?.[0]?.text || `An in-depth look at the creative process and impact of ${project.title}.`;
 
             return (
               <div key={project._id}>
                 <div className="flex justify-center">
                   <div className="flex w-full max-w-4xl flex-col gap-6 sm:flex-row sm:items-center">
-                    {/* Project Image - Error handled */}
+                    {/* Project Image - More Compact */}
                     <div className="h-48 w-full sm:h-40 sm:w-64 flex-shrink-0 overflow-hidden rounded-xl sm:rounded-lg">
                       <Link href={projectUrl} className="block h-full w-full group">
-                        {imageUrl ? (
-                          <Image
-                            src={imageUrl}
+                        {hasThumbnail ? (
+                          <CldImage
+                            src={project.thumbnailImage.public_id!}
                             alt={project.title}
                             width={400}
                             height={250}
+                            crop="fill"
+                            gravity="center"
                             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                            onError={(e) => {
-                              console.warn(`Failed to load image for project: ${project.title}`);
-                              // Fallback to a solid color if image fails
-                              (e.target as HTMLImageElement).style.display = 'none';
-                              (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
-                            }}
                           />
                         ) : (
                           <div className="h-full w-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                            <span className="text-gray-500 text-sm">No image</span>
+                            <span className="text-gray-500 text-sm">No Image</span>
                           </div>
                         )}
-                        {/* Fallback for image error */}
-                        <div className="hidden h-full w-full bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center">
-                          <span className="text-white text-lg font-medium">No Image</span>
-                        </div>
                       </Link>
                     </div>
                     
-                    {/* Project Content */}
+                    {/* Project Content - More Compact */}
                     <div className="flex flex-1 flex-col justify-center gap-3">
                       <div className="space-y-2">
-                        {/* Category and Division Tags */}
+                        {/* Category and Division Tags - Smaller */}
                         <div className="flex flex-wrap items-center gap-1.5">
                           {project.category && (
                             <span className="inline-flex items-center rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
@@ -97,28 +79,25 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
                           )}
                         </div>
                         
-                        {/* Project Title */}
+                        {/* Project Title - Smaller */}
                         <h3 className="text-lg font-semibold hover:underline">
                           <Link href={projectUrl}>
                             {project.title}
                           </Link>
                         </h3>
                         
-                        {/* Author Information - Error handled */}
+                        {/* Author Information - More Compact */}
                         {project.author && (
                           <div className="flex items-center gap-2">
-                            {project.author.image && (
+                            {project.author.image && project.author.image._type === 'cloudinary.asset' && project.author.image.public_id && (
                               <div className="relative h-6 w-6 rounded-full overflow-hidden">
-                                <Image
-                                  src={urlFor(project.author.image).width(24).height(24).url()}
+                                <CldImage
+                                  src={project.author.image.public_id}
                                   alt={project.author.name}
                                   width={24}
                                   height={24}
+                                  crop="fill"
                                   className="object-cover"
-                                  onError={(e) => {
-                                    console.warn(`Failed to load author image for project: ${project.title}`);
-                                    (e.target as HTMLImageElement).style.display = 'none';
-                                  }}
                                 />
                               </div>
                             )}
@@ -129,13 +108,13 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
                           </div>
                         )}
                         
-                        {/* Project Excerpt */}
+                        {/* Project Excerpt - More Compact */}
                         <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
                           {excerpt}
                         </p>
                       </div>
                       
-                      {/* Project Metadata */}
+                      {/* Project Metadata - More Compact */}
                       <div className="flex flex-wrap items-center gap-3 text-xs">
                         {project.releaseDate && (
                           <div className="flex items-center gap-1 text-muted-foreground">
