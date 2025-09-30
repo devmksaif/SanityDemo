@@ -11,6 +11,12 @@ export default defineType({
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
+     defineField({
+      name: 'author',
+      title: 'Author',
+      type: 'reference',   // <- important
+      to: [{ type: 'author' }],  // points to your author schema
+    }),
     defineField({
       name: 'slug',
       title: 'Slug',

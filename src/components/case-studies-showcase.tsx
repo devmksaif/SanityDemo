@@ -66,12 +66,12 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
               <div key={project._id}>
                 <div className="flex justify-center">
                   <div className="flex w-full max-w-5xl flex-col gap-10 sm:flex-row">
-                    <div className="aspect-29/35 h-full w-full max-w-60 flex-shrink-0 overflow-hidden rounded-2xl">
+                    <div className="h-full w-full max-w-[260px] flex-shrink-0 overflow-hidden rounded-2xl sm:max-w-none sm:aspect-[29/35] sm:w-60">
                       <Link href={projectUrl} className="block h-full w-full group">
                         <Image
                           src={imageUrl}
                           alt={project.title}
-                          width={300}
+                          width={260}
                           height={350}
                           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                         />

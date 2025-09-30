@@ -10,7 +10,13 @@ async function getPortfolioProjects() {
     division->{title}, 
     thumbnailImage, 
     releaseDate, 
-    slug
+    slug,
+    author->{
+    name,
+    bio,
+    image,
+    role
+    },
   }`;
   const data: PortfolioProjectData[] = await client.fetch(query);
   return data;
@@ -18,6 +24,6 @@ async function getPortfolioProjects() {
 
 export default async function PortfolioPage() {
   const projects = await getPortfolioProjects();
-
+   
   return <PortfolioPageClient projects={projects} />;
 }

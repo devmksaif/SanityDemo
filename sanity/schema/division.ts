@@ -26,6 +26,12 @@ export default defineType({
       validation: (Rule) => Rule.required().error('Slug is required for SEO'),
     }),
     defineField({
+      name: 'author',
+      title: 'Author',
+      type: 'reference',   // <- important
+      to: [{ type: 'author' }],  // points to your author schema
+    }),
+    defineField({
       name: 'description',
       title: 'Description',
       type: 'text',
