@@ -6,11 +6,7 @@ import { EnterpriseFooter } from "@/components/enterprise-footer";
 import { DebugClickTracker } from "@/components/debug-click-tracker";
 import { ThemeProvider } from "@/components/theme-provider";
 
-const inter = Inter({ 
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Shubz Entertainment",
@@ -24,13 +20,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans`}>
+      <body className={inter.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
+           
           <EnterpriseHeader />
           <main className="min-h-screen">{children}</main>
           <EnterpriseFooter />
