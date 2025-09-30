@@ -56,7 +56,7 @@ export default async function PortfolioProjectPage({ params }: { params: { slug:
             </BreadcrumbList>
           </Breadcrumb>
 
-          <div className="relative flex-col gap-10 lg:flex lg:flex-row lg:justify-between">
+          <div className="relative flex-col gap-10 lg:flex lg:flex-row lg:justify-center">
             {/* Main Content */}
             <div className="lg:max-w-[692px]">
               <div>
