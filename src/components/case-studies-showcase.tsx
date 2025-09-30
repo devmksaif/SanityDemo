@@ -65,8 +65,8 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
             return (
               <div key={project._id}>
                 <div className="flex justify-center">
-                  <div className="flex w-full max-w-5xl flex-col gap-10 sm:flex-row">
-                    <div className="h-full w-full max-w-[260px] flex-shrink-0 overflow-hidden rounded-2xl sm:max-w-none sm:aspect-[29/35] sm:w-60">
+                  <div className="flex w-full max-w-5xl flex-col gap-8 sm:gap-10 sm:flex-row">
+                    <div className="h-full w-full max-w-[260px] flex-shrink-0 overflow-hidden rounded-2xl sm:max-w-none sm:aspect-[29/35] sm:w-60 mx-auto sm:mx-0">
                       <Link href={projectUrl} className="block h-full w-full group">
                         <Image
                           src={imageUrl}
@@ -77,7 +77,7 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
                         />
                       </Link>
                     </div>
-                    <div className="flex h-full flex-col justify-between gap-10">
+                    <div className="flex flex-col justify-between gap-6 sm:gap-8">
                       <div className="space-y-4">
                         <div className="flex items-center gap-2">
                           <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
@@ -117,7 +117,7 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
                           {testimonial.quote}
                         </q>
                       </div>
-                      <div className="flex items-end gap-6">
+                      <div className="flex items-center gap-6">
                         <div className="flex flex-col gap-1">
                           <p className="text-lg font-semibold text-primary">
                             {testimonial.author}
