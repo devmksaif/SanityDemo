@@ -1,12 +1,10 @@
-"use client"
 import { client } from "@/lib/sanity";
 import type { NewsArticleData } from "@/types/sanity";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Sparkles } from "lucide-react";
-import { CldImage } from "next-cloudinary";
-import { AnimatedContainer } from "@/components/ui/animated-container";
+import { BlogSection } from "@/components/blog-section";
 
 async function getNewsArticles() {
   const query = `*[_type == "newsArticle"] | order(publishedAt desc)`;
@@ -16,8 +14,6 @@ async function getNewsArticles() {
 
 export default async function NewsroomPage() {
   const articles = await getNewsArticles();
-  const featuredArticle = articles?.[0];
-  const otherArticles = articles?.slice(1);
 
   return (
     <div className="min-h-screen bg-background">
@@ -46,71 +42,15 @@ export default async function NewsroomPage() {
         </Container>
       </header>
 
-      <main className="py-16 sm:py-24">
-        <Container>
-          {/* Featured Article */}
-          {featuredArticle && (
-            <AnimatedContainer className="mb-16">
-              <Link href={`/newsroom/${featuredArticle.slug.current}`} className="group block">
-                <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
-                  <div className="lg:col-span-3 relative aspect-video rounded-lg overflow-hidden">
-                    {featuredArticle.coverImage?.public_id && (
-                      <CldImage
-                        src={featuredArticle.coverImage.public_id}
-                        alt={featuredArticle.title}
-                        fill
-                        crop="fill"
-                        gravity="center"
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    )}
-                  </div>
-                  <div className="lg:col-span-2">
-                    <p className="text-sm text-muted-foreground mb-2">
-                      {new Date(featuredArticle.publishedAt).toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' })}
-                    </p>
-                    <h2 className="text-3xl font-bold mb-4 group-hover:underline">
-                      {featuredArticle.title}
-                    </h2>
-                    <p className="text-muted-foreground line-clamp-3">
-                      {featuredArticle.excerpt}
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            </AnimatedContainer>
-          )}
-
-          {/* Other Articles Grid */}
-          {otherArticles && otherArticles.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {otherArticles.map(article => (
-                <AnimatedContainer key={article._id}>
-                  <Link href={`/newsroom/${article.slug.current}`} className="group block">
-                    <div className="relative aspect-video rounded-lg overflow-hidden mb-4">
-                      {article.coverImage?.public_id && (
-                        <CldImage
-                          src={article.coverImage.public_id}
-                          alt={article.title}
-                          fill
-                          crop="fill"
-                          gravity="center"
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                      )}
-                    </div>
-                    <p className="text-sm text-muted-foreground mb-1">
-                      {new Date(article.publishedAt).toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' })}
-                    </p>
-                    <h3 className="text-xl font-bold group-hover:underline">{article.title}</h3>
-                    <p className="text-muted-foreground mt-2 line-clamp-2">{article.excerpt}</p>
-                  </Link>
-                </AnimatedContainer>
-              ))}
-            </div>
-          )}
-        </Container>
-      </main>
+      {/* Blog7 Theme BlogSection */}
+      <BlogSection 
+        articles={articles}
+        tagline="Latest News"
+        heading="From the Newsroom"
+        description="Stay updated with the latest stories and announcements from Shubz Entertainment."
+        buttonText="Visit Newsroom"
+        buttonUrl="/newsroom"
+      />
     </div>
   );
 }

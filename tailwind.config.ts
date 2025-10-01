@@ -9,10 +9,6 @@ export default {
   ],
   theme: {
   	extend: {
-      fontFamily: {
-        sans: ["var(--font-inter)", "sans-serif"],
-        serif: ["var(--font-playfair)", "serif"],
-      },
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
