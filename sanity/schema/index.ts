@@ -7,6 +7,7 @@ import page from './page'
 import textBlock from './blocks/textBlock'
 import imageBlock from './blocks/imageBlock'
 import author from './author'
+import { hero } from './hero'
 
 export const schemaTypes = [
   homePage,
@@ -17,5 +18,6 @@ export const schemaTypes = [
   page,
   textBlock,
   imageBlock,
-  author
+  author,
+  hero
 ]

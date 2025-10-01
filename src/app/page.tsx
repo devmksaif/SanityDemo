@@ -1,24 +1,16 @@
 import { EnterpriseHero } from "@/components/enterprise-hero";
 import { client } from "@/lib/sanity";
-import type { HomePageData, DivisionData, PortfolioProjectData, NewsArticleData } from "@/types/sanity";
+import type { DivisionData, PortfolioProjectData, NewsArticleData } from "@/types/sanity";
 import { DivisionCard } from "@/components/division-card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ArrowRight, Sparkles, TrendingUp, BookOpen, Briefcase } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { AnimatedContainer } from "@/components/ui/animated-container";
 import { BlogSection } from "@/components/blog-section";
 import { CaseStudiesShowcase } from "@/components/case-studies-showcase";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
 
 async function getPageData() {
-  const homePageQuery = `*[_type == "homePage"][0]`;
   const divisionsQuery = `*[_type == "division"] | order(_createdAt asc){
     _id, 
     title, 
@@ -40,20 +32,19 @@ async function getPageData() {
   }`;
   const newsQuery = `*[_type == "newsArticle"] | order(publishedAt desc)[0...3]`;
 
-  const homePageData: HomePageData = await client.fetch(homePageQuery);
   const divisions: DivisionData[] = await client.fetch(divisionsQuery);
   const portfolio: PortfolioProjectData[] = await client.fetch(portfolioQuery);
   const news: NewsArticleData[] = await client.fetch(newsQuery);
 
-  return { homePageData, divisions, portfolio, news };
+  return { divisions, portfolio, news };
 }
 
 export default async function IndexPage() {
-  const { homePageData, divisions, portfolio, news } = await getPageData();
+  const { divisions, portfolio, news } = await getPageData();
 
   return (
     <div className="min-h-screen bg-background">
-      <EnterpriseHero data={homePageData} />
+      <EnterpriseHero />
 
       {divisions.length > 0 && (
         <section id="divisions-section" className="py-12 sm:py-24 bg-gradient-to-br from-slate-50 via-slate-100 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900/30">
@@ -64,7 +55,7 @@ export default async function IndexPage() {
                   <Sparkles className="h-4 w-4" />
                   Our Creative Divisions
                 </div>
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-slate-900 dark:text-white">
+                <h2 className="font-serif text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-slate-900 dark:text-white">
                   Powering Creative Excellence
                 </h2>
                 <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-400">
@@ -73,42 +64,31 @@ export default async function IndexPage() {
               </div>
             </AnimatedContainer>
             
-            {/* 3D Carousel for Desktop */}
-            <div className="hidden lg:block">
-              <Carousel
-                opts={{ align: "center", loop: true }}
-                className="w-full carousel-3d-container"
-              >
-                <CarouselContent className="-ml-4">
-                  {divisions.map((division) => (
-                    <CarouselItem key={division._id} className="pl-4 basis-1/3 carousel-3d-item">
-                      <div className="p-1">
-                        <DivisionCard division={division} />
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious className="-left-12" />
-                <CarouselNext className="-right-12" />
-              </Carousel>
-            </div>
+            <AnimatedContainer className="hidden lg:grid lg:grid-cols-3 lg:grid-rows-2 gap-6 h-[800px]">
+              {divisions[0] && (
+                <div className="lg:col-span-2 lg:row-span-2">
+                  <DivisionCard division={divisions[0]} />
+                </div>
+              )}
+              {divisions[1] && (
+                <div className="lg:col-span-1">
+                  <DivisionCard division={divisions[1]} />
+                </div>
+              )}
+              {divisions[2] && (
+                <div className="lg:col-span-1">
+                  <DivisionCard division={divisions[2]} />
+                </div>
+              )}
+            </AnimatedContainer>
 
-            {/* Standard Carousel for Mobile */}
-            <div className="lg:hidden">
-              <Carousel
-                opts={{ align: "start", loop: true }}
-                className="w-full max-w-sm mx-auto"
-              >
-                <CarouselContent className="-ml-4">
-                  {divisions.map((division) => (
-                    <CarouselItem key={division._id} className="pl-4 basis-4/5">
-                      <div className="p-1">
-                        <DivisionCard division={division} />
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-              </Carousel>
+            {/* Mobile view remains a simple list/carousel */}
+            <div className="lg:hidden space-y-6">
+              {divisions.slice(0, 3).map((division) => (
+                <div key={division._id} className="h-[450px]">
+                  <DivisionCard division={division} />
+                </div>
+              ))}
             </div>
             
             <AnimatedContainer className="mt-12 text-center">
@@ -124,9 +104,38 @@ export default async function IndexPage() {
       )}
 
       {portfolio.length > 0 && (
-        <section id="portfolio-section" className="py-12 sm:py-16 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950/20 dark:via-orange-950/20 dark:to-yellow-950/20">
+        <section
+          id="portfolio-section"
+          className="py-12 sm:py-16 bg-gradient-to-br from-yellow-50 via-amber-100 to-yellow-100 dark:from-yellow-950/20 dark:via-amber-950/20 dark:to-yellow-950/30"
+        >
           <Container>
+            <div className="mb-12 text-center">
+              <div className="inline-flex items-center gap-2 rounded-full bg-amber-200/30 px-4 py-2 text-sm font-medium text-amber-800 dark:text-amber-300 mb-3 backdrop-blur-sm">
+                <Sparkles className="h-4 w-4" />
+                Featured Projects
+              </div>
+              <h2 className="font-serif text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-gray-900 dark:text-white">
+                Our Gold Standard Work
+              </h2>
+              <p className="mt-3 max-w-2xl mx-auto text-lg text-gray-700 dark:text-gray-300">
+                Explore our latest portfolio projects where creativity meets technical excellence.
+              </p>
+            </div>
+
             <CaseStudiesShowcase projects={portfolio} />
+
+            <div className="mt-12 text-center">
+              <Button
+                asChild
+                size="lg"
+                className="group bg-amber-500 hover:bg-amber-600 text-gray-900 shadow-lg hover:shadow-xl transition-all"
+              >
+                <Link href="/portfolio">
+                  View All Projects
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </Button>
+            </div>
           </Container>
         </section>
       )}
@@ -145,36 +154,6 @@ export default async function IndexPage() {
           </Container>
         </section>
       )}
-
-      <section className="relative overflow-hidden py-16 sm:py-20 bg-gradient-to-br from-gray-900 via-slate-800 to-zinc-900 text-white">
-        <Container>
-          <AnimatedContainer>
-            <div className="relative mx-auto max-w-4xl text-center">
-              <div className="absolute -top-20 -left-20 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
-              <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-yellow-500/20 rounded-full blur-3xl" />
-              <div className="relative inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium mb-4 backdrop-blur-sm">
-                <TrendingUp className="h-4 w-4" />
-                Ready to Collaborate?
-              </div>
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-4">
-                Let's Create Something Extraordinary Together
-              </h2>
-              <p className="mb-6 text-lg text-white/90">
-                Whether you're an artist, brand, or creative professional, we have the expertise and resources to bring your vision to life.
-              </p>
-              <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-                <Button size="lg" className="group bg-yellow-500 hover:bg-yellow-600 text-gray-900">
-                  Start a Project
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-                <Button variant="outline" size="lg" className="border-white/30 bg-white/10 text-white hover:bg-white/20 hover:text-white backdrop-blur-sm">
-                  Schedule a Call
-                </Button>
-              </div>
-            </div>
-          </AnimatedContainer>
-        </Container>
-      </section>
     </div>
   );
 }

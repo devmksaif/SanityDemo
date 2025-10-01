@@ -18,7 +18,7 @@ export function DivisionCard({ division }: DivisionCardProps) {
   const hasCoverImage = division.coverImage?._type === 'cloudinary.asset' && division.coverImage.public_id;
 
   return (
-    <motion.div whileHover={{ scale: 1.03 }} transition={{ duration: 0.3 }}>
+    <motion.div whileHover={{ scale: 1.03 }} transition={{ duration: 0.3 }} className="h-full">
       <Tilt
         tiltMaxAngleX={8}
         tiltMaxAngleY={8}
@@ -28,7 +28,7 @@ export function DivisionCard({ division }: DivisionCardProps) {
         glarePosition="all"
         className="h-full w-full transform-style-3d"
       >
-        <Link href={href} className="group block h-[450px] w-full">
+        <Link href={href} className="group block h-full w-full">
           <div
             className={cn(
               "relative h-full w-full overflow-hidden rounded-xl bg-gray-900 shadow-2xl shadow-black/40 transition-all duration-300 transform-style-3d",
@@ -58,7 +58,7 @@ export function DivisionCard({ division }: DivisionCardProps) {
                 <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-medium backdrop-blur-sm border border-white/20">
                   {division.divisionType || "Division"}
                 </span>
-                <h3 className="mt-3 text-3xl font-bold tracking-tight drop-shadow-lg">
+                <h3 className="mt-3 text-3xl font-bold tracking-tight drop-shadow-lg font-serif">
                   {division.title}
                 </h3>
                 <div className="mt-4 flex items-center text-sm font-medium opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 translate-y-2">
