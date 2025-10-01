@@ -1,3 +1,4 @@
+
 import { EnterpriseHero } from "@/components/enterprise-hero";
 import { client } from "@/lib/sanity";
 import type { HomePageData, DivisionData, PortfolioProjectData, NewsArticleData } from "@/types/sanity";
