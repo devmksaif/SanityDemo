@@ -26,25 +26,17 @@ export default async function DivisionPage({ params }: { params: Promise<{ slug:
     notFound();
   }
 
-  // Robust image URL handling
-  const imageUrl = division.coverImage 
-    ? urlFor(division.coverImage).width(1600).height(800).url()
-    : "https://images.unsplash.com/photo-1511379938547-c1f33886168f?w=1600&h=800&fit=crop";
-  
-  const logoUrl = division.logo 
-    ? urlFor(division.logo).url()
-    : null;
+  const coverPublicId = division.coverImage?.public_id || null;
+  const logoPublicId = division.logo?.public_id || null;
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Modernized Hero Section with Image Error Handling */}
       <DivisionHero
-        imageUrl={imageUrl}
-        logoUrl={logoUrl}
+        coverPublicId={coverPublicId}
+        logoPublicId={logoPublicId}
         title={division.title}
       />
 
-      {/* Main Content */}
       <main className="py-12 sm:py-16">
         <Container size="lg">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

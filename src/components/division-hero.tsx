@@ -1,16 +1,16 @@
 "use client";
 
-import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Calendar, Users, Award } from "lucide-react";
+import { CldImage } from "next-cloudinary";
 
 interface DivisionHeroProps {
-  imageUrl: string;
-  logoUrl: string | null;
+  coverPublicId: string | null;
+  logoPublicId: string | null;
   title: string;
 }
 
-export function DivisionHero({ imageUrl, logoUrl, title }: DivisionHeroProps) {
+export function DivisionHero({ coverPublicId, logoPublicId, title }: DivisionHeroProps) {
   return (
     <header className="relative h-[60vh] min-h-[450px] w-full overflow-hidden bg-primary text-primary-foreground">
       <div className="absolute inset-0 opacity-20">
@@ -18,33 +18,28 @@ export function DivisionHero({ imageUrl, logoUrl, title }: DivisionHeroProps) {
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary rounded-full blur-3xl" />
       </div>
       
-      <Image 
-        src={imageUrl} 
-        alt={title} 
-        fill 
-        className="absolute inset-0 object-cover opacity-10" 
-        priority
-        onError={(e) => {
-          console.warn(`Failed to load hero image for division: ${title}`);
-          (e.target as HTMLImageElement).style.display = 'none';
-          (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
-        }}
-      />
-      <div className="hidden absolute inset-0 bg-gradient-to-br from-purple-600 to-indigo-700"></div>
+      {coverPublicId ? (
+        <CldImage 
+          src={coverPublicId} 
+          alt={title} 
+          fill 
+          crop="fill"
+          gravity="center"
+          className="absolute inset-0 object-cover opacity-10" 
+        />
+      ) : (
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-600 to-indigo-700"></div>
+      )}
       <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent" />
       
       <Container className="relative flex h-full flex-col items-center justify-center text-center">
-        {logoUrl && (
+        {logoPublicId && (
           <div className="relative h-20 w-20 mb-4 animate-float">
-            <Image 
-              src={logoUrl} 
+            <CldImage 
+              src={logoPublicId} 
               alt={`${title} Logo`} 
               fill 
               className="object-contain drop-shadow-lg" 
-              onError={(e) => {
-                console.warn(`Failed to load division logo: ${title}`);
-                (e.target as HTMLImageElement).style.display = 'none';
-              }}
             />
           </div>
         )}

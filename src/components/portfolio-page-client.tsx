@@ -4,26 +4,17 @@ import type { PortfolioProjectData } from "@/types/sanity";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Sparkles, Play, Image as ImageIcon, Calendar, User } from "lucide-react";
-import Image from "next/image";
-import { urlFor } from "@/lib/sanity";
+import { Sparkles, Play, Image as ImageIcon, Calendar, User, AlertTriangle } from "lucide-react";
+import { CldImage } from "next-cloudinary";
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { CaseStudiesShowcase } from "@/components/case-studies-showcase";
 import { cn } from "@/lib/utils";
 
-// Fallback image for missing thumbnails
-const FALLBACK_THUMBNAIL_URL = "https://images.unsplash.com/photo-1511379938547-c1f33886168f?w=600&h=400&fit=crop";
-
 function CaseStudyCard({ project }: { project: PortfolioProjectData }) {
-  // Robust image URL handling
-  const imageUrl = project.thumbnailImage 
-    ? urlFor(project.thumbnailImage).width(600).height(400).url()
-    : FALLBACK_THUMBNAIL_URL;
-
   const hasSlug = project.slug?.current;
-  const slug = hasSlug ? project.slug.current : project._id;
-  const href = `/portfolio/${slug}`;
+  const href = hasSlug ? `/portfolio/${project.slug.current}` : "#";
+  const hasThumbnail = project.thumbnailImage?._type === 'cloudinary.asset' && project.thumbnailImage.public_id;
 
   const handleClick = (e: React.MouseEvent) => {
     if (!hasSlug) {
@@ -33,22 +24,11 @@ function CaseStudyCard({ project }: { project: PortfolioProjectData }) {
     }
   };
 
-  // Handle missing category
   const displayCategory = project.category || "Creative Project";
-  
-  // Handle missing division
   const displayDivision = project.division?.title || "Shubz Entertainment";
-  
-  // Handle missing author
   const displayAuthor = project.author?.name || "Shubz Team";
-  
-  // Handle missing release date
   const displayDate = project.releaseDate 
-    ? new Date(project.releaseDate).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      })
+    ? new Date(project.releaseDate).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })
     : "Date TBA";
 
   return (
@@ -57,31 +37,26 @@ function CaseStudyCard({ project }: { project: PortfolioProjectData }) {
         "overflow-hidden rounded-lg border bg-card transition-all duration-300 hover:shadow-lg hover:-translate-y-1",
         !hasSlug && "opacity-75 cursor-not-allowed"
       )}>
-        {/* Image Section with Error Handling */}
         <div className="relative aspect-[4/3] w-full overflow-hidden">
-          <Image
-            src={imageUrl}
-            alt={project.title}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-            onError={(e) => {
-              console.warn(`Failed to load thumbnail for project: ${project.title}`);
-              // Fallback to gradient if image fails
-              (e.target as HTMLImageElement).style.display = 'none';
-              (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
-            }}
-          />
-          {/* Fallback gradient for image errors */}
-          <div className="hidden absolute inset-0 bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center">
-            <ImageIcon className="w-12 h-12 text-white/60" />
-          </div>
+          {hasThumbnail ? (
+            <CldImage
+              src={project.thumbnailImage.public_id!}
+              alt={project.title}
+              width="500"
+              height="500"
+              crop="fill"
+              gravity="center"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          ) : (
+            <div className="h-full w-full bg-gray-200 flex items-center justify-center">
+              <span className="text-gray-500">No Image</span>
+            </div>
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
         
-        {/* Content Section with Error Handling */}
         <div className="p-4">
-          {/* Category and Division - Error handled */}
           <div className="mb-2">
             <h3 className="text-lg font-semibold text-foreground">
               {project.title}
@@ -98,7 +73,6 @@ function CaseStudyCard({ project }: { project: PortfolioProjectData }) {
             )}
           </div>
           
-          {/* Author and Date - Error handled */}
           <div className="flex items-center gap-2 text-xs text-muted-foreground mt-2">
             <User className="w-3 h-3" />
             <span>{displayAuthor}</span>
@@ -112,7 +86,6 @@ function CaseStudyCard({ project }: { project: PortfolioProjectData }) {
           </div>
         </div>
 
-        {/* No Slug Warning */}
         {!hasSlug && (
           <div className="absolute top-2 right-2 flex items-center gap-1 rounded-full bg-yellow-500/90 px-2 py-1 text-xs font-semibold text-white">
             <AlertTriangle className="h-3 w-3" />
@@ -125,7 +98,6 @@ function CaseStudyCard({ project }: { project: PortfolioProjectData }) {
 }
 
 export function PortfolioPageClient({ projects }: { projects: PortfolioProjectData[] }) {
-  // Handle empty projects array
   if (!projects || projects.length === 0) {
     return (
       <div className="min-h-screen bg-background">
@@ -142,7 +114,6 @@ export function PortfolioPageClient({ projects }: { projects: PortfolioProjectDa
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section */}
       <header className="relative overflow-hidden h-[70vh] min-h-[500px] w-full bg-primary text-primary-foreground">
         <div className="absolute inset-0">
           <video
@@ -225,7 +196,6 @@ export function PortfolioPageClient({ projects }: { projects: PortfolioProjectDa
 
       <CaseStudiesShowcase projects={projects} />
 
-      {/* All Projects Grid - Error handled */}
       <main className="py-16 sm:py-24">
         <Container>
           <div className="mb-12 text-center">

@@ -22,11 +22,7 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
     notFound();
   }
 
-  // Robust image URL handling
-  const imageUrl = article.coverImage 
-    ? urlFor(article.coverImage).width(1200).height(600).url()
-    : "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&h=600&fit=crop";
-  
+  const publicId = article.coverImage?.public_id || null;
   const readTime = Math.ceil(article.body ? article.body.length / 200 : 5);
 
   return (
@@ -46,7 +42,7 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
 
       {/* Hero Section with Image Error Handling */}
       <NewsArticleHero
-        imageUrl={imageUrl}
+        publicId={publicId}
         title={article.title}
         publishedAt={article.publishedAt}
         readTime={readTime}

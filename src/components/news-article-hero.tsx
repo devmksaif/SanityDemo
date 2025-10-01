@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Calendar, Clock } from "lucide-react";
+import { CldImage } from "next-cloudinary";
 
 interface NewsArticleHeroProps {
-  imageUrl: string;
+  publicId: string | null;
   title: string;
   publishedAt: string;
   readTime: number;
@@ -13,7 +13,7 @@ interface NewsArticleHeroProps {
 }
 
 export function NewsArticleHero({
-  imageUrl,
+  publicId,
   title,
   publishedAt,
   readTime,
@@ -26,19 +26,18 @@ export function NewsArticleHero({
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary rounded-full blur-3xl" />
       </div>
       
-      <Image
-        src={imageUrl}
-        alt={title}
-        fill
-        className="absolute inset-0 object-cover opacity-20"
-        priority
-        onError={(e) => {
-          console.warn(`Failed to load hero image for article: ${title}`);
-          (e.target as HTMLImageElement).style.display = 'none';
-          (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
-        }}
-      />
-      <div className="hidden absolute inset-0 bg-gradient-to-br from-indigo-600 to-purple-700"></div>
+      {publicId ? (
+        <CldImage
+          src={publicId}
+          alt={title}
+          fill
+          crop="fill"
+          gravity="center"
+          className="absolute inset-0 object-cover opacity-20"
+        />
+      ) : (
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 to-purple-700"></div>
+      )}
       <div className="absolute inset-0 bg-gradient-to-t from-primary/70 to-transparent" />
 
       <Container size="lg" className="relative flex h-full flex-col items-center justify-center text-center">
