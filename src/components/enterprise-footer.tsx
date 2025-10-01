@@ -26,52 +26,52 @@ export function EnterpriseFooter() {
                 />
               </div>
             </Link>
-            <p className="text-sm text-muted-foreground">
+            <p className="font-serif text-sm text-muted-foreground">
               Integrating media, music, and talent platforms to tell unforgettable global stories.
             </p>
             <div className="space-y-2">
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4" />
-                <span>Netherlands</span>
+                <span className="font-serif">Netherlands</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Mail className="h-4 w-4" />
-                <span>hello@shubz.com</span>
+                <span className="font-serif">hello@shubz.com</span>
               </div>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground">
                 <Phone className="h-4 w-4" />
-                <span>+234 XXX XXX XXXX</span>
+                <span className="font-serif">+234 XXX XXX XXXX</span>
               </div>
             </div>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h4 className="text-sm font-semibold uppercase tracking-wider">Company</h4>
+            <h4 className="font-serif text-sm font-semibold uppercase tracking-wider">Company</h4>
             <ul className="space-y-3">
-              <li><Link href="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">About Us</Link></li>
-              <li><Link href="/divisions" className="text-sm text-muted-foreground hover:text-primary transition-colors">Our Divisions</Link></li>
-              <li><Link href="/portfolio" className="text-sm text-muted-foreground hover:text-primary transition-colors">Portfolio</Link></li>
-              <li><Link href="/newsroom" className="text-sm text-muted-foreground hover:text-primary transition-colors">Newsroom</Link></li>
-              <li><Link href="/careers" className="text-sm text-muted-foreground hover:text-primary transition-colors">Careers</Link></li>
+              <li><Link href="/about" className="font-serif text-sm text-muted-foreground hover:text-primary transition-colors">About Us</Link></li>
+              <li><Link href="/divisions" className="font-serif text-sm text-muted-foreground hover:text-primary transition-colors">Our Divisions</Link></li>
+              <li><Link href="/portfolio" className="font-serif text-sm text-muted-foreground hover:text-primary transition-colors">Portfolio</Link></li>
+              <li><Link href="/newsroom" className="font-serif text-sm text-muted-foreground hover:text-primary transition-colors">Newsroom</Link></li>
+              <li><Link href="/careers" className="font-serif text-sm text-muted-foreground hover:text-primary transition-colors">Careers</Link></li>
             </ul>
           </div>
 
           {/* Services */}
           <div className="space-y-4">
-            <h4 className="text-sm font-semibold uppercase tracking-wider">Services</h4>
+            <h4 className="font-serif text-sm font-semibold uppercase tracking-wider">Services</h4>
             <ul className="space-y-3">
-              <li><Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Media Production</Link></li>
-              <li><Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Music Management</Link></li>
-              <li><Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Talent Development</Link></li>
-              <li><Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Creative Consulting</Link></li>
-              <li><Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">Event Management</Link></li>
+              <li><Link href="#" className="font-serif text-sm text-muted-foreground hover:text-primary transition-colors">Media Production</Link></li>
+              <li><Link href="#" className="font-serif text-sm text-muted-foreground hover:text-primary transition-colors">Music Management</Link></li>
+              <li><Link href="#" className="font-serif text-sm text-muted-foreground hover:text-primary transition-colors">Talent Development</Link></li>
+              <li><Link href="#" className="font-serif text-sm text-muted-foreground hover:text-primary transition-colors">Creative Consulting</Link></li>
+              <li><Link href="#" className="font-serif text-sm text-muted-foreground hover:text-primary transition-colors">Event Management</Link></li>
             </ul>
           </div>
 
           {/* Newsletter */}
           <div className="space-y-4">
-            <h4 className="text-sm font-semibold uppercase tracking-wider">Stay Updated</h4>
+            <h4 className="font-serif text-sm font-semibold uppercase tracking-wider">Stay Updated</h4>
             <p className="text-sm text-muted-foreground">
               Get the latest news and updates from Shubz Entertainment.
             </p>

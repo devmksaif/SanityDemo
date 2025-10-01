@@ -9,6 +9,7 @@ import { Container } from "@/components/ui/container";
 import { AnimatedContainer } from "@/components/ui/animated-container";
 import { BlogSection } from "@/components/blog-section";
 import { CaseStudiesShowcase } from "@/components/case-studies-showcase";
+import { DivisionsSection } from "@/components/divisions-section";
 
 async function getPageData() {
   const divisionsQuery = `*[_type == "division"] | order(_createdAt asc){
@@ -47,60 +48,11 @@ export default async function IndexPage() {
       <EnterpriseHero />
 
       {divisions.length > 0 && (
-        <section id="divisions-section" className="py-12 sm:py-24 bg-gradient-to-br from-slate-50 via-slate-100 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900/30">
-          <Container>
-            <AnimatedContainer>
-              <div className="mb-12 text-center">
-                <div className="inline-flex items-center gap-2 rounded-full bg-indigo-100 dark:bg-indigo-900/30 px-4 py-2 text-sm font-medium text-indigo-700 dark:text-indigo-300 mb-3">
-                  <Sparkles className="h-4 w-4" />
-                  Our Creative Divisions
-                </div>
-                <h2 className="font-serif text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-slate-900 dark:text-white">
-                  Powering Creative Excellence
-                </h2>
-                <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-400">
-                  From music to media, our divisions are the heart of our creative enterprise.
-                </p>
-              </div>
-            </AnimatedContainer>
-            
-            <AnimatedContainer className="hidden lg:grid lg:grid-cols-3 lg:grid-rows-2 gap-6 h-[800px]">
-              {divisions[0] && (
-                <div className="lg:col-span-2 lg:row-span-2">
-                  <DivisionCard division={divisions[0]} />
-                </div>
-              )}
-              {divisions[1] && (
-                <div className="lg:col-span-1">
-                  <DivisionCard division={divisions[1]} />
-                </div>
-              )}
-              {divisions[2] && (
-                <div className="lg:col-span-1">
-                  <DivisionCard division={divisions[2]} />
-                </div>
-              )}
-            </AnimatedContainer>
-
-            {/* Mobile view remains a simple list/carousel */}
-            <div className="lg:hidden space-y-6">
-              {divisions.slice(0, 3).map((division) => (
-                <div key={division._id} className="h-[450px]">
-                  <DivisionCard division={division} />
-                </div>
-              ))}
-            </div>
-            
-            <AnimatedContainer className="mt-12 text-center">
-              <Button asChild size="lg" className="group bg-indigo-600 hover:bg-indigo-700 text-white">
-                <Link href="/divisions">
-                  Explore All Divisions
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </Button>
-            </AnimatedContainer>
-          </Container>
-        </section>
+         <section className="py-12 sm:py-24 bg-gradient-to-br from-slate-50 via-slate-100 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900/30">
+    <Container>
+      <DivisionsSection divisions={divisions} />
+    </Container>
+  </section>
       )}
 
       {portfolio.length > 0 && (
@@ -141,19 +93,25 @@ export default async function IndexPage() {
       )}
 
       {news.length > 0 && (
-        <section className="py-12 sm:py-16 bg-gradient-to-br from-teal-50 via-emerald-50 to-green-50 dark:from-teal-950/20 dark:via-emerald-950/20 dark:to-green-950/20">
-          <Container>
-            <BlogSection
-              articles={news}
-              tagline="Latest News"
-              heading="From the Newsroom"
-              description="Stay updated with the latest stories and announcements from Shubz Entertainment."
-              buttonText="Visit Newsroom"
-              buttonUrl="/newsroom"
-            />
-          </Container>
-        </section>
-      )}
+  <section className="py-12 sm:py-16 bg-gradient-to-br from-teal-50 via-emerald-50 to-green-50 dark:from-teal-950/20 dark:via-emerald-950/20 dark:to-green-950/20">
+    <Container>
+      <div className="flex flex-col items-center gap-12 lg:gap-16">
+        
+
+        {/* Blog Grid / Asymmetric Cards */}
+        <BlogSection
+          articles={news}
+          tagline="Latest News"
+          heading="From the Newsroom"
+          description="Stay updated with the latest stories and announcements from Shubz Entertainment."
+          buttonText="Visit Newsroom"
+          buttonUrl="/newsroom"
+        />
+      </div>
+    </Container>
+  </section>
+)}
+
     </div>
   );
 }

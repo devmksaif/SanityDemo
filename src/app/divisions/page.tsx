@@ -8,22 +8,31 @@ import { ensureSlugsExist } from "@/lib/sanity-helpers";
 import { DivisionsPageClient } from "@/components/divisions-page-client";
 
 async function getDivisions() {
-  const query = `*[_type == "division"] | order(_createdAt asc){
-    _id, 
-    title, 
-    description, 
-    logo, 
-    coverImage, 
-    slug,
-    divisionType
-  }`;
-  const data: DivisionData[] = await client.fetch(query);
-  
-  // Add detailed logging
-  console.log('📊 Divisions query result:', data);
-  console.log('📊 First division data:', data[0]);
-  
-  return data;
+  try {
+    const query = `*[_type == "division"] | order(_createdAt asc){
+      _id, 
+      title, 
+      description, 
+      logo, 
+      coverImage, 
+      slug,
+      divisionType
+    }`;
+    const data: DivisionData[] = await client.fetch(query);
+    
+    // Add detailed logging
+    console.log('📊 Divisions query result length:', data?.length);
+    console.log('📊 Divisions query result:', JSON.stringify(data, null, 2));
+    
+    if (!data || data.length === 0) {
+      console.log('❌ No divisions found in Sanity');
+    }
+    
+    return data;
+  } catch (error) {
+    console.error('❌ Error fetching divisions:', error);
+    return [];
+  }
 }
 
 export default async function DivisionsPage() {

@@ -31,7 +31,7 @@ export function DivisionCard({ division }: DivisionCardProps) {
         <Link href={href} className="group block h-full w-full">
           <div
             className={cn(
-              "relative h-full w-full overflow-hidden rounded-xl bg-gray-900 shadow-2xl shadow-black/40 transition-all duration-300 transform-style-3d",
+              "relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-gray-900 shadow-2xl shadow-black/40 transition-all duration-300 transform-style-3d",
               !hasSlug && "cursor-not-allowed"
             )}
           >
@@ -41,6 +41,7 @@ export function DivisionCard({ division }: DivisionCardProps) {
                 src={division.coverImage.public_id!}
                 alt={division.title}
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 crop="fill"
                 gravity="center"
                 className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"

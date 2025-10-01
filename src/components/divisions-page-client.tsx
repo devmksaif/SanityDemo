@@ -1,41 +1,59 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants, easeOut } from "framer-motion";
 import type { DivisionData } from "@/types/sanity";
 import { DivisionCard } from "@/components/division-card";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
+// Parent container animation
+const containerVariants: Variants = {
+  hidden: {},
   visible: {
-    opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.15, // Animate children one after another
     },
   },
 };
 
-const itemVariants = {
+// Individual card animation
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.5,
-      ease: "easeOut",
+      ease: easeOut, // ✅ Type-safe easing
     },
   },
 };
 
-export function DivisionsPageClient({ divisions }: { divisions: DivisionData[] }) {
+interface Props {
+  divisions: DivisionData[];
+}
+
+export function DivisionsPageClient({ divisions }: Props) {
+  console.log('🎯 DivisionsPageClient received divisions:', divisions?.length);
+
+  if (!divisions || divisions.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-lg text-muted-foreground">No divisions available.</p>
+      </div>
+    );
+  }
+
   return (
     <motion.div
-      className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
+      className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
     >
       {divisions.map((division) => (
-        <motion.div key={division._id} variants={itemVariants}>
+        <motion.div
+          key={division._id}
+          variants={cardVariants}
+        >
           <DivisionCard division={division} />
         </motion.div>
       ))}

@@ -1,12 +1,15 @@
 import type { Image } from 'sanity';
 
 export type HomePageData = {
+  heroImageUrl: any;
+  heroVideoUrl: any;
   heroHeadline?: string;
   heroSubheadline?: string;
   heroBackgroundImage?: Image;
 };
 
 export type DivisionData = {
+  divisionType: string;
   _id: string;
   title: string;
   slug: { current: string };

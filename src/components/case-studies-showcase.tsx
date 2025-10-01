@@ -9,148 +9,167 @@ import type { PortfolioProjectData } from "@/types/sanity";
 interface CaseStudiesShowcaseProps {
   projects: PortfolioProjectData[];
 }
-
 const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
-  // Get the first two projects for detailed showcase
-  const showcaseProjects = projects.slice(0, 2);
-
-  if (showcaseProjects.length === 0) {
-    return null;
-  }
+  if (!projects || projects.length === 0) return null;
 
   return (
-    <section className="py-12 sm:py-16 bg-background">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col gap-6 text-center mb-12">
-          <p className="font-medium text-primary">Featured Case Studies</p>
-          <h2 className="text-3xl font-medium md:text-4xl">
-            Real results from creative excellence
-          </h2>
-          <p className="text-base text-muted-foreground max-w-2xl mx-auto">
-            Showcasing our work across film, music, dance, and digital media through our sister companies
-          </p>
-        </div>
-        
-        <div className="mt-8 space-y-8">
-          {showcaseProjects.map((project, index) => {
-            const hasThumbnail = project.thumbnailImage?._type === 'cloudinary.asset' && project.thumbnailImage.public_id;
-            const projectUrl = `/portfolio/${project.slug?.current || project._id}`;
-            const excerpt = project.body?.[0]?.children?.[0]?.text || `An in-depth look at the creative process and impact of ${project.title}.`;
+    <div className="w-full">
+      {/* Desktop Layout */}
+      <div className="hidden lg:grid lg:grid-cols-12 lg:grid-rows-2 gap-6 h-[600px]">
+        {projects[0] && (
+          <div className="lg:col-span-8 lg:row-span-2 group relative overflow-hidden rounded-3xl">
+            <ProjectCard project={projects[0]} variant="featured" className="h-full" />
+          </div>
+        )}
 
-            return (
-              <div key={project._id}>
-                <div className="flex justify-center">
-                  <div className="flex w-full max-w-4xl flex-col gap-6 sm:flex-row sm:items-center">
-                    {/* Project Image - More Compact */}
-                    <div className="h-48 w-full sm:h-40 sm:w-64 flex-shrink-0 overflow-hidden rounded-xl sm:rounded-lg">
-                      <Link href={projectUrl} className="block h-full w-full group">
-                        {hasThumbnail ? (
-                          <CldImage
-                            src={project.thumbnailImage.public_id!}
-                            alt={project.title}
-                            width={400}
-                            height={250}
-                            crop="fill"
-                            gravity="center"
-                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                          />
-                        ) : (
-                          <div className="h-full w-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                            <span className="text-gray-500 text-sm">No Image</span>
-                          </div>
-                        )}
-                      </Link>
-                    </div>
-                    
-                    {/* Project Content - More Compact */}
-                    <div className="flex flex-1 flex-col justify-center gap-3">
-                      <div className="space-y-2">
-                        {/* Category and Division Tags - Smaller */}
-                        <div className="flex flex-wrap items-center gap-1.5">
-                          {project.category && (
-                            <span className="inline-flex items-center rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
-                              {project.category}
-                            </span>
-                          )}
-                          {project.division?.title && (
-                            <span className="inline-flex items-center rounded-full bg-secondary/10 px-2 py-0.5 text-xs font-medium text-secondary">
-                              {project.division.title}
-                            </span>
-                          )}
-                        </div>
-                        
-                        {/* Project Title - Smaller */}
-                        <h3 className="text-lg font-semibold hover:underline">
-                          <Link href={projectUrl}>
-                            {project.title}
-                          </Link>
-                        </h3>
-                        
-                        {/* Author Information - More Compact */}
-                        {project.author && (
-                          <div className="flex items-center gap-2">
-                            {project.author.image && project.author.image._type === 'cloudinary.asset' && project.author.image.public_id && (
-                              <div className="relative h-6 w-6 rounded-full overflow-hidden">
-                                <CldImage
-                                  src={project.author.image.public_id}
-                                  alt={project.author.name}
-                                  width={24}
-                                  height={24}
-                                  crop="fill"
-                                  className="object-cover"
-                                />
-                              </div>
-                            )}
-                            <div>
-                              <p className="text-xs font-medium text-gray-700 dark:text-gray-300">{project.author.name}</p>
-                              <p className="text-[10px] text-gray-500 dark:text-gray-400">{project.author.role}</p>
-                            </div>
-                          </div>
-                        )}
-                        
-                        {/* Project Excerpt - More Compact */}
-                        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
-                          {excerpt}
-                        </p>
-                      </div>
-                      
-                      {/* Project Metadata - More Compact */}
-                      <div className="flex flex-wrap items-center gap-3 text-xs">
-                        {project.releaseDate && (
-                          <div className="flex items-center gap-1 text-muted-foreground">
-                            <span>{new Date(project.releaseDate).toLocaleDateString("en-US", {
-                              year: "numeric",
-                              month: "short",
-                              day: "numeric",
-                            })}</span>
-                          </div>
-                        )}
-                        
-                        <Link
-                          href={projectUrl}
-                          className="inline-flex items-center font-medium text-primary hover:underline group text-xs"
-                        >
-                          <span>Read more</span>
-                          <svg 
-                            className="ml-1 h-3 w-3 transition-transform group-hover:translate-x-0.5" 
-                            fill="none" 
-                            viewBox="0 0 24 24" 
-                            stroke="currentColor"
-                          >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {index < showcaseProjects.length - 1 && <Separator className="my-6" />}
-              </div>
-            );
-          })}
+        <div className="lg:col-span-4 lg:row-span-2 flex flex-col gap-6">
+          {projects[1] && (
+            <div className="flex-1 group relative overflow-hidden rounded-2xl">
+              <ProjectCard project={projects[1]} variant="secondary" className="h-full" />
+            </div>
+          )}
+          {projects[2] && (
+            <div className="flex-1 group relative overflow-hidden rounded-2xl">
+              <ProjectCard project={projects[2]} variant="secondary" className="h-full" />
+            </div>
+          )}
         </div>
       </div>
-    </section>
+
+      {/* Mobile Layout */}
+      <div className="lg:hidden space-y-6">
+        {projects.slice(0, 3).map((project) => (
+          <div key={project._id} className="h-[400px]">
+            <ProjectCard project={project} variant="mobile" className="h-full" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Project Card Component
+const ProjectCard = ({
+  project,
+  variant = "featured",
+  className = "",
+}: {
+  project: PortfolioProjectData;
+  variant?: "featured" | "secondary" | "mobile";
+  className?: string;
+}) => {
+  const hasThumbnail =
+    project.thumbnailImage?._type === "cloudinary.asset" && project.thumbnailImage.public_id;
+  const projectUrl = `/portfolio/${project.slug?.current || project._id}`;
+  const excerpt =
+    project.body?.[0]?.children?.[0]?.text ||
+    `An in-depth look at the creative process and impact of ${project.title}.`;
+
+  return (
+    <Link href={projectUrl} className={`block relative w-full ${className}`}>
+      <div className="absolute inset-0 w-full h-full">
+        {hasThumbnail ? (
+          <CldImage
+            src={project.thumbnailImage.public_id!}
+            alt={project.title}
+            fill
+            sizes={
+              variant === "featured"
+                ? "(max-width: 768px) 100vw, 66vw"
+                : "(max-width: 768px) 100vw, 33vw"
+            }
+            crop="fill"
+            gravity="center"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <div className="h-full w-full bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-900 dark:to-amber-800" />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+      </div>
+
+      <div className="relative h-full p-6 flex flex-col justify-end text-white">
+        {/* Tags */}
+        <div className="flex flex-wrap items-center gap-2 mb-4">
+          {project.category && (
+            <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-medium backdrop-blur-sm">
+              {project.category}
+            </span>
+          )}
+          {project.division?.title && (
+            <span className="inline-flex items-center rounded-full bg-amber-500/10 px-3 py-1 text-xs font-medium backdrop-blur-sm border border-amber-500/20">
+              {project.division.title}
+            </span>
+          )}
+        </div>
+
+        {/* Title and Description */}
+        <h3
+          className={`font-serif ${
+            variant === "featured" ? "text-3xl" : "text-2xl"
+          } font-bold tracking-tight mb-3`}
+        >
+          {project.title}
+        </h3>
+        {variant === "featured" && (
+          <p className="text-white/80 line-clamp-2 mb-4 max-w-xl">{excerpt}</p>
+        )}
+
+        {/* Author - Only show on featured card */}
+        {variant === "featured" && project.author && (
+          <div className="flex items-center gap-3 mb-4">
+            {project.author.image && project.author.image._type === "cloudinary.asset" && (
+              <div className="relative h-10 w-10 rounded-full overflow-hidden border-2 border-white/20">
+                <CldImage
+                  src={project.author.image.public_id}
+                  alt={project.author.name}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            )}
+            <div className="flex flex-col">
+              <span className="font-medium">{project.author.name}</span>
+              {project.author.role && (
+                <span className="text-sm text-white/60">{project.author.role}</span>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Project Excerpt - Mobile / Secondary */}
+        {variant !== "featured" && (
+          <p className="text-sm text-white/80 line-clamp-2">{excerpt}</p>
+        )}
+
+        {/* Metadata & Read More */}
+        <div className="flex flex-wrap items-center gap-3 text-xs mt-2">
+          {project.releaseDate && (
+            <span className="text-white/60">
+              {new Date(project.releaseDate).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+            </span>
+          )}
+          <Link
+            href={projectUrl}
+            className="inline-flex items-center font-medium text-primary hover:underline"
+          >
+            Read more
+            <svg
+              className="ml-1 h-3 w-3 transition-transform group-hover:translate-x-0.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
+      </div>
+    </Link>
   );
 };
 
