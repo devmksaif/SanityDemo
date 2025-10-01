@@ -1,44 +1,24 @@
 import { EnterpriseHero } from "@/components/enterprise-hero";
 import { client } from "@/lib/sanity";
 import type { HomePageData, DivisionData, PortfolioProjectData, NewsArticleData } from "@/types/sanity";
-import { DivisionCard } from "@/components/division-card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ArrowRight, Sparkles, TrendingUp, BookOpen, Briefcase } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { AnimatedContainer } from "@/components/ui/animated-container";
-import { BlogSection } from "@/components/blog-section";
-import { CaseStudiesShowcase } from "@/components/case-studies-showcase";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { CldImage } from "next-cloudinary";
 
 async function getPageData() {
   const homePageQuery = `*[_type == "homePage"][0]`;
   const divisionsQuery = `*[_type == "division"] | order(_createdAt asc){
-    _id, 
-    title, 
-    description, 
-    logo, 
-    coverImage, 
-    slug,
-    divisionType
+    _id, title, slug, divisionType, coverImage
   }`;
-  const portfolioQuery = `*[_type == "portfolioProject"] | order(releaseDate desc)[0...3]{
-    _id, 
-    title, 
-    category, 
-    division->{title}, 
-    thumbnailImage, 
-    releaseDate, 
-    slug,
-    author->{name, role, image}
+  const portfolioQuery = `*[_type == "portfolioProject"] | order(releaseDate desc)[0...4]{
+    _id, title, slug, category, thumbnailImage
   }`;
-  const newsQuery = `*[_type == "newsArticle"] | order(publishedAt desc)[0...3]`;
+  const newsQuery = `*[_type == "newsArticle"] | order(publishedAt desc)[0...4]{
+    _id, title, slug, publishedAt, coverImage, excerpt
+  }`;
 
   const homePageData: HomePageData = await client.fetch(homePageQuery);
   const divisions: DivisionData[] = await client.fetch(divisionsQuery);
@@ -50,129 +30,156 @@ async function getPageData() {
 
 export default async function IndexPage() {
   const { homePageData, divisions, portfolio, news } = await getPageData();
+  const featuredArticle = news?.[0];
+  const otherArticles = news?.slice(1, 3);
+  const featuredProjects = portfolio?.slice(0, 2);
 
   return (
     <div className="min-h-screen bg-background">
       <EnterpriseHero data={homePageData} />
 
-      {divisions.length > 0 && (
-        <section id="divisions-section" className="py-12 sm:py-24 bg-gradient-to-br from-slate-50 via-slate-100 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900/30">
+      {/* Featured Story Section */}
+      {featuredArticle && (
+        <section className="py-16 sm:py-24">
           <Container>
             <AnimatedContainer>
-              <div className="mb-12 text-center">
-                <div className="inline-flex items-center gap-2 rounded-full bg-indigo-100 dark:bg-indigo-900/30 px-4 py-2 text-sm font-medium text-indigo-700 dark:text-indigo-300 mb-3">
-                  <Sparkles className="h-4 w-4" />
-                  Our Creative Divisions
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div className="relative aspect-[4/3] rounded-lg overflow-hidden group">
+                  <Link href={`/newsroom/${featuredArticle.slug.current}`}>
+                    {featuredArticle.coverImage?.public_id && (
+                      <CldImage
+                        src={featuredArticle.coverImage.public_id}
+                        alt={featuredArticle.title}
+                        fill
+                        crop="fill"
+                        gravity="center"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  </Link>
                 </div>
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-slate-900 dark:text-white">
-                  Powering Creative Excellence
-                </h2>
-                <p className="mt-3 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-400">
-                  From music to media, our divisions are the heart of our creative enterprise.
-                </p>
+                <div>
+                  <p className="text-sm font-semibold uppercase tracking-widest text-primary mb-2">
+                    Featured Story
+                  </p>
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                    <Link href={`/newsroom/${featuredArticle.slug.current}`} className="hover:underline">
+                      {featuredArticle.title}
+                    </Link>
+                  </h2>
+                  <p className="text-muted-foreground mb-6 line-clamp-3">
+                    {featuredArticle.excerpt}
+                  </p>
+                  <Button asChild>
+                    <Link href={`/newsroom/${featuredArticle.slug.current}`}>
+                      Read Full Story <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
               </div>
             </AnimatedContainer>
-            
-            {/* 3D Carousel for Desktop */}
-            <div className="hidden lg:block">
-              <Carousel
-                opts={{ align: "center", loop: true }}
-                className="w-full carousel-3d-container"
-              >
-                <CarouselContent className="-ml-4">
-                  {divisions.map((division) => (
-                    <CarouselItem key={division._id} className="pl-4 basis-1/3 carousel-3d-item">
-                      <div className="p-1">
-                        <DivisionCard division={division} />
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious className="-left-12" />
-                <CarouselNext className="-right-12" />
-              </Carousel>
-            </div>
-
-            {/* Standard Carousel for Mobile */}
-            <div className="lg:hidden">
-              <Carousel
-                opts={{ align: "start", loop: true }}
-                className="w-full max-w-sm mx-auto"
-              >
-                <CarouselContent className="-ml-4">
-                  {divisions.map((division) => (
-                    <CarouselItem key={division._id} className="pl-4 basis-4/5">
-                      <div className="p-1">
-                        <DivisionCard division={division} />
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-              </Carousel>
-            </div>
-            
-            <AnimatedContainer className="mt-12 text-center">
-              <Button asChild size="lg" className="group bg-indigo-600 hover:bg-indigo-700 text-white">
-                <Link href="/divisions">
-                  Explore All Divisions
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </Button>
-            </AnimatedContainer>
           </Container>
         </section>
       )}
 
-      {portfolio.length > 0 && (
-        <section id="portfolio-section" className="py-12 sm:py-16 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950/20 dark:via-orange-950/20 dark:to-yellow-950/20">
+      {/* Divisions Section - Asymmetrical Grid */}
+      {divisions.length > 0 && (
+        <section className="py-16 sm:py-24 bg-muted/50">
           <Container>
-            <CaseStudiesShowcase projects={portfolio} />
-          </Container>
-        </section>
-      )}
-
-      {news.length > 0 && (
-        <section className="py-12 sm:py-16 bg-gradient-to-br from-teal-50 via-emerald-50 to-green-50 dark:from-teal-950/20 dark:via-emerald-950/20 dark:to-green-950/20">
-          <Container>
-            <BlogSection
-              articles={news}
-              tagline="Latest News"
-              heading="From the Newsroom"
-              description="Stay updated with the latest stories and announcements from Shubz Entertainment."
-              buttonText="Visit Newsroom"
-              buttonUrl="/newsroom"
-            />
-          </Container>
-        </section>
-      )}
-
-      <section className="relative overflow-hidden py-16 sm:py-20 bg-gradient-to-br from-gray-900 via-slate-800 to-zinc-900 text-white">
-        <Container>
-          <AnimatedContainer>
-            <div className="relative mx-auto max-w-4xl text-center">
-              <div className="absolute -top-20 -left-20 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
-              <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-yellow-500/20 rounded-full blur-3xl" />
-              <div className="relative inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-medium mb-4 backdrop-blur-sm">
-                <TrendingUp className="h-4 w-4" />
-                Ready to Collaborate?
-              </div>
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl mb-4">
-                Let's Create Something Extraordinary Together
+            <AnimatedContainer className="mb-12 text-center">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                Our Creative Divisions
               </h2>
-              <p className="mb-6 text-lg text-white/90">
-                Whether you're an artist, brand, or creative professional, we have the expertise and resources to bring your vision to life.
+              <p className="mt-3 max-w-2xl mx-auto text-lg text-muted-foreground">
+                A synergy of specialized entities driving creative innovation.
               </p>
-              <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-                <Button size="lg" className="group bg-yellow-500 hover:bg-yellow-600 text-gray-900">
-                  Start a Project
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-                <Button variant="outline" size="lg" className="border-white/30 bg-white/10 text-white hover:bg-white/20 hover:text-white backdrop-blur-sm">
-                  Schedule a Call
+            </AnimatedContainer>
+            <div className="grid grid-cols-6 grid-rows-2 gap-6 h-[600px]">
+              {divisions.slice(0, 4).map((division, index) => {
+                const gridClasses = [
+                  "col-span-3 row-span-2", // Item 1
+                  "col-span-3 row-span-1", // Item 2
+                  "col-span-2 row-span-1", // Item 3
+                  "col-span-1 row-span-1", // Item 4
+                ];
+                return (
+                  <AnimatedContainer key={division._id} className={gridClasses[index]}>
+                    <Link href={`/divisions/${division.slug.current}`} className="group block w-full h-full relative rounded-lg overflow-hidden">
+                      {division.coverImage?.public_id && (
+                        <CldImage
+                          src={division.coverImage.public_id}
+                          alt={division.title}
+                          fill
+                          crop="fill"
+                          gravity="center"
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                      <div className="absolute bottom-0 left-0 p-6 text-white">
+                        <span className="text-xs font-semibold uppercase tracking-wider bg-white/20 backdrop-blur-sm px-2 py-1 rounded">
+                          {division.divisionType}
+                        </span>
+                        <h3 className="text-2xl font-bold mt-2">{division.title}</h3>
+                      </div>
+                    </Link>
+                  </AnimatedContainer>
+                );
+              })}
+            </div>
+          </Container>
+        </section>
+      )}
+
+      {/* More News & Portfolio */}
+      <section className="py-16 sm:py-24">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div className="lg:col-span-2">
+              <h2 className="text-3xl font-bold mb-6">From The Portfolio</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {featuredProjects?.map(project => (
+                  <AnimatedContainer key={project._id}>
+                    <Link href={`/portfolio/${project.slug.current}`} className="group block">
+                      <div className="relative aspect-square rounded-lg overflow-hidden mb-4">
+                        {project.thumbnailImage?.public_id && (
+                          <CldImage
+                            src={project.thumbnailImage.public_id}
+                            alt={project.title}
+                            fill
+                            crop="fill"
+                            gravity="center"
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                        )}
+                      </div>
+                      <p className="text-sm font-semibold text-primary">{project.category}</p>
+                      <h3 className="text-xl font-bold mt-1 group-hover:underline">{project.title}</h3>
+                    </Link>
+                  </AnimatedContainer>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold mb-6">More News</h2>
+              <div className="space-y-6">
+                {otherArticles?.map(article => (
+                  <AnimatedContainer key={article._id}>
+                    <Link href={`/newsroom/${article.slug.current}`} className="group block border-b pb-6">
+                      <p className="text-sm text-muted-foreground mb-1">
+                        {new Date(article.publishedAt).toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' })}
+                      </p>
+                      <h3 className="text-xl font-bold group-hover:underline">{article.title}</h3>
+                    </Link>
+                  </AnimatedContainer>
+                ))}
+                <Button asChild variant="outline" className="w-full">
+                  <Link href="/newsroom">Visit Newsroom</Link>
                 </Button>
               </div>
             </div>
-          </AnimatedContainer>
+          </div>
         </Container>
       </section>
     </div>
