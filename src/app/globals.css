@@ -216,3 +216,26 @@
 .text-accent-glow {
   text-shadow: 0 0 20px hsl(40 64% 57% / 0.5);
 }
+
+/* 3D Transform Utilities */
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+.translate-z-10 {
+  transform: translateZ(40px);
+}
+
+/* 3D Carousel Styles */
+.carousel-3d-container {
+  perspective: 1000px;
+}
+.carousel-3d-item {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  transform: scale(0.8) rotateY(0deg);
+  opacity: 0.6;
+}
+.carousel-3d-item.is-active {
+  transform: scale(1) rotateY(0deg);
+  opacity: 1;
+  z-index: 10;
+}

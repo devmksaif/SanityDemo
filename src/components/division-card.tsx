@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import type { DivisionData } from "@/types/sanity";
-import { ArrowRight, AlertTriangle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CldImage } from 'next-cloudinary';
+import Tilt from 'react-parallax-tilt';
+import { ArrowRight } from "lucide-react";
 
 type DivisionCardProps = {
   division: DivisionData;
@@ -14,110 +14,59 @@ type DivisionCardProps = {
 export function DivisionCard({ division }: DivisionCardProps) {
   const hasSlug = division.slug?.current;
   const href = hasSlug ? `/divisions/${division.slug.current}` : "#";
-
   const hasCoverImage = division.coverImage?._type === 'cloudinary.asset' && division.coverImage.public_id;
-  const hasLogo = division.logo?._type === 'cloudinary.asset' && division.logo.public_id;
-
-  const handleClick = (e: React.MouseEvent) => {
-    if (!hasSlug) {
-      e.preventDefault();
-      console.warn(`🚨 Division "${division.title}" has no slug! ID: ${division._id}`);
-      alert(`This division has no slug generated. Please go to Sanity Studio and click "Generate" next to the Slug field.`);
-    }
-  };
 
   return (
-    <Link href={href} onClick={handleClick} className="group block">
-      <div
-        className={cn(
-          "flex flex-col w-full max-w-sm overflow-hidden rounded-[1em] bg-gradient-to-br from-white to-gray-100 dark:from-gray-800 dark:to-gray-900 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1",
-          !hasSlug && "cursor-not-allowed opacity-70"
-        )}
-      >
-        <div className="relative h-48 w-full overflow-hidden">
+    <Tilt
+      tiltMaxAngleX={8}
+      tiltMaxAngleY={8}
+      perspective={1000}
+      glareEnable={true}
+      glareMaxOpacity={0.15}
+      glarePosition="all"
+      className="h-full w-full transform-style-3d"
+    >
+      <Link href={href} className="group block h-[450px] w-full">
+        <div
+          className={cn(
+            "relative h-full w-full overflow-hidden rounded-xl bg-gray-900 shadow-2xl shadow-black/40 transition-all duration-300 transform-style-3d",
+            !hasSlug && "cursor-not-allowed"
+          )}
+        >
+          {/* Background Image */}
           {hasCoverImage ? (
             <CldImage
               src={division.coverImage.public_id!}
               alt={division.title}
-              width="500"
-              height="500"
+              fill
               crop="fill"
               gravity="center"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
             />
           ) : (
-            <div className="h-full w-full bg-gray-200 flex items-center justify-center">
-              <span className="text-gray-500">No Image</span>
-            </div>
+            <div className="h-full w-full bg-gray-800" />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-          {hasLogo && (
-            <div className="absolute top-4 left-4">
-              <CldImage
-                src={division.logo!.public_id!}
-                alt={`${division.title} Logo`}
-                width="80"
-                height="40"
-                className="h-auto w-12 object-contain drop-shadow-lg"
-              />
-            </div>
-          )}
-        </div>
+          
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
 
-        <div className="p-6 flex flex-col gap-4">
-          <div className="flex items-center gap-2">
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-purple-500 to-pink-500 text-white">
-              Division
-            </span>
-            {division.divisionType && (
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-orange-400 to-yellow-400 text-white">
-                {division.divisionType}
+          {/* 3D Content Layer */}
+          <div className="absolute inset-0 flex flex-col justify-end p-6 text-white transform-style-3d">
+            <div className="transform transition-transform duration-500 group-hover:translate-z-10 translate-z-0">
+              <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs font-medium backdrop-blur-sm border border-white/20">
+                {division.divisionType || "Division"}
               </span>
-            )}
-          </div>
-          <h4 className="text-xl font-bold text-gray-900 dark:text-white capitalize">
-            {division.title}
-          </h4>
-          <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed line-clamp-3">
-            {division.description}
-          </p>
-        </div>
-
-        <div className="flex items-center justify-between p-6 pt-0 mt-auto">
-          <div className="flex items-center gap-3">
-            <div className="relative h-8 w-8 rounded-full overflow-hidden bg-gradient-to-r from-purple-400 to-pink-400">
-              {hasLogo ? (
-                <CldImage
-                  src={division.logo!.public_id!}
-                  alt={division.title}
-                  width="32"
-                  height="32"
-                  crop="fill"
-                  className="object-cover"
-                />
-              ) : (
-                <div className="flex items-center justify-center h-full w-full text-white text-xs font-bold">
-                  {division.title.charAt(0)}
-                </div>
-              )}
-            </div>
-            <div>
-              <h5 className="text-sm font-medium text-gray-900 dark:text-white">Shubz Entertainment</h5>
-              <small className="text-xs text-gray-500 dark:text-gray-400">Creative Division</small>
+              <h3 className="mt-3 text-3xl font-bold tracking-tight drop-shadow-lg">
+                {division.title}
+              </h3>
+              <div className="mt-4 flex items-center text-sm font-medium opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 translate-y-2">
+                View Division
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </div>
             </div>
           </div>
-          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white group-hover:scale-110 transition-transform duration-300">
-            <ArrowRight className="w-5 h-5" />
-          </div>
         </div>
-
-        {!hasSlug && (
-          <div className="absolute top-3 right-3 flex items-center gap-1 rounded-full bg-yellow-500/90 px-2 py-1 text-xs font-semibold text-white">
-            <AlertTriangle className="h-3 w-3" />
-            <span>No Slug</span>
-          </div>
-        )}
-      </div>
-    </Link>
+      </Link>
+    </Tilt>
   );
 }

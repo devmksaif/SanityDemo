@@ -44,9 +44,7 @@ async function getPageData() {
   const divisions: DivisionData[] = await client.fetch(divisionsQuery);
   const portfolio: PortfolioProjectData[] = await client.fetch(portfolioQuery);
   const news: NewsArticleData[] = await client.fetch(newsQuery);
-  console.log(divisions);
-  console.log(news);
-  console.log(portfolio)
+
   return { homePageData, divisions, portfolio, news };
 }
 
@@ -58,10 +56,10 @@ export default async function IndexPage() {
       <EnterpriseHero data={homePageData} />
 
       {divisions.length > 0 && (
-        <section id="divisions-section" className="py-12 sm:py-16 bg-gradient-to-br from-slate-50 via-slate-100 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900/30">
+        <section id="divisions-section" className="py-12 sm:py-24 bg-gradient-to-br from-slate-50 via-slate-100 to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900/30">
           <Container>
             <AnimatedContainer>
-              <div className="mb-8 text-center">
+              <div className="mb-12 text-center">
                 <div className="inline-flex items-center gap-2 rounded-full bg-indigo-100 dark:bg-indigo-900/30 px-4 py-2 text-sm font-medium text-indigo-700 dark:text-indigo-300 mb-3">
                   <Sparkles className="h-4 w-4" />
                   Our Creative Divisions
@@ -75,36 +73,45 @@ export default async function IndexPage() {
               </div>
             </AnimatedContainer>
             
-            {/* Desktop Grid */}
-            <div className="hidden lg:grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {divisions.slice(0,3).map((division, i) => (
-                <AnimatedContainer key={division._id} delay={i * 0.1}>
-                  <DivisionCard division={division} />
-                </AnimatedContainer>
-              ))}
-            </div>
-
-            {/* Mobile Carousel */}
-            <div className="lg:hidden">
+            {/* 3D Carousel for Desktop */}
+            <div className="hidden lg:block">
               <Carousel
-                opts={{ align: "start", loop: true }}
-                className="w-full max-w-sm mx-auto"
+                opts={{ align: "center", loop: true }}
+                className="w-full carousel-3d-container"
               >
                 <CarouselContent className="-ml-4">
-                  {divisions.slice(3).map((division) => (
-                    <CarouselItem key={division._id} className="pl-4 basis-4/5 md:basis-1/2">
+                  {divisions.map((division) => (
+                    <CarouselItem key={division._id} className="pl-4 basis-1/3 carousel-3d-item">
                       <div className="p-1">
                         <DivisionCard division={division} />
                       </div>
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <CarouselPrevious className="hidden sm:flex -left-4" />
-                <CarouselNext className="hidden sm:flex -right-4" />
+                <CarouselPrevious className="-left-12" />
+                <CarouselNext className="-right-12" />
+              </Carousel>
+            </div>
+
+            {/* Standard Carousel for Mobile */}
+            <div className="lg:hidden">
+              <Carousel
+                opts={{ align: "start", loop: true }}
+                className="w-full max-w-sm mx-auto"
+              >
+                <CarouselContent className="-ml-4">
+                  {divisions.map((division) => (
+                    <CarouselItem key={division._id} className="pl-4 basis-4/5">
+                      <div className="p-1">
+                        <DivisionCard division={division} />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
               </Carousel>
             </div>
             
-            <AnimatedContainer className="mt-8 text-center">
+            <AnimatedContainer className="mt-12 text-center">
               <Button asChild size="lg" className="group bg-indigo-600 hover:bg-indigo-700 text-white">
                 <Link href="/divisions">
                   Explore All Divisions
@@ -119,33 +126,7 @@ export default async function IndexPage() {
       {portfolio.length > 0 && (
         <section id="portfolio-section" className="py-12 sm:py-16 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950/20 dark:via-orange-950/20 dark:to-yellow-950/20">
           <Container>
-            <AnimatedContainer>
-              <div className="mb-8 text-center">
-                <div className="inline-flex items-center gap-2 rounded-full bg-amber-100 dark:bg-amber-900/30 px-4 py-2 text-sm font-medium text-amber-700 dark:text-amber-300 mb-3">
-                  <Briefcase className="h-4 w-4" />
-                  Featured Work
-                </div>
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-amber-900 dark:text-amber-100">
-                  Our Creative Portfolio
-                </h2>
-                <p className="mt-3 max-w-2xl mx-auto text-lg text-amber-700 dark:text-amber-400">
-                  A glimpse into the impactful projects we've brought to life.
-                </p>
-              </div>
-            </AnimatedContainer>
-            
-            <div className="mt-8">
-              <CaseStudiesShowcase projects={portfolio} />
-            </div>
-            
-            <AnimatedContainer className="mt-8 text-center">
-              <Button asChild size="lg" variant="outline" className="group border-amber-600 text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/30">
-                <Link href="/portfolio">
-                  View Full Portfolio
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </Button>
-            </AnimatedContainer>
+            <CaseStudiesShowcase projects={portfolio} />
           </Container>
         </section>
       )}
