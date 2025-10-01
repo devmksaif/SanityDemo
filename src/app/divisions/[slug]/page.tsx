@@ -1,4 +1,4 @@
-import { client, urlFor } from "@/lib/sanity";
+import { client } from "@/lib/sanity";
 import type { DivisionData } from "@/types/sanity";
 import { Container } from "@/components/ui/container";
 import { notFound } from "next/navigation";
@@ -40,7 +40,6 @@ export default async function DivisionPage({ params }: { params: Promise<{ slug:
       <main className="py-12 sm:py-16">
         <Container size="lg">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Main Content */}
             <div className="lg:col-span-2 space-y-6">
               <div className="prose prose-lg max-w-none dark:prose-invert">
                 <p className="text-xl text-muted-foreground leading-relaxed">
@@ -56,7 +55,6 @@ export default async function DivisionPage({ params }: { params: Promise<{ slug:
               </div>
             </div>
 
-            {/* Sidebar */}
             <div className="space-y-6">
               <div className="bg-card rounded-2xl p-6 border">
                 <h3 className="text-lg font-semibold mb-4">Quick Facts</h3>

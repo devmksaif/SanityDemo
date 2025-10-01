@@ -4,24 +4,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { urlFor } from "@/lib/sanity";
+import { CldImage } from 'next-cloudinary';
 import type { NewsArticleData } from "@/types/sanity";
 
 interface NewsroomListProps {
   articles: NewsArticleData[];
 }
 
-// Fallback image URL for when no image is provided
-const FALLBACK_IMAGE_URL = "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=450&fit=crop";
-
 export function NewsroomList({ articles }: NewsroomListProps) {
   return (
     <div className="grid gap-y-10 sm:grid-cols-12 sm:gap-y-12 md:gap-y-16 lg:gap-y-20">
       {articles.map((article) => {
-        // Robust image URL handling
-        const imageUrl = article.coverImage 
-          ? urlFor(article.coverImage).width(800).height(450).url()
-          : FALLBACK_IMAGE_URL;
+        const hasCoverImage = article.coverImage?._type === 'cloudinary.asset' && article.coverImage.public_id;
+        const excerpt = article.body?.[0]?.children?.[0]?.text || `An in-depth look at the creative process and impact of ${article.title}.`;
 
         return (
           <Card
@@ -45,7 +40,7 @@ export function NewsroomList({ articles }: NewsroomListProps) {
                   </Link>
                 </h3>
                 <p className="mt-4 text-muted-foreground md:mt-5">
-                  {article.excerpt}
+                  {excerpt}
                 </p>
                 <div className="mt-6 flex items-center space-x-4 text-sm md:mt-8">
                   <span className="text-muted-foreground">Shubz Entertainment</span>
@@ -71,23 +66,20 @@ export function NewsroomList({ articles }: NewsroomListProps) {
               <div className="order-first sm:order-last sm:col-span-5">
                 <Link href={`/newsroom/${article.slug.current}`} className="block group">
                   <div className="aspect-16/9 overflow-clip rounded-lg border border-border">
-                    <Image
-                      src={imageUrl}
-                      alt={article.title}
-                      width={800}
-                      height={450}
-                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      onError={(e) => {
-                        console.warn(`Failed to load image for article: ${article.title}`);
-                        // Fallback to a solid color if image fails
-                        (e.target as HTMLImageElement).style.display = 'none';
-                        (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
-                      }}
-                    />
-                    {/* Fallback for image error */}
-                    <div className="hidden h-full w-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center">
-                      <span className="text-white text-lg font-medium">No Image</span>
-                    </div>
+                    {hasCoverImage ? (
+                      <CldImage
+                        src={article.coverImage.public_id}
+                        alt={article.title}
+                        width={800}
+                        height={450}
+                        crop="fill"
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="h-full w-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center">
+                        <span className="text-white text-lg font-medium">No Image</span>
+                      </div>
+                    )}
                   </div>
                 </Link>
               </div>
