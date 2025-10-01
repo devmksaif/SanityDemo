@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/sheet";
 import { ThemedLogo } from "@/components/themed-logo";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { useScrolled } from "@/hooks/use-scrolled";
 
 const navLinks = [
   { href: "/divisions", label: "Divisions" },
@@ -32,9 +33,15 @@ const navLinks = [
 export function EnterpriseHeader() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const pathname = usePathname();
+  const scrolled = useScrolled(20);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-lg supports-[backdrop-filter]:bg-background/60">
+    <header className={cn(
+      "sticky top-0 z-50 w-full transition-all duration-300",
+      scrolled 
+        ? "border-b border-border bg-background/95 backdrop-blur-lg shadow-sm"
+        : "border-b border-transparent"
+    )}>
       <div className="container mx-auto flex h-20 max-w-screen-2xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center">
           <ThemedLogo width={180} height={180} className="w-auto" />

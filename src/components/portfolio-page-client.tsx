@@ -32,70 +32,94 @@ function CaseStudyCard({ project }: { project: PortfolioProjectData }) {
     : "Date TBA";
 
   return (
-    <Link href={href} onClick={handleClick} className="group block">
-      <Card className={cn(
-        "overflow-hidden rounded-lg border bg-card transition-all duration-300 hover:shadow-lg hover:-translate-y-1",
-        !hasSlug && "opacity-75 cursor-not-allowed"
-      )}>
-        <div className="relative aspect-[4/3] w-full overflow-hidden">
-          {hasThumbnail ? (
-            <CldImage
-              src={project.thumbnailImage.public_id!}
-              alt={project.title}
-              width="500"
-              height="500"
-              crop="fill"
-              gravity="center"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-          ) : (
-            <div className="h-full w-full bg-gray-200 flex items-center justify-center">
-              <span className="text-gray-500">No Image</span>
-            </div>
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        </div>
-        
-        <div className="p-4">
-          <div className="mb-2">
-            <h3 className="text-lg font-semibold text-foreground">
-              {project.title}
-              {displayCategory && (
-                <span className="ml-1 text-base font-normal text-muted-foreground">
-                  ({displayCategory})
-                </span>
-              )}
-            </h3>
-            {displayDivision && (
-              <p className="mt-1 text-sm text-muted-foreground">
-                — {displayDivision}
-              </p>
+    <motion.div whileHover={{ y: -8 }} transition={{ duration: 0.3 }}>
+      <Link href={href} onClick={handleClick} className="group block">
+        <Card className={cn(
+          "overflow-hidden rounded-lg border bg-card transition-all duration-300 hover:shadow-lg",
+          !hasSlug && "opacity-75 cursor-not-allowed"
+        )}>
+          <div className="relative aspect-[4/3] w-full overflow-hidden">
+            {hasThumbnail ? (
+              <CldImage
+                src={project.thumbnailImage.public_id!}
+                alt={project.title}
+                width="500"
+                height="500"
+                crop="fill"
+                gravity="center"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            ) : (
+              <div className="h-full w-full bg-gray-200 flex items-center justify-center">
+                <span className="text-gray-500">No Image</span>
+              </div>
             )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
           
-          <div className="flex items-center gap-2 text-xs text-muted-foreground mt-2">
-            <User className="w-3 h-3" />
-            <span>{displayAuthor}</span>
-            {project.releaseDate && (
-              <>
-                <span>•</span>
-                <Calendar className="w-3 h-3" />
-                <span>{displayDate}</span>
-              </>
-            )}
+          <div className="p-4">
+            <div className="mb-2">
+              <h3 className="text-lg font-semibold text-foreground">
+                {project.title}
+                {displayCategory && (
+                  <span className="ml-1 text-base font-normal text-muted-foreground">
+                    ({displayCategory})
+                  </span>
+                )}
+              </h3>
+              {displayDivision && (
+                <p className="mt-1 text-sm text-muted-foreground">
+                  — {displayDivision}
+                </p>
+              )}
+            </div>
+            
+            <div className="flex items-center gap-2 text-xs text-muted-foreground mt-2">
+              <User className="w-3 h-3" />
+              <span>{displayAuthor}</span>
+              {project.releaseDate && (
+                <>
+                  <span>•</span>
+                  <Calendar className="w-3 h-3" />
+                  <span>{displayDate}</span>
+                </>
+              )}
+            </div>
           </div>
-        </div>
 
-        {!hasSlug && (
-          <div className="absolute top-2 right-2 flex items-center gap-1 rounded-full bg-yellow-500/90 px-2 py-1 text-xs font-semibold text-white">
-            <AlertTriangle className="h-3 w-3" />
-            <span>No slug</span>
-          </div>
-        )}
-      </Card>
-    </Link>
+          {!hasSlug && (
+            <div className="absolute top-2 right-2 flex items-center gap-1 rounded-full bg-yellow-500/90 px-2 py-1 text-xs font-semibold text-white">
+              <AlertTriangle className="h-3 w-3" />
+              <span>No slug</span>
+            </div>
+          )}
+        </Card>
+      </Link>
+    </motion.div>
   );
 }
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};
 
 export function PortfolioPageClient({ projects }: { projects: PortfolioProjectData[] }) {
   if (!projects || projects.length === 0) {
@@ -209,16 +233,14 @@ export function PortfolioPageClient({ projects }: { projects: PortfolioProjectDa
           {projects.length > 0 ? (
             <motion.div
               className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
             >
-              {projects.map((project, index) => (
+              {projects.map((project) => (
                 <motion.div
                   key={project._id}
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 + (index * 0.1), duration: 0.6 }}
+                  variants={itemVariants}
                 >
                   <CaseStudyCard project={project} />
                 </motion.div>

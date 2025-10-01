@@ -140,26 +140,30 @@ export function EnterpriseHero({ data }: EnterpriseHeroProps) {
               variants={itemVariants}
               className="flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start"
             >
-              <Button
-                asChild
-                size="lg"
-                className="group bg-white text-primary hover:bg-white/90"
-              >
-                <Link href="#divisions-section">
-                  Explore Divisions
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </Button>
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="border-white/30 bg-white/10 text-white hover:bg-white/20 hover:text-white backdrop-blur-sm"
-              >
-                <Link href="#portfolio-section">
-                  See Our Work
-                </Link>
-              </Button>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  asChild
+                  size="lg"
+                  className="group bg-white text-primary hover:bg-white/90"
+                >
+                  <Link href="#divisions-section">
+                    Explore Divisions
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </Button>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="border-white/30 bg-white/10 text-white hover:bg-white/20 hover:text-white backdrop-blur-sm"
+                >
+                  <Link href="#portfolio-section">
+                    See Our Work
+                  </Link>
+                </Button>
+              </motion.div>
             </motion.div>
           </motion.div>
 

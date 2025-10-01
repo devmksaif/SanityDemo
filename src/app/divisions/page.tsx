@@ -1,11 +1,11 @@
 import { client } from "@/lib/sanity";
 import type { DivisionData } from "@/types/sanity";
-import { DivisionCard } from "@/components/division-card";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight, Sparkles, AlertTriangle } from "lucide-react";
 import { ensureSlugsExist } from "@/lib/sanity-helpers";
+import { DivisionsPageClient } from "@/components/divisions-page-client";
 
 async function getDivisions() {
   const query = `*[_type == "division"] | order(_createdAt asc){
@@ -14,7 +14,8 @@ async function getDivisions() {
     description, 
     logo, 
     coverImage, 
-    slug
+    slug,
+    divisionType
   }`;
   const data: DivisionData[] = await client.fetch(query);
   
@@ -75,11 +76,7 @@ export default async function DivisionsPage() {
       <section className="py-16 sm:py-24">
         <Container>
           {divisions.length > 0 ? (
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {divisions.map((division) => (
-                <DivisionCard key={division._id} division={division} />
-              ))}
-            </div>
+            <DivisionsPageClient divisions={divisions} />
           ) : (
             <div className="text-center">
               <p className="text-lg text-muted-foreground">Divisions content coming soon.</p>

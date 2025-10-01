@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { EnterpriseHeader } from "@/components/enterprise-header";
-import { EnterpriseFooter } from "@/components/enterprise-footer";
-import { DebugClickTracker } from "@/components/debug-click-tracker";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ClientLayout } from "@/components/client-layout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,10 +25,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-           
-          <EnterpriseHeader />
-          <main className="min-h-screen">{children}</main>
-          <EnterpriseFooter />
+          <ClientLayout>{children}</ClientLayout>
         </ThemeProvider>
       </body>
     </html>

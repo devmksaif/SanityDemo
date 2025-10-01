@@ -1,37 +1,23 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 interface AnimatedContainerProps {
   children: React.ReactNode;
   className?: string;
   delay?: number;
-  amount?: number;
+  yOffset?: number;
 }
 
-export function AnimatedContainer({
-  children,
-  className,
-  delay = 0,
-  amount = 0.5,
-}: AnimatedContainerProps) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount });
-
-  const variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  };
-
+export function AnimatedContainer({ children, className, delay = 0, yOffset = 20 }: AnimatedContainerProps) {
   return (
     <motion.div
-      ref={ref}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={variants}
-      transition={{ duration: 0.5, delay }}
-      className={className}
+      initial={{ opacity: 0, y: yOffset }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.8, ease: "easeOut", delay }}
+      className={cn(className)}
     >
       {children}
     </motion.div>
