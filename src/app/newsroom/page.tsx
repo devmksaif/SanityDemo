@@ -1,3 +1,4 @@
+"use client"
 import { client } from "@/lib/sanity";
 import type { NewsArticleData } from "@/types/sanity";
 import { Container } from "@/components/ui/container";
