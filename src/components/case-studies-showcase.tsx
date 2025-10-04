@@ -38,7 +38,7 @@ const CaseStudiesShowcase = ({ projects }: CaseStudiesShowcaseProps) => {
 
       {/* Mobile Layout */}
       <div className="lg:hidden space-y-6">
-        {projects.slice(0, 3).map((project) => (
+        {projects.slice(0, 3).map((project, index) => (
           <div key={project._id} className="h-[400px]">
             <ProjectCard project={project} variant="mobile" className="h-full" />
           </div>
@@ -64,6 +64,16 @@ const ProjectCard = ({
   const excerpt =
     project.body?.[0]?.children?.[0]?.text ||
     `An in-depth look at the creative process and impact of ${project.title}.`;
+
+  // Safe date formatting to avoid hydration issues
+  const formatDate = (dateString: string) => {
+    try {
+      const date = new Date(dateString);
+      return date.getFullYear().toString();
+    } catch {
+      return '';
+    }
+  };
 
   return (
     <Link href={projectUrl} className={`block relative w-full ${className}`}>
@@ -146,11 +156,7 @@ const ProjectCard = ({
         <div className="flex flex-wrap items-center gap-3 text-xs mt-2">
           {project.releaseDate && (
             <span className="text-white/60">
-              {new Date(project.releaseDate).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              })}
+              {formatDate(project.releaseDate)}
             </span>
           )}
           <Link

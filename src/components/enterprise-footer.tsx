@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Github, Twitter, Instagram, Youtube, Mail, ArrowRight, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
+import { FlexibleLogo } from "@/components/flexible-logo";
 
 export function EnterpriseFooter() {
   return (
@@ -16,15 +17,7 @@ export function EnterpriseFooter() {
           {/* Brand Section */}
           <div className="space-y-6">
             <Link href="/">
-              <div className="relative w-48 h-16">
-                <Image
-                  src="/logo.png"
-                  alt="Shubz Entertainment Logo"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </div>
+              <FlexibleLogo variant="icon-only" width={180} height={180} />
             </Link>
             <p className="font-serif text-sm text-muted-foreground">
               Integrating media, music, and talent platforms to tell unforgettable global stories.

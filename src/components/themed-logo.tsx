@@ -25,7 +25,7 @@ export function ThemedLogo({ className, width, height }: ThemedLogoProps) {
 
   const isDark = resolvedTheme === 'dark';
   // We'll use two versions of your logo for best results.
-  const src = isDark ? "/logo-dark.png" : "/logo-light.png";
+  const src = isDark ?  "/shubz-logo-compact.png" : "/shubz-logo-icon-only.png";
 
   return (
     <Image

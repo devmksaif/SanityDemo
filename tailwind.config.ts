@@ -48,6 +48,21 @@ export default {
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',
+        // Shubz Logo Colors
+        shubz: {
+          purple: {
+            deep: '#991B65',     // Deep Purple/Magenta (top-left)
+            bright: '#E91E8C',   // Bright Purple/Pink (top-right)
+          },
+          yellow: {
+            bright: '#FFFF00',   // Bright Yellow (bottom-left)
+            golden: '#FFD700',   // Golden Yellow variant
+          },
+          orange: {
+            bright: '#FF8C42',   // Bright Orange (bottom-right)
+            vibrant: '#FF6B35',  // Vibrant Orange variant
+          }
+        },
   			chart: {
   				'1': 'hsl(var(--chart-1))',
   				'2': 'hsl(var(--chart-2))',
@@ -91,14 +106,70 @@ export default {
         'float': {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-20px)' },
+        },
+        'gradient': {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
+        },
+        'marquee': {
+          'from': { transform: 'translateX(0%)' },
+          'to': { transform: 'translateX(-50%)' }
+        },
+        'blob': {
+          '0%': { 
+            transform: 'translate(0px, 0px) scale(1)' 
+          },
+          '33%': { 
+            transform: 'translate(30px, -50px) scale(1.1)' 
+          },
+          '66%': { 
+            transform: 'translate(-20px, 20px) scale(0.9)' 
+          },
+          '100%': { 
+            transform: 'translate(0px, 0px) scale(1)' 
+          }
         }
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out',
         'float': 'float 6s ease-in-out infinite',
-  		}
+        'gradient': 'gradient 8s linear infinite',
+        'marquee': 'marquee 15s linear infinite',
+        'blob': 'blob 7s infinite'
+  		},
+      translate: {
+        '101': '101%',
+      },
+      screens: {
+        'xs': '475px',
+      },
+      scrollbarHide: {
+        'scrollbar-hide': {
+          '-ms-overflow-style': 'none',
+          'scrollbar-width': 'none',
+          '&::-webkit-scrollbar': {
+            display: 'none'
+          }
+        }
+      }
   	}
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+  plugins: [
+    require("tailwindcss-animate"), 
+    require("@tailwindcss/typography"),
+    function({ addUtilities }: any) {
+      const newUtilities = {
+        '.scrollbar-hide': {
+          '-ms-overflow-style': 'none',
+          'scrollbar-width': 'none',
+          '&::-webkit-scrollbar': {
+            display: 'none'
+          }
+        }
+      }
+      addUtilities(newUtilities)
+    }
+  ],
 } satisfies Config;

@@ -1,88 +1,126 @@
-# ModernBlog - A Next.js & Sanity Blog Platform
+# Shubz Entertainment - Modern Creative Agency Website
 
-![ModernBlog Banner](https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop)
+![Shubz Entertainment Banner](https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1200&auto=format&fit=crop)
 
 ## 🌟 Overview
 
-ModernBlog is a production-ready, full-featured blog platform that combines the power of Next.js with the flexibility of Sanity CMS. It delivers a stunning, modern user experience with a focus on performance, accessibility, and content management simplicity.
+Shubz Entertainment is a cutting-edge creative agency website built with Next.js and Sanity CMS. This platform showcases a stunning, modern design with advanced animations, 3D elements, and a premium user experience focused on highlighting creative divisions, portfolio projects, and industry news.
 
 ## ✨ Key Features
 
 ### 🎨 Design & User Experience
-- **Modern Glassmorphism Design**: Sleek header with backdrop blur effects
-- **Responsive Layout**: Perfect experience on all devices (mobile, tablet, desktop)
-- **Smooth Animations**: Hover effects, transitions, and micro-interactions
-- **Dark Mode Ready**: Built with CSS variables for easy theme switching
-- **Professional Typography**: Clean, readable fonts with optimal spacing
+- **Modern Glassmorphism Design**: Stunning header with backdrop blur effects and animated elements
+- **Advanced Animations**: Framer Motion powered transitions, hover effects, and micro-interactions
+- **Premium Component Library**: Custom animated components (TextPressure, RotatingText, GradientText, PixelTransition)
+- **3D Interactive Elements**: Three.js integration for immersive experiences
+- **Dark/Light Mode**: Seamless theme switching with consistent styling
+- **Responsive Excellence**: Perfect experience across all devices and screen sizes
 
-### 📝 Content Management
-- **Sanity CMS Integration**: Powerful, flexible content management
-- **Rich Text Editor**: Support for formatted text, images, and embedded content
-- **Real-time Preview**: See changes instantly as you edit
-- **SEO-Optimized**: Built-in SEO features for better search rankings
-- **Image Optimization**: Automatic image resizing and format optimization
+### 📱 Page Architecture
+- **Dynamic Homepage**: Hero section with animated components and featured content
+- **Portfolio Showcase**: Advanced filtering, multiple view modes, and stunning case study presentations
+- **Creative Divisions**: Enhanced division cards with 3D animations and professional layouts
+- **Modern Newsroom**: Magazine-style layout with category filtering and article cards
+- **Interactive Navigation**: 3D menu elements and smooth page transitions
+
+### 🏢 Content Management
+- **Sanity CMS Integration**: Powerful headless CMS for content management
+- **Rich Content Types**: Portfolio projects, news articles, team members, divisions, and pages
+- **Cloudinary Integration**: Advanced image optimization and delivery
+- **Real-time Preview**: Instant content updates with live preview
+- **SEO Optimization**: Built-in SEO features and metadata management
 
 ### 🚀 Performance & Technical
-- **Next.js App Router**: Latest Next.js features for optimal performance
-- **Server-Side Rendering**: Fast initial page loads and better SEO
-- **TypeScript**: Full type safety throughout the application
-- **Image Optimization**: Next.js Image component for automatic optimization
-- **Code Splitting**: Automatic code splitting for faster load times
+- **Next.js 15 App Router**: Latest Next.js features with server components
+- **TypeScript Excellence**: Full type safety throughout the application
+- **Advanced State Management**: React hooks and context for smooth interactions
+- **Code Splitting**: Automatic optimization for faster load times
+- **Image Optimization**: Next.js Image and Cloudinary for perfect performance
 
-### 🔧 Developer Experience
-- **Component-Based Architecture**: Reusable, maintainable components
-- **Tailwind CSS**: Utility-first CSS for rapid development
-- **Shadcn/UI**: Beautiful, accessible components
-- **Hot Reload**: Instant feedback during development
-- **ESLint & TypeScript**: Code quality and consistency
+### 🎬 Animated Components
+- **TextPressure**: Interactive text with pressure-sensitive effects
+- **RotatingText**: Smooth text rotation with spring animations
+- **GradientText**: Animated gradient text effects
+- **PixelTransition**: Creative pixel-based transitions
+- **AnimatedList**: Staggered list animations
+- **CircularGallery**: 3D circular image galleries
+- **RollingGallery**: Dynamic rolling image displays
 
 ## 🏗️ Architecture
 
 ```
-modern-blog/
+shubz-entertainment/
 ├── src/
 │   ├── app/                    # Next.js App Router pages
-│   │   ├── [slug]/            # Dynamic blog post pages
+│   │   ├── [slug]/            # Dynamic page routing
+│   │   ├── about/             # About page with team showcase
+│   │   ├── contact/           # Contact page with forms
+│   │   ├── divisions/         # Creative divisions showcase
+│   │   ├── newsroom/          # News and article management
+│   │   ├── portfolio/         # Portfolio projects display
 │   │   ├── studio/            # Sanity Studio integration
-│   │   ├── layout.tsx         # Root layout with header/footer
-│   │   └── page.tsx           # Homepage with hero and posts
+│   │   ├── layout.tsx         # Root layout with navigation
+│   │   └── page.tsx           # Homepage with hero
 │   ├── components/            # Reusable React components
-│   │   ├── ui/               # Shadcn/UI components
+│   │   ├── ui/               # Shadcn/UI base components
+│   │   ├── 3d/               # Three.js 3D components
+│   │   ├── blocks/           # Content block components
+│   │   ├── animated/         # Custom animated components
 │   │   ├── header.tsx        # Modern navigation header
 │   │   ├── footer.tsx        # Feature-rich footer
-│   │   └── hero-section.tsx  # Landing page hero
+│   │   └── theme-provider.tsx # Theme management
 │   ├── lib/                   # Utility functions and configurations
 │   │   ├── utils.ts          # Helper functions
-│   │   └── sanity.ts         # Sanity client configuration
-│   └── hooks/                 # Custom React hooks
+│   │   ├── sanity.ts         # Sanity client configuration
+│   │   └── three-setup.ts    # Three.js utilities
+│   ├── hooks/                 # Custom React hooks
+│   └── types/                 # TypeScript type definitions
 ├── sanity/                    # Sanity CMS configuration
 │   ├── schema/               # Content type definitions
-│   │   └── post.ts           # Blog post schema
+│   │   ├── blocks/           # Content block schemas
+│   │   ├── author.ts         # Author content type
+│   │   ├── division.ts       # Division content type
+│   │   ├── newsArticle.ts    # News article schema
+│   │   ├── portfolioProject.ts # Portfolio project schema
+│   │   └── teamMember.ts     # Team member schema
+│   ├── components/           # Custom studio components
 │   ├── sanity.config.ts      # Studio configuration
 │   └── sanity.cli.ts         # CLI configuration
-├── public/                    # Static assets
-├── .env.local.example         # Environment variables template
-└── package.json              # Dependencies and scripts
+├── public/                    # Static assets and images
+├── design-system/            # Design system documentation
+└── scripts/                  # Utility scripts and tools
 ```
 
 ## 🛠️ Tech Stack
 
 ### Core Technologies
-- **[Next.js 15](https://nextjs.org/)** - React framework with App Router
-- **[React 19](https://react.dev/)** - Latest React version
-- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript
-- **[Sanity CMS](https://www.sanity.io/)** - Headless content management
+- **[Next.js 15](https://nextjs.org/)** - React framework with App Router and server components
+- **[React 19](https://react.dev/)** - Latest React with concurrent features
+- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript with strict mode
+- **[Sanity CMS](https://www.sanity.io/)** - Headless content management system
+
+### Animation & 3D
+- **[Framer Motion](https://www.framer.com/motion/)** - Production-ready motion library
+- **[Three.js](https://threejs.org/)** - 3D graphics and interactive elements
+- **[React Three Fiber](https://docs.pmnd.rs/react-three-fiber/)** - React renderer for Three.js
+- **Custom Animation Components** - TextPressure, RotatingText, GradientText, PixelTransition
 
 ### Styling & UI
 - **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework
-- **[Shadcn/UI](https://ui.shadcn.com/)** - Beautiful, accessible components
+- **[Shadcn/UI](https://ui.shadcn.com/)** - Beautiful, accessible component library
 - **[Lucide React](https://lucide.dev/)** - Modern icon library
-- **[@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin)** - Prose styling
+- **[next-themes](https://github.com/pacocoursey/next-themes)** - Theme switching system
+
+### Media & Assets
+- **[Cloudinary](https://cloudinary.com/)** - Advanced image and video management
+- **[Next.js Image](https://nextjs.org/docs/api-reference/next/image)** - Optimized image component
+- **[next-cloudinary](https://next-cloudinary.spacejelly.dev/)** - Cloudinary integration for Next.js
 
 ### Development Tools
-- **[ESLint](https://eslint.org/)** - Code linting
+- **[ESLint](https://eslint.org/)** - Code linting with custom rules
 - **[Prettier](https://prettier.io/)** - Code formatting
-- **[Vercel](https://vercel.com/)** - Deployment platform
+- **[pnpm](https://pnpm.io/)** - Fast, disk space efficient package manager
+- **[Vercel](https://vercel.com/)** - Deployment and hosting platform
 
 ## 🚀 Getting Started
 
@@ -91,204 +129,456 @@ modern-blog/
 Ensure you have the following installed on your development machine:
 
 - **Node.js** (v18.0.0 or higher)
-- **pnpm** (v8.0.0 or higher) - or npm/yarn as alternative
+- **pnpm** (v8.0.0 or higher) - recommended package manager
 - **Git** (for version control)
 
 ### Installation & Setup
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/modern-blog.git
-   cd modern-blog
+   git clone https://github.com/devmksaif/SanityDemo.git
+   cd SanityDemo
    ```
 
 2. **Install dependencies**
    ```bash
    pnpm install
-   # or
-   npm install
-   # or
-   yarn install
    ```
 
 3. **Set up environment variables**
    ```bash
-   # Copy the example environment file
+   # Create environment file
    cp .env.local.example .env.local
    
-   # Open .env.local and add your Sanity project details
+   # Add your configuration
    nano .env.local
    ```
 
 4. **Configure Sanity CMS**
    - Visit [Sanity.io](https://www.sanity.io/) and create a new project
    - Get your project ID and dataset name from the Sanity dashboard
+   - Configure Cloudinary for image management
    - Update your `.env.local` file:
      ```
      NEXT_PUBLIC_SANITY_PROJECT_ID="your-project-id"
-     NEXT_PUBLIC_SANITY_DATASET="your-dataset-name"
+     NEXT_PUBLIC_SANITY_DATASET="your-dataset-name" 
      NEXT_PUBLIC_SANITY_API_VERSION="2024-01-01"
+     NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="your-cloud-name"
      ```
 
 5. **Run the development server**
    ```bash
    pnpm dev
-   # or
-   npm run dev
-   # or
-   yarn dev
    ```
 
 6. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000) to see your blog.
+   Navigate to [http://localhost:3000](http://localhost:3000) to see the website.
 
-## 📖 Using Sanity Studio
+7. **Access Sanity Studio**
+   Navigate to [http://localhost:3000/studio](http://localhost:3000/studio) for content management.
 
-Sanity Studio is your content management interface, fully integrated into your Next.js application.
+## 📖 Content Management
+
+Sanity Studio is your powerful content management interface, fully integrated into the Next.js application.
 
 ### Accessing the Studio
 - Navigate to `http://localhost:3000/studio`
-- You'll see the Sanity Studio interface embedded in your app
+- Modern, intuitive interface for all content types
 
-### Creating Content
-1. **Create a new post**
-   - Click the "+" button or "Post" in the sidebar
-   - Fill in the required fields:
-     - **Title**: Your blog post title
-     - **Slug**: URL-friendly version (auto-generated from title)
-     - **Image**: Featured image for the post
-     - **Published At**: Publication date
-     - **Body**: Main content using the rich text editor
+### Content Types Available
 
-2. **Rich Text Editing**
-   - Use the toolbar to format text (bold, italic, headings)
-   - Insert images by clicking the image button
-   - Create lists, quotes, and links
-   - Preview your content in real-time
+#### 📰 News Articles
+- **Title**: Article headline
+- **Slug**: URL-friendly identifier
+- **Cover Image**: Featured image with Cloudinary optimization
+- **Excerpt**: Article summary for previews
+- **Published At**: Publication date and time
+- **Body**: Rich content with embedded media
 
-3. **Publishing Content**
-   - Click "Publish" to make content live
-   - Use "Save" to store drafts
-   - Content updates automatically on your website
+#### 🎨 Portfolio Projects
+- **Project Title**: Creative project name
+- **Slug**: URL path for project pages
+- **Category**: Project classification (branding, web, mobile, etc.)
+- **Featured Image**: Main project showcase image
+- **Description**: Project overview and details
+- **Client Information**: Client name and industry
+- **Technologies Used**: Tech stack and tools
+- **Project Gallery**: Multiple project images
+- **Case Study**: Detailed project breakdown
 
-### Best Practices
-- **SEO Optimization**: Write descriptive titles and slugs
-- **Image Optimization**: Upload high-quality images, Sanity handles resizing
-- **Content Structure**: Use headings (H2, H3) to organize your content
-- **Regular Updates**: Keep your content fresh and engaging
+#### 🏢 Creative Divisions
+- **Division Name**: Department or creative unit
+- **Description**: Division overview and capabilities
+- **Services**: List of services offered
+- **Team Members**: Associated team members
+- **Featured Projects**: Showcase projects
+- **Division Logo**: Visual identifier
+
+#### 👥 Team Members
+- **Name**: Team member full name
+- **Position**: Job title and role
+- **Bio**: Professional background
+- **Profile Image**: Professional headshot
+- **Social Links**: Professional social media profiles
+- **Division**: Associated creative division
+
+#### 📄 Pages
+- **Page Title**: Dynamic page title
+- **Slug**: URL path
+- **SEO Metadata**: Title, description, keywords
+- **Content Blocks**: Flexible content sections
+- **Hero Section**: Featured content area
+
+### Rich Content Editing
+- **Block Editor**: Rich text with custom styling
+- **Image Blocks**: Cloudinary-powered image management
+- **Text Blocks**: Formatted text content
+- **Embedded Media**: Videos, galleries, and interactive content
+- **Custom Components**: Specialized content blocks
 
 ## 🎨 Customization Guide
 
-### Styling
-- **Colors**: Modify `tailwind.config.ts` to change the color scheme
-- **Fonts**: Update the font in `src/app/layout.tsx`
-- **Spacing**: Adjust Tailwind classes throughout components
-- **Animations**: Customize or add new animations in `globals.css`
+### Visual Design
+- **Theme System**: Dark/light mode with CSS variables
+- **Color Palette**: Modify `tailwind.config.ts` for brand colors
+- **Typography**: Update font configuration in `src/app/layout.tsx`
+- **Animations**: Customize Framer Motion settings throughout components
+- **3D Elements**: Adjust Three.js scenes in `src/components/3d/`
 
-### Components
-- **Header**: Modify `src/components/header.tsx` for navigation changes
-- **Footer**: Update `src/components/footer.tsx` for footer content
-- **Hero Section**: Customize `src/components/hero-section.tsx`
-- **Post Cards**: Style post cards in `src/app/page.tsx`
+### Component Customization
+- **Animated Components**: Modify `TextPressure`, `RotatingText`, `GradientText`
+- **Navigation**: Update `src/components/header.tsx` and `nav-3d-link.tsx`
+- **Hero Sections**: Customize hero components for each page
+- **Card Designs**: Enhance portfolio, division, and news card layouts
+- **Footer**: Update `src/components/footer.tsx` for branding
 
-### Content Schema
-- **Post Schema**: Modify `sanity/schema/post.ts` to add new fields
+### Content Schema Extensions
+- **New Fields**: Add custom fields to existing content types
 - **New Content Types**: Create additional schemas in `sanity/schema/`
+- **Custom Blocks**: Build specialized content blocks
+- **Validation Rules**: Add content validation and requirements
+
+### Animation Customization
+- **Framer Motion**: Adjust animation timings and easing
+- **3D Scenes**: Modify Three.js components for unique effects
+- **Micro-interactions**: Enhance hover states and transitions
+- **Page Transitions**: Customize route change animations
 
 ## 🚀 Deployment
 
 ### Deploy on Vercel (Recommended)
 
-1. **Push to GitHub**
+1. **Prepare Repository**
    ```bash
-   git init
    git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin https://github.com/your-username/modern-blog.git
-   git push -u origin main
+   git commit -m "Deploy Shubz Entertainment website"
+   git push origin main
    ```
 
-2. **Import to Vercel**
-   - Go to [Vercel](https://vercel.com)
-   - Click "New Project"
+2. **Vercel Deployment**
+   - Go to [Vercel Dashboard](https://vercel.com)
    - Import your GitHub repository
-   - Configure environment variables in Vercel dashboard
-   - Deploy!
+   - Configure environment variables
+   - Deploy with zero configuration
 
-### Environment Variables on Vercel
-Add these to your Vercel project settings:
-
-- `NEXT_PUBLIC_SANITY_PROJECT_ID`
-- `NEXT_PUBLIC_SANITY_DATASET`
-- `NEXT_PUBLIC_SANITY_API_VERSION`
+3. **Environment Variables**
+   Add these to your Vercel project settings:
+   ```
+   NEXT_PUBLIC_SANITY_PROJECT_ID=your-project-id
+   NEXT_PUBLIC_SANITY_DATASET=your-dataset-name
+   NEXT_PUBLIC_SANITY_API_VERSION=2024-01-01
+   NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your-cloud-name
+   ```
 
 ### Alternative Deployment Options
-- **Netlify**: Connect your GitHub repo
-- **Railway**: Use their CLI or dashboard
-- **DigitalOcean**: Deploy using their App Platform
+
+#### Netlify
+- Connect GitHub repository
+- Configure build settings: `pnpm build`
+- Set publish directory: `.next`
+
+#### Railway
+- Connect GitHub repository
+- Add environment variables
+- Automatic deployments on push
+
+### Production Optimization
+
+#### Performance Checklist
+- [ ] Enable Vercel Analytics
+- [ ] Configure Cloudinary auto-optimization
+- [ ] Set up proper caching headers
+- [ ] Enable compression and minification
+- [ ] Test Core Web Vitals scores
+
+#### SEO Configuration
+- [ ] Submit sitemap to search engines
+- [ ] Configure robots.txt
+- [ ] Set up Google Analytics
+- [ ] Implement structured data
+- [ ] Test social media previews
+
+## 🤝 Contributing
+
+We welcome contributions to make Shubz Entertainment even better!
+
+### Development Workflow
+1. **Fork the repository**
+2. **Create feature branch**
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+3. **Make your changes**
+   - Follow existing code style
+   - Add TypeScript types
+   - Update documentation
+   - Test thoroughly
+4. **Commit changes**
+   ```bash
+   git commit -m 'Add amazing feature'
+   ```
+5. **Push and create PR**
+   ```bash
+   git push origin feature/amazing-feature
+   ```
+
+### Contribution Guidelines
+- **Code Style**: Follow existing patterns and use Prettier
+- **TypeScript**: Maintain strict type safety
+- **Components**: Create reusable, documented components
+- **Testing**: Test animations and responsive behavior
+- **Documentation**: Update README for new features
+
+### Areas for Contribution
+- **New Animated Components**: Creative animation effects
+- **3D Elements**: Enhanced Three.js integrations
+- **Performance**: Optimization improvements
+- **Accessibility**: WCAG compliance enhancements
+- **Content Types**: New Sanity schema types
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+### Core Technologies
+- **[Next.js](https://nextjs.org/)** - The React framework for production
+- **[Sanity](https://www.sanity.io/)** - The composable content cloud
+- **[Framer Motion](https://www.framer.com/motion/)** - A production-ready motion library
+- **[Three.js](https://threejs.org/)** - JavaScript 3D library
+- **[Tailwind CSS](https://tailwindcss.com/)** - A utility-first CSS framework
+
+### UI & Design
+- **[Shadcn/UI](https://ui.shadcn.com/)** - Beautiful and accessible components
+- **[Lucide React](https://lucide.dev/)** - Beautiful & consistent icons
+- **[Cloudinary](https://cloudinary.com/)** - Media management and optimization
+- **[Vercel](https://vercel.com/)** - The platform for frontend developers
+
+### Special Thanks
+- The open-source community for incredible tools and libraries
+- Design inspiration from modern creative agencies
+- Contributors and testers who helped improve the platform
+
+---
+
+## 🌟 Features Showcase
+
+### ✨ **Recent Updates**
+- ✅ **Enhanced Portfolio**: Advanced filtering, multiple view modes, stunning case studies
+- ✅ **Modern Newsroom**: Magazine-style layout with category filtering
+- ✅ **Creative Divisions**: 3D animations and professional presentations  
+- ✅ **Animated Components**: TextPressure, RotatingText, GradientText, PixelTransition
+- ✅ **Consistent Design**: Unified color scheme and visual hierarchy
+- ✅ **Performance Optimized**: Fast loading with smooth animations
+
+### 🎯 **Coming Soon**
+- Advanced contact forms with validation
+- Team member detail pages
+- Project case study templates
+- Enhanced 3D interactions
+- Blog comment system
+- Multi-language support
+
+---
+
+**Built with ❤️ by the Shubz Entertainment team**
+
+*Creating exceptional digital experiences through cutting-edge technology and stunning design.*
+
+For support, please open an issue on GitHub or contact our development team.
+
+---
+
+*Documentation updated by Dyad AI Assistant - Your intelligent development companion.*
 
 ## 🔧 Development Guide
 
-### Project Structure
+### Project Structure Deep Dive
 ```
 src/
-├── app/                    # Next.js App Router
-│   ├── [slug]/            # Dynamic blog post pages
-│   ├── studio/            # Sanity Studio
-│   ├── layout.tsx         # Root layout
-│   └── page.tsx           # Homepage
-├── components/            # React components
-│   ├── ui/               # Shadcn/UI components
-│   ├── header.tsx        # Navigation header
-│   ├── footer.tsx        # Site footer
-│   └── hero-section.tsx  # Landing hero
-├── lib/                   # Utilities
-│   ├── utils.ts          # Helper functions
-│   └── sanity.ts         # Sanity client
-└── hooks/                 # Custom hooks
+├── app/                      # Next.js App Router
+│   ├── [slug]/              # Dynamic pages with full-featured routing
+│   ├── about/               # About page with team showcase
+│   ├── contact/             # Contact forms and information
+│   ├── divisions/           # Creative divisions with 3D animations
+│   ├── newsroom/            # Magazine-style news layout
+│   ├── portfolio/           # Advanced portfolio with filtering
+│   ├── studio/              # Embedded Sanity Studio
+│   ├── layout.tsx           # Root layout with navigation
+│   └── page.tsx             # Homepage with animated hero
+├── components/              # Reusable React components
+│   ├── ui/                  # Shadcn/UI base components
+│   ├── 3d/                  # Three.js 3D components
+│   ├── blocks/              # Content block renderers
+│   ├── animated/            # Custom animation components
+│   │   ├── TextPressure.tsx # Pressure-sensitive text
+│   │   ├── RotatingText.tsx # Smooth text rotation
+│   │   ├── GradientText.tsx # Animated gradients
+│   │   └── PixelTransition.tsx # Pixel effects
+│   ├── navigation/          # Header and menu components
+│   └── layout/              # Layout components
+├── lib/                     # Core utilities
+│   ├── utils.ts             # Helper functions
+│   ├── sanity.ts            # Sanity client setup
+│   ├── sanity-helpers.ts    # Content fetching utilities
+│   └── three-setup.ts       # Three.js configuration
+├── hooks/                   # Custom React hooks
+│   ├── use-mobile.tsx       # Mobile detection
+│   └── use-scrolled.ts      # Scroll state management
+└── types/                   # TypeScript definitions
+    └── sanity.ts            # Content type definitions
 ```
 
-### Key Files
-- `src/app/page.tsx` - Homepage with hero and post grid
-- `src/app/[slug]/page.tsx` - Individual blog post pages
-- `src/lib/sanity.ts` - Sanity client configuration
-- `sanity/schema/post.ts` - Blog post content schema
+### Key Features Implementation
+
+#### Portfolio System
+- **Advanced Filtering**: Category-based project filtering
+- **Multiple View Modes**: Grid and list views with smooth transitions
+- **Case Study Details**: Rich project presentations
+- **Client Integration**: Client information and testimonials
+
+#### News & Content
+- **Magazine Layout**: Modern newsroom with card-based design
+- **Category Management**: Dynamic content categorization
+- **Article Pages**: Rich content with embedded media
+- **SEO Optimization**: Metadata and structured data
+
+#### Creative Divisions
+- **3D Animations**: Interactive division showcases
+- **Team Integration**: Division-based team member grouping
+- **Service Highlighting**: Capability presentations
+- **Performance Metrics**: Division statistics and achievements
 
 ### Adding New Features
-1. **New Components**: Create in `src/components/`
-2. **New Pages**: Add folders in `src/app/`
-3. **API Routes**: Create in `src/app/api/`
-4. **Content Types**: Add schemas in `sanity/schema/`
+
+#### New Animated Components
+1. Create component in `src/components/animated/`
+2. Implement Framer Motion animations
+3. Add TypeScript types and props
+4. Export from component index
+
+#### New Content Types
+1. Define schema in `sanity/schema/`
+2. Add to schema index
+3. Create TypeScript types in `src/types/sanity.ts`
+4. Build corresponding React components
+
+#### New Pages
+1. Create folder in `src/app/`
+2. Add `page.tsx` with server component
+3. Implement client components as needed
+4. Add navigation links
 
 ## 🐛 Troubleshooting
 
-### Common Issues
+### Common Issues & Solutions
 
-**Sanity Client Error**
-- Ensure environment variables are correctly set
-- Check Sanity project ID and dataset name
-- Verify network connectivity
+#### Animation Performance
+**Issue**: Animations stuttering or laggy
+**Solutions**:
+- Check for `will-change` CSS property usage
+- Optimize Framer Motion animations with `layoutId`
+- Use `transform` and `opacity` for best performance
+- Enable GPU acceleration in browser settings
 
-**Build Errors**
-- Run `pnpm build` to see detailed error messages
-- Check for TypeScript errors
-- Ensure all dependencies are installed
+#### 3D Rendering Issues
+**Issue**: Three.js components not loading
+**Solutions**:
+- Verify WebGL support in browser
+- Check console for Three.js errors
+- Ensure proper canvas sizing
+- Use error boundaries for 3D components
 
-**Images Not Loading**
-- Verify image URLs in Sanity
-- Check Next.js image configuration
-- Ensure proper image domains in `next.config.ts`
+#### Sanity Content Loading
+**Issue**: Content not appearing or outdated
+**Solutions**:
+- Check environment variables
+- Verify Sanity project ID and dataset
+- Test API connections in network tab
+- Clear browser cache and restart dev server
 
-**Studio Not Loading**
-- Check browser console for errors
-- Verify Sanity configuration
-- Ensure all Sanity packages are installed
+#### Image Optimization
+**Issue**: Images loading slowly or not at all
+**Solutions**:
+- Verify Cloudinary configuration
+- Check image URLs and public IDs
+- Ensure proper Next.js Image component usage
+- Test image domains in `next.config.ts`
 
-### Getting Help
-- Check the [Next.js documentation](https://nextjs.org/docs)
-- Visit [Sanity documentation](https://www.sanity.io/docs)
-- Review [Tailwind CSS documentation](https://tailwindcss.com/docs)
+#### Theme Switching
+**Issue**: Dark/light mode not working properly
+**Solutions**:
+- Check `next-themes` configuration
+- Verify CSS variable definitions
+- Ensure hydration matches on server/client
+- Test theme persistence in localStorage
+
+#### TypeScript Errors
+**Issue**: Type errors during development
+**Solutions**:
+- Run `pnpm type-check` for detailed errors
+- Update Sanity types with schema changes
+- Check component prop interfaces
+- Verify import/export consistency
+
+### Performance Optimization
+
+#### Bundle Analysis
+```bash
+# Analyze bundle size
+pnpm build && pnpm analyze
+
+# Check for unnecessary dependencies
+pnpm dlx depcheck
+```
+
+#### Image Optimization
+- Use Cloudinary transformations
+- Implement progressive loading
+- Add proper alt texts for accessibility
+- Use responsive image sizing
+
+#### Animation Optimization
+- Use `transform` and `opacity` for animations
+- Implement `useMemo` for expensive calculations
+- Add `will-change` CSS for animation elements
+- Use `framer-motion` layout animations efficiently
+
+### Getting Help & Support
+
+#### Documentation Resources
+- [Next.js App Router Guide](https://nextjs.org/docs/app)
+- [Sanity Content Studio](https://www.sanity.io/docs/studio)
+- [Framer Motion API](https://www.framer.com/motion/)
+- [Three.js Documentation](https://threejs.org/docs/)
+- [Tailwind CSS Reference](https://tailwindcss.com/docs)
+
+#### Community Support
+- GitHub Issues for bug reports
+- Discussions for feature requests
+- Stack Overflow for development questions
+- Discord/Slack communities for real-time help
 
 ## 🤝 Contributing
 

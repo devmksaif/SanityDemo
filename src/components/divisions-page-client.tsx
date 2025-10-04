@@ -9,20 +9,25 @@ const containerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.15, // Animate children one after another
+      staggerChildren: 0.2, // Staggered animation for dramatic effect
     },
   },
 };
 
-// Individual card animation
+// Individual card animation with enhanced effects
 const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { 
+    opacity: 0, 
+    y: 60,
+    scale: 0.8,
+  },
   visible: {
     opacity: 1,
     y: 0,
+    scale: 1,
     transition: {
-      duration: 0.5,
-      ease: easeOut, // ✅ Type-safe easing
+      duration: 0.8,
+      ease: [0.6, -0.05, 0.01, 0.99], // Custom cubic-bezier for smooth effect
     },
   },
 };
@@ -47,12 +52,23 @@ export function DivisionsPageClient({ divisions }: Props) {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+      className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
     >
-      {divisions.map((division) => (
+      {divisions.map((division, index) => (
         <motion.div
           key={division._id}
           variants={cardVariants}
+          className="h-full"
+          whileInView={{ 
+            opacity: 1, 
+            y: 0,
+            scale: 1,
+            transition: { 
+              duration: 0.6,
+              delay: index * 0.1 
+            }
+          }}
+          viewport={{ once: true, margin: "-100px" }}
         >
           <DivisionCard division={division} />
         </motion.div>

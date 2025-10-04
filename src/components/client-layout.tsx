@@ -43,6 +43,7 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
         </AnimatePresence>
       </main>
       <EnterpriseFooter />
+      
       {process.env.NODE_ENV === 'development' && <DebugClickTracker />}
     </>
   );

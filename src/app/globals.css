@@ -10,28 +10,28 @@
   :root {
     /* Shubz Entertainment Color Palette - Light Mode */
     --background: 0 0% 100%; /* White */
-    --foreground: 220 13% 22%; /* Dark text */
+    --foreground: 220 13% 18%; /* Dark text */
     
     --card: 0 0% 100%; /* White cards */
-    --card-foreground: 220 13% 22%; /* Dark card text */
+    --card-foreground: 220 13% 18%; /* Dark card text */
     
     --popover: 0 0% 100%; /* White popovers */
-    --popover-foreground: 220 13% 22%; /* Dark popover text */
+    --popover-foreground: 220 13% 18%; /* Dark popover text */
     
-    /* Primary: Deep Magenta #8C2D5A */
-    --primary: 330 51% 36%; 
+    /* Primary: Deep Purple/Magenta from logo #991B65 */
+    --primary: 330 67% 36%; 
     --primary-foreground: 0 0% 100%; /* White text on primary */
     
-    /* Secondary: Muted Lilac #C782B7 */
-    --secondary: 315 39% 65%;
+    /* Secondary: Bright Purple/Pink from logo #E91E8C */
+    --secondary: 330 85% 52%;
     --secondary-foreground: 0 0% 100%; /* White text on secondary */
     
     /* Muted: Light gray for subtle backgrounds */
     --muted: 220 14% 96%;
     --muted-foreground: 220 9% 47%; /* Gray text */
     
-    /* Accent: Rich Gold #D6A84C */
-    --accent: 40 64% 57%;
+    /* Accent: Bright Orange from logo #FF8C42 */
+    --accent: 22 100% 63%;
     --accent-foreground: 0 0% 100%; /* White text on accent */
     
     /* Destructive: Red for errors */
@@ -41,24 +41,24 @@
     /* Borders and inputs */
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 330 51% 36%; /* Primary color for focus rings */
+    --ring: 330 67% 36%; /* Primary color for focus rings */
     
-    /* Chart colors using palette */
-    --chart-1: 330 51% 36%; /* Deep Magenta */
-    --chart-2: 315 39% 65%; /* Muted Lilac */
-    --chart-3: 40 64% 57%; /* Rich Gold */
-    --chart-4: 55 86% 65%; /* Golden Yellow */
-    --chart-5: 220 13% 22%; /* Charcoal Gray */
+    /* Chart colors using logo palette */
+    --chart-1: 330 67% 36%; /* Deep Purple/Magenta */
+    --chart-2: 330 85% 52%; /* Bright Purple/Pink */
+    --chart-3: 22 100% 63%; /* Bright Orange */
+    --chart-4: 55 100% 50%; /* Bright Yellow from logo */
+    --chart-5: 220 13% 18%; /* Charcoal Gray */
     
     /* Sidebar using palette */
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 220 13% 22%;
-    --sidebar-primary: 330 51% 36%;
+    --sidebar-foreground: 220 13% 18%;
+    --sidebar-primary: 330 67% 36%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 40 64% 57%;
+    --sidebar-accent: 22 100% 63%;
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 330 51% 36%;
+    --sidebar-ring: 330 67% 36%;
     
     --radius: 0.75rem;
   }
@@ -74,20 +74,20 @@
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
     
-    /* Primary: Muted Lilac for dark mode */
-    --primary: 315 39% 65%;
-    --primary-foreground: 315 30% 15%; /* Dark text for contrast */
+    /* Primary: Bright Purple/Pink for dark mode visibility */
+    --primary: 330 85% 52%;
+    --primary-foreground: 330 30% 15%; /* Dark text for contrast */
     
-    /* Secondary: Rich Gold for dark mode */
-    --secondary: 40 64% 57%;
-    --secondary-foreground: 40 50% 15%; /* Dark text for contrast */
+    /* Secondary: Bright Orange for dark mode */
+    --secondary: 22 100% 63%;
+    --secondary-foreground: 22 50% 15%; /* Dark text for contrast */
     
     /* Muted: Darker gray for subtle backgrounds */
     --muted: 240 4% 12%;
     --muted-foreground: 240 5% 65%;
     
-    /* Accent: Golden Yellow for highlights */
-    --accent: 55 86% 65%;
+    /* Accent: Bright Yellow for highlights */
+    --accent: 55 100% 50%;
     --accent-foreground: 55 70% 15%; /* Dark text for contrast */
     
     /* Destructive: Brighter red for dark mode */
@@ -97,24 +97,24 @@
     /* Borders and inputs */
     --border: 240 4% 15%;
     --input: 240 4% 15%;
-    --ring: 315 39% 65%; /* Muted Lilac for focus rings */
+    --ring: 330 85% 52%; /* Bright Purple/Pink for focus rings */
     
-    /* Chart colors for dark mode */
-    --chart-1: 315 39% 65%; /* Muted Lilac */
-    --chart-2: 40 64% 57%; /* Rich Gold */
-    --chart-3: 55 86% 65%; /* Golden Yellow */
-    --chart-4: 330 51% 36%; /* Deep Magenta (as a darker accent) */
+    /* Chart colors for dark mode using logo palette */
+    --chart-1: 330 85% 52%; /* Bright Purple/Pink */
+    --chart-2: 22 100% 63%; /* Bright Orange */
+    --chart-3: 55 100% 50%; /* Bright Yellow */
+    --chart-4: 330 67% 36%; /* Deep Purple/Magenta (as accent) */
     --chart-5: 0 0% 95%; /* Light text color */
     
     /* Sidebar for dark mode */
     --sidebar-background: 240 10% 3.9%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 315 39% 65%;
-    --sidebar-primary-foreground: 315 30% 15%;
-    --sidebar-accent: 55 86% 65%;
+    --sidebar-primary: 330 85% 52%;
+    --sidebar-primary-foreground: 330 30% 15%;
+    --sidebar-accent: 55 100% 50%;
     --sidebar-accent-foreground: 55 70% 15%;
     --sidebar-border: 240 4% 15%;
-    --sidebar-ring: 315 39% 65%;
+    --sidebar-ring: 330 85% 52%;
   }
 }
 

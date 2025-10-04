@@ -1,6 +1,7 @@
 import { Container } from "@/components/ui/container";
 import { ContactForm } from "@/components/contact-form";
 import { Mail, MapPin, Phone, Sparkles } from "lucide-react";
+import GradientText from "@/components/GradientText";
 
 export default function ContactPage() {
   return (
@@ -20,7 +21,15 @@ export default function ContactPage() {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-              Let's Create Together
+              <GradientText 
+                colors={['#f59e0b', '#ef4444', '#f59e0b']}
+                animationSpeed={4}
+                showBorder={false}
+                className="inline-block"
+              >
+                Let's Create
+              </GradientText>{" "}
+              Together
             </h1>
             
             <p className="text-lg text-white/80 max-w-3xl mx-auto">

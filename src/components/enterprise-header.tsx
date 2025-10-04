@@ -78,7 +78,7 @@ export function EnterpriseHeader() {
             animate={{ scale: 1, rotate: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <ThemedLogo width={180} height={180} className="w-auto" />
+            <ThemedLogo width={189} height={180} className="w-auto" />
           </motion.div>
         </Link>
 
@@ -129,7 +129,7 @@ export function EnterpriseHeader() {
                 <SheetHeader>
                   <SheetTitle>
                     <Link href="/" onClick={() => setIsSheetOpen(false)}>
-                      <ThemedLogo width={150} height={150} />
+                      <ThemedLogo width={80} height={50} />
                     </Link>
                   </SheetTitle>
                 </SheetHeader>

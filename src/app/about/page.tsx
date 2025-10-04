@@ -1,9 +1,15 @@
+"use client";
+
 import { Container } from "@/components/ui/container";
 import { Sparkles, Users, Target, Eye, Quote, Zap, Handshake, Globe } from "lucide-react";
 import { client } from "@/lib/sanity";
 import type { TeamMemberData } from "@/types/sanity";
 import { AnimatedContainer } from "@/components/ui/animated-container";
 import { TeamMemberCard } from "@/components/team-member-card";
+import AnimatedList from "@/components/AnimatedList";
+import PixelTransition from "@/components/PixelTransition";
+import GradientText from "@/components/GradientText";
+import { useEffect, useState } from "react";
 
 async function getTeamMembers() {
   const query = `*[_type == "teamMember"] | order(order asc)`;
@@ -18,8 +24,28 @@ const AnimatedSection = ({ children, className }: { children: React.ReactNode, c
   </AnimatedContainer>
 );
 
-export default async function AboutPage() {
-  const teamMembers = await getTeamMembers();
+export default function AboutPage() {
+  const [teamMembers, setTeamMembers] = useState<TeamMemberData[]>([]);
+
+  useEffect(() => {
+    getTeamMembers().then(setTeamMembers);
+  }, []);
+
+  // Sample achievements for AnimatedList
+  const achievements = [
+    "100+ Creative Projects Delivered",
+    "50+ Artists Represented", 
+    "25+ International Collaborations",
+    "15+ Awards & Recognition",
+    "10+ Years of Creative Excellence",
+    "5+ Continents Reached",
+    "Global Media Coverage",
+    "Industry Innovation Leadership"
+  ];
+
+  const handleAchievementSelect = (achievement: string, index: number) => {
+    console.log(`Selected: ${achievement} at index ${index}`);
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -39,7 +65,15 @@ export default async function AboutPage() {
             </div>
             
             <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-              The Creative Force Behind Global Stories
+              <GradientText 
+                colors={['#f59e0b', '#8b5cf6', '#f59e0b']}
+                animationSpeed={6}
+                showBorder={false}
+                className="inline-block"
+              >
+                The Creative Force
+              </GradientText>{" "}
+              Behind Global Stories
             </h1>
             
             <p className="mt-6 text-lg text-white/80 max-w-3xl mx-auto font-sans">
@@ -67,6 +101,66 @@ export default async function AboutPage() {
               </p>
             </div>
           </AnimatedSection>
+        </Container>
+      </section>
+
+      {/* 3.5. Achievements Section with AnimatedList */}
+      <section className="py-24 sm:py-32">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <AnimatedSection>
+              <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-4">
+                <Target className="h-4 w-4" />
+                Our Impact
+              </div>
+              <h2 className="font-serif text-4xl font-bold tracking-tight mb-6">
+                Measurable Creative Excellence
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8">
+                Our journey is marked by meaningful milestones that reflect our commitment to advancing African creativity on the global stage.
+              </p>
+              
+              {/* PixelTransition Card */}
+              <PixelTransition
+                firstContent={
+                  <div className="flex items-center justify-center h-full bg-gradient-to-br from-primary to-accent text-primary-foreground">
+                    <div className="text-center p-6">
+                      <Eye className="h-12 w-12 mx-auto mb-4" />
+                      <h3 className="text-xl font-bold">Creative Vision</h3>
+                      <p className="text-sm opacity-90">Pioneering African storytelling</p>
+                    </div>
+                  </div>
+                }
+                secondContent={
+                  <div className="flex items-center justify-center h-full bg-gradient-to-br from-secondary to-accent text-secondary-foreground">
+                    <div className="text-center p-6">
+                      <Globe className="h-12 w-12 mx-auto mb-4" />
+                      <h3 className="text-xl font-bold">Global Reach</h3>
+                      <p className="text-sm opacity-90">Stories that transcend borders</p>
+                    </div>
+                  </div>
+                }
+                gridSize={8}
+                pixelColor="#f59e0b"
+                animationStepDuration={0.4}
+                className="w-full max-w-sm mx-auto lg:mx-0"
+                aspectRatio="100%"
+              />
+            </AnimatedSection>
+            
+            <AnimatedSection className="lg:col-span-1">
+              <AnimatedList
+                items={achievements}
+                onItemSelect={handleAchievementSelect}
+                showGradients={true}
+                enableArrowNavigation={true}
+                className="w-full max-w-lg mx-auto"
+                itemClassName="p-4 bg-card/50 backdrop-blur-sm rounded-lg border border-border/50 hover:border-primary/50 transition-colors text-card-foreground"
+                displayScrollbar={false}
+                initialSelectedIndex={0}
+              />
+            </AnimatedSection>
+          </div>
         </Container>
       </section>
 

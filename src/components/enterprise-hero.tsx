@@ -7,6 +7,8 @@ import { motion, Variants, easeOut, easeInOut } from "framer-motion";
 import Link from "next/link";
 import { CldVideoPlayer, CldImage } from "next-cloudinary";
 import { client } from "@/lib/sanity";
+import TextPressure from "@/components/TextPressure";
+import RotatingText from "@/components/RotatingText";
 
 type SanityCloudinaryAsset = {
   _type: "cloudinary.asset";
@@ -48,6 +50,14 @@ export function EnterpriseHero() {
     "We are Africa's Creative Nerve Center — bridging media, talent, and technology into global stories.";
 
   const backgroundVideoId = heroData?.heroVideo?.secure_url;
+
+  // Dynamic rotating texts for enhanced engagement
+  const rotatingTexts = [
+    "Creative Nerve Center",
+    "Innovation Hub",
+    "Talent Ecosystem",
+    "Media Powerhouse"
+  ];
   const backgroundImageId = heroData?.heroImage?.public_id;
 
   return (
@@ -95,11 +105,42 @@ export function EnterpriseHero() {
               Creative Enterprise
             </div>
 
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white">
-              {headline}
-            </h1>
+            {/* Dynamic TextPressure headline */}
+            <div className="relative h-24 sm:h-32 lg:h-40">
+              <TextPressure
+                text={headline}
+                className="w-full h-full"
+                textColor="#ffffff"
+                strokeColor="#ffaa40"
+                stroke={true}
+                strokeWidth={1}
+                minFontSize={32}
+                width={true}
+                weight={true}
+                italic={false}
+                alpha={true}
+                flex={false}
+                scale={true}
+              />
+            </div>
 
-            <p className="text-lg sm:text-xl font-serif  lg:text-2xl text-white/80">{subheadline}</p>
+            <div className="flex flex-col gap-2">
+              <p className="text-lg sm:text-xl font-serif lg:text-2xl text-white/90">
+                We are Africa's{" "}
+                <RotatingText
+                  texts={rotatingTexts}
+                  className="font-bold text-amber-300"
+                  rotationInterval={3000}
+                  transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                  initial={{ y: "100%", opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: "-120%", opacity: 0 }}
+                />
+              </p>
+              <p className="text-base sm:text-lg lg:text-xl text-white/80">
+                bridging media, talent, and technology into global stories.
+              </p>
+            </div>
 
             <div className="flex flex-col sm:flex-row gap-4 sm:justify-center lg:justify-start">
               <Button asChild size="lg" className="group font-serif bg-white text-primary hover:bg-white/90">
